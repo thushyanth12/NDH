@@ -42,17 +42,32 @@ document.addEventListener('DOMContentLoaded', () => {
         { metric: '-42%', label: 'Cart Abandonment Rate', sublabel: 'Frictionless checkout' }
       ]
     },
-    'petal-stem': {
-      title: 'Petal & Stem — Luxury Floral Boutique',
-      category: 'Brand & Web Experience',
+    'secret-florist': {
+      title: 'The secretflorist — Luxury Floral & Bouquet Studio',
+      category: 'Bouquet & Floral Experience',
       timeline: '10 Days Delivery',
-      client: 'Petal & Stem Boutique',
+      client: 'The secretflorist',
       heroImage: 'assets/project-florist.jpg',
-      overview: 'A high-end artisan florist boutique seeking an interactive online presence with a custom flower bouquet builder and same-day delivery scheduling.',
-      challenge: 'The business lacked an online booking engine and relied on manual phone orders, limiting regional expansion and weekend sales.',
-      solution: 'Created an evocative, visual-first online store with smooth micro-interactions, an interactive stem customizer, and automated local dispatch logic.',
-      deliverables: ['Custom Web Platform', 'Interactive Bouquet Builder', 'Automated Dispatch System', 'Full Brand Guidelines'],
-      techStack: ['HTML5', 'CSS3 Modern Grid', 'JavaScript', 'Online Payments'],
+      overview: 'A bespoke luxury bouquet studio seeking an evocative, visual-first online presence with custom floral arrangement curation and same-day delivery scheduling.',
+      challenge: 'The business needed an intuitive online booking experience that reflects their artisan aesthetic and streamlines customized bouquet orders.',
+      solution: 'Created an elegant, visual-first digital storefront with smooth micro-interactions, an interactive stem customizer, and automated local dispatch logic.',
+      deliverables: ['Custom Web Storefront', 'Interactive Bouquet Curation', 'Automated Dispatch System', 'Full Brand Guidelines'],
+      results: [
+        { metric: '+180%', label: 'Online Order Volume', sublabel: 'In first month of launch' },
+        { metric: '4.9/5', label: 'Customer Review Rating', sublabel: 'Over 400 verified reviews' },
+        { metric: '100%', label: 'Automated Invoicing', sublabel: 'Saved 15 hrs/wk admin time' }
+      ]
+    },
+    'petal-stem': {
+      title: 'The secretflorist — Luxury Floral & Bouquet Studio',
+      category: 'Bouquet & Floral Experience',
+      timeline: '10 Days Delivery',
+      client: 'The secretflorist',
+      heroImage: 'assets/project-florist.jpg',
+      overview: 'A bespoke luxury bouquet studio seeking an evocative, visual-first online presence with custom floral arrangement curation and same-day delivery scheduling.',
+      challenge: 'The business needed an intuitive online booking experience that reflects their artisan aesthetic and streamlines customized bouquet orders.',
+      solution: 'Created an elegant, visual-first digital storefront with smooth micro-interactions, an interactive stem customizer, and automated local dispatch logic.',
+      deliverables: ['Custom Web Storefront', 'Interactive Bouquet Curation', 'Automated Dispatch System', 'Full Brand Guidelines'],
       results: [
         { metric: '+180%', label: 'Online Order Volume', sublabel: 'In first month of launch' },
         { metric: '4.9/5', label: 'Customer Review Rating', sublabel: 'Over 400 verified reviews' },
@@ -490,12 +505,13 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           </div>
 
+          ${cs.techStack && cs.techStack.length ? `
           <div>
             <h4 style="font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 0.75rem;">Technology Stack</h4>
             <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
               ${cs.techStack.map(t => `<span class="service-tool-badge">${t}</span>`).join('')}
             </div>
-          </div>
+          </div>` : ''}
         </div>
 
         <div style="display: flex; flex-wrap: wrap; gap: 1rem; border-top: 1px solid var(--border-subtle); padding-top: 1.5rem;">
@@ -707,48 +723,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // =========================================================================
-  // 13. TERMINAL LINE TYPING ANIMATION
-  // =========================================================================
-  const terminalLine = document.getElementById('terminal-line');
-  if (terminalLine) {
-    const phrases = [
-      'crafting digital experiences',
-      'designing brand identities',
-      'engineering high-converting web apps',
-      'scaling viral social growth'
-    ];
-    let phraseIdx = 0;
-    let charIdx = 0;
-    let isDeleting = false;
-
-    function typeLoop() {
-      const current = phrases[phraseIdx];
-      
-      if (isDeleting) {
-        terminalLine.textContent = current.substring(0, charIdx - 1);
-        charIdx--;
-      } else {
-        terminalLine.textContent = current.substring(0, charIdx + 1);
-        charIdx++;
-      }
-
-      let speed = isDeleting ? 35 : 75;
-
-      if (!isDeleting && charIdx === current.length) {
-        speed = 2000;
-        isDeleting = true;
-      } else if (isDeleting && charIdx === 0) {
-        isDeleting = false;
-        phraseIdx = (phraseIdx + 1) % phrases.length;
-        speed = 400;
-      }
-
-      setTimeout(typeLoop, speed);
-    }
-
-    setTimeout(typeLoop, 600);
-  }
-
 });
-
