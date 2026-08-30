@@ -1,684 +1,1286 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Ninja Design Hub — Premium freelance agency crafting stunning websites, UI/UX, brand identity, and digital experiences for brands that want to stand out." />
-    <meta name="keywords" content="web design, UI/UX, brand identity, landing pages, freelance agency, Ninja Design Hub, Thushyanth" />
-    <meta name="author" content="Thushyanth" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://ninjadesignhub.netlify.app/" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Primary Meta Tags -->
+  <title>Ninja Design Hub | Elite Web Development, Brand Systems &amp; Social Growth Agency</title>
+  <meta name="title" content="Ninja Design Hub | Elite Web Development, Brand Systems &amp; Social Growth Agency" />
+  <meta name="description" content="High-converting web development, brand identity systems, high-retention video editing, and viral social growth for high-growth startups and visionary creators." />
+  <meta name="keywords" content="web development, UI/UX design, branding, video editing, social media growth, freelance agency, Ninja Design Hub" />
+  <meta name="author" content="Ninja Design Hub" />
+  <meta name="theme-color" content="#080808" />
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="Ninja Design Hub | Premium Design &amp; Web Agency" />
-    <meta property="og:description" content="We create stunning websites, UI/UX, branding, and digital experiences for businesses that demand more than ordinary." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://ninjadesignhub.netlify.app/" />
-    <meta property="og:image" content="https://ninjadesignhub.netlify.app/assets/NDH.jpeg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:site_name" content="Ninja Design Hub" />
-    <meta property="og:locale" content="en_US" />
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ninjadesignhub.com/" />
+  <meta property="og:title" content="Ninja Design Hub | Elite Web Development, Brand Systems &amp; Social Growth" />
+  <meta property="og:description" content="We engineer bespoke digital experiences, iconic brand identities, and viral content machines that scale revenue." />
+  <meta property="og:image" content="assets/NDH.jpeg" />
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Ninja Design Hub | Premium Design &amp; Web Agency" />
-    <meta name="twitter:description" content="We create stunning websites, UI/UX, branding, and digital experiences for businesses that demand more than ordinary." />
-    <meta name="twitter:image" content="https://ninjadesignhub.netlify.app/assets/NDH.jpeg" />
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:title" content="Ninja Design Hub | Elite Web Development &amp; Creative Agency" />
+  <meta property="twitter:description" content="High-performance web apps, brand systems, and organic social scale." />
+  <meta property="twitter:image" content="assets/NDH.jpeg" />
 
-    <meta name="theme-color" content="#050505" />
-    <title>Ninja Design Hub | Premium Design &amp; Web Agency</title>
+  <!-- Preconnect & Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "Ninja Design Hub",
-      "url": "https://ninjadesignhub.netlify.app/",
-      "description": "Premium freelance agency specialising in web design, UI/UX, brand identity, and digital experiences.",
-      "founder": {
-        "@type": "Person",
-        "name": "Thushyanth"
-      },
-      "serviceType": ["Web Design", "UI/UX Design", "Brand Identity", "Web Development", "Landing Pages"],
-      "email": "thushyanth12082006@gmail.com"
-    }
-    </script>
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <!-- SCROLL PROGRESS BAR -->
-    <div id="scroll-progress-wrap" aria-hidden="true"><div id="scroll-progress"></div></div>
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Ninja Design Hub",
+    "image": "assets/NDH.jpeg",
+    "description": "Multidisciplinary digital agency specializing in high-performance web development, brand identity, video production, and social media growth.",
+    "founder": {
+      "@type": "Person",
+      "name": "Ninja Design Hub Team"
+    },
+    "serviceType": [
+      "Web Development",
+      "Graphic & Brand Design",
+      "Content Creation",
+      "Video Editing",
+      "Social Media Management"
+    ],
+    "priceRange": "₹₹₹"
+  }
+  </script>
+</head>
+<body>
 
-
-    <!-- SKIP LINK -->
-    <a class="skip-link" href="#main">Skip to content</a>
-
-    <!-- LOADER -->
-    <div class="loader" id="loader" aria-hidden="true">
-      <div class="loader-inner">
-        <div class="loader-logo">
-          <span class="loader-n">N</span><span class="loader-rest">inja Design Hub</span>
-        </div>
-        <div class="loader-bar"><div class="loader-fill"></div></div>
+  <!-- Brand Preloader -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-inner">
+      <div class="loader-logo">
+        <span class="loader-n">N</span><span class="loader-rest">inja Design Hub</span>
+      </div>
+      <div class="loader-bar">
+        <div class="loader-fill"></div>
       </div>
     </div>
+  </div>
 
-    <!-- HEADER -->
-    <header class="site-header" data-header>
-      <a class="brand" href="#home" aria-label="Ninja Design Hub home">
-        <img src="assets/logo-sm.png" alt="Ninja Design Hub logo" width="55" height="55" decoding="async" />
+  <!-- Scroll Progress Indicator -->
+  <div id="scroll-progress-wrap" aria-hidden="true">
+    <div id="scroll-progress"></div>
+  </div>
+
+  <!-- SKIP TO CONTENT -->
+  <a href="#main-content" class="sr-only">Skip to main content</a>
+
+  <!-- =========================================================================
+       1. FLOATING / STICKY NAVBAR
+       ========================================================================= -->
+  <header class="site-header" id="site-header">
+    <div class="navbar-inner">
+      <a href="#home" class="brand-logo" aria-label="Ninja Design Hub Home">
+        <img src="assets/logo-sm.png" alt="Ninja Design Hub" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        <div class="brand-logo-fallback" style="display:none;">N</div>
         <span>Ninja Design Hub</span>
       </a>
-      <nav class="desktop-nav" aria-label="Primary navigation">
-        <a href="#home">Home</a>
-        <a href="#services">Services</a>
-        <a href="#work">Work</a>
-        <a href="#about">About</a>
-        <a href="#process">Process</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact">Contact</a>
+
+      <!-- Navigation Links -->
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#work" class="nav-link">Work</a>
+        <a href="#proof" class="nav-link">Results</a>
+        <a href="#process" class="nav-link">Process</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="#contact" class="nav-link">Contact</a>
       </nav>
-      <a class="btn-gold nav-cta" href="#contact">Get Started</a>
-      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-menu-toggle>
-        <span></span><span></span><span></span>
-      </button>
-    </header>
 
-    <!-- MOBILE PANEL -->
-    <div class="mobile-panel" data-mobile-panel>
-      <button class="mobile-close" data-menu-toggle aria-label="Close menu" aria-expanded="true">✕</button>
-      <nav aria-label="Mobile navigation">
-        <a href="#home">Home</a>
-        <a href="#services">Services</a>
-        <a href="#work">Work</a>
-        <a href="#about">About</a>
-        <a href="#process">Process</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <a class="btn-gold mobile-cta" href="#contact">Get Started</a>
-    </div>
-    <div class="mobile-overlay" data-mobile-overlay></div>
+      <!-- CTA & Status -->
+      <div class="nav-actions">
 
-    <main id="main">
-
-      <!-- HERO -->
-      <section class="hero" id="home" aria-labelledby="hero-title">
-        <div class="hero-grid-texture" aria-hidden="true"></div>
-        <div class="hero-glow" aria-hidden="true"></div>
-        <div class="hero-content">
-          <div class="hero-badge reveal">
-            <span class="badge-dot"></span>
-            Available for new projects
-          </div>
-          <p class="terminal-intro fade-up">
-            <span class="terminal-prompt">&nbsp;</span><span id="terminal-line"></span><span class="terminal-cursor" aria-hidden="true">|</span>
-          </p>
-          <h1 id="hero-title" class="hero-title" data-split>Design &amp; websites <br class="hero-br-desktop" />for brands that <br class="hero-br-desktop" />want to stand out</h1>
-          <p class="hero-subtitle reveal">
-            We create stunning websites, UI/UX, branding, and digital experiences for businesses that demand more than ordinary.
-          </p>
-          <div class="hero-actions reveal">
-            <a class="btn-gold" href="#work" id="hero-cta-work">See Our Work</a>
-            <a class="btn-outline" href="#contact" id="hero-cta-start">Start a Project</a>
-          </div>
-        </div>
-
-        <!-- Floating UI Cards -->
-        <div class="hero-visuals" aria-hidden="true">
-          <div class="float-card fc1 reveal">
-            <div class="float-card-inner">
-              <div class="fc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="19" cy="17" r="2"/><circle cx="9" cy="18" r="3"/><path d="M12 9a7 7 0 0 0-7 7c0 1.1.3 2.1.7 3"/><path d="M16 6a7 7 0 0 1 5 6.7c0 .8-.1 1.6-.4 2.3"/></svg></div>
-              <div class="fc-text">
-                <p class="fc-label">Brand Identity</p>
-                <p class="fc-sub">Crafted for impact</p>
-              </div>
-            </div>
-          </div>
-          <div class="float-card fc2 reveal">
-            <div class="float-card-inner">
-              <div class="fc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-              <div class="fc-text">
-                <p class="fc-label">Fast Delivery</p>
-                <p class="fc-sub">On time, every time</p>
-              </div>
-            </div>
-          </div>
-          <div class="float-card fc3 reveal">
-            <div class="float-card-inner">
-              <div class="fc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg></div>
-              <div class="fc-text">
-                <p class="fc-label">100% Responsive</p>
-                <p class="fc-sub">Mobile-first builds</p>
-              </div>
-            </div>
-          </div>
-          <div class="hero-ring r1"></div>
-          <div class="hero-ring r2"></div>
-          <div class="hero-orb"></div>
-        </div>
-
-        <a class="scroll-cue" href="#about" aria-label="Scroll down">
-          <span>Scroll</span>
-          <i aria-hidden="true"></i>
+        <a href="#contact" class="btn btn-primary btn-sm">
+          <span>Contact Now</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </a>
-      </section>
+        <button class="menu-toggle-btn" id="menu-toggle-btn" aria-label="Toggle Navigation Menu">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
 
-      <!-- WHY US -->
-      <section class="section why-us" id="about" aria-labelledby="why-title">
-        <div class="container">
-          <div class="section-label reveal">
-            <span class="eyebrow">Why Choose Us</span>
-          </div>
-          <h2 id="why-title" class="section-title reveal">
-            Built for brands that <em>refuse to be average</em>
-          </h2>
-          <div class="why-grid">
-            <div class="why-card reveal">
-              <div class="why-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg></div>
-              <h3>Premium Conversion Design</h3>
-              <p>Every pixel crafted to convert. We build interfaces that don't just look good — they turn visitors into clients.</p>
-            </div>
-            <div class="why-card reveal">
-              <div class="why-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 2l5.2 3v6L12 14l-5.2-3V5z"/><path d="M12 14l5.2 3v6L12 26l-5.2-3v-6z" transform="translate(0,-3)"/></svg></div>
-              <h3>Fully Responsive Builds</h3>
-              <p>Pixel-perfect across every device. From ultrawide desktops to compact mobile screens — nothing breaks.</p>
-            </div>
-            <div class="why-card reveal">
-              <div class="why-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="1" transform="rotate(45 12 12)"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg></div>
-              <h3>Clean UI/UX &amp; Brand Identity</h3>
-              <p>Strong design systems with purposeful typography, cohesive brand language, and intuitive user flows.</p>
-            </div>
-            <div class="why-card reveal">
-              <div class="why-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 20h20L12 2zm0 4l7 12H5l7-12z"/></svg></div>
-              <h3>Fast Delivery &amp; Clear Comms</h3>
-              <p>Structured sprints, real-time updates, and zero ghost zones. You always know where your project stands.</p>
-            </div>
-          </div>
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer-backdrop" id="mobile-backdrop"></div>
+  <div class="mobile-drawer" id="mobile-drawer" aria-label="Mobile Menu">
+    <div>
+      <div class="mobile-drawer-header">
+        <div class="brand-logo">
+          <img src="assets/logo-sm.png" alt="Ninja Design Hub" width="32" height="32" onerror="this.style.display='none';" />
+          <span>Ninja Design Hub</span>
         </div>
-      </section>
+        <button class="modal-close-btn" id="mobile-close-btn" aria-label="Close menu">✕</button>
+      </div>
+      <div class="mobile-nav-links">
+        <a href="#services" class="mobile-nav-link"><span>01. Services</span> <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+        <a href="#work" class="mobile-nav-link"><span>02. Portfolio Work</span> <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+        <a href="#proof" class="mobile-nav-link"><span>03. Proven Results</span> <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+        <a href="#process" class="mobile-nav-link"><span>04. How We Work</span> <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+        <a href="#faq" class="mobile-nav-link"><span>05. FAQ</span> <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+        <a href="#contact" class="mobile-nav-link"><span>06. Contact Us</span> <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+      </div>
+    </div>
+    <div style="padding-top: 2rem;">
+      <a href="#contact" class="btn btn-primary" style="width:100%;">
+        <span>Contact Now</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </div>
+  </div>
 
-      <!-- STATS -->
-      <section class="section stats-section" aria-label="Agency stats">
-        <div class="container">
-          <div class="stats-grid">
-            <div class="stat-card reveal">
-              <div class="stat-value-row"><span class="stat-num" data-count="20">0</span><span class="stat-plus">+</span></div>
-              <p>Projects Completed</p>
-            </div>
-            <div class="stat-card reveal">
-              <div class="stat-value-row"><span class="stat-num" data-count="10">0</span><span class="stat-plus">+</span></div>
-              <p>Brands Designed</p>
-            </div>
-            <div class="stat-card reveal">
-              <div class="stat-value-row"><span class="stat-num" data-count="100">0</span><span class="stat-plus">%</span></div>
-              <p>Responsive Builds</p>
-            </div>
-            <div class="stat-card reveal">
-              <div class="stat-value-row"><span class="stat-num" data-count="48">0</span><span class="stat-plus">h</span></div>
-              <p>Avg First Draft</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- TRUSTED BRANDS -->
-      <section class="section brands-section" aria-label="Trusted by brands">
-        <div class="container">
-          <p class="eyebrow text-center reveal">Trusted by growing brands</p>
-          <div class="brands-track" aria-hidden="true">
-            <div class="brands-track-inner">
-              <div class="brands-inner">
-                <span>ArtisanCo</span>
-                <span>NovaBuild</span>
-                <span>ZenithX</span>
-                <span>PulseMedia</span>
-                <span>StudioForge</span>
-                <span>LuxeHomes</span>
-                <span>TechMint</span>
-                <span>CrownWear</span>
-                <span>ArtisanCo</span>
-                <span>NovaBuild</span>
-                <span>ZenithX</span>
-                <span>PulseMedia</span>
-                <span>StudioForge</span>
-                <span>LuxeHomes</span>
-                <span>TechMint</span>
-                <span>CrownWear</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SERVICES -->
-      <section class="section services-section" id="services" aria-labelledby="services-title">
-        <div class="container">
-          <div class="section-label reveal"><span class="eyebrow">What We Do</span></div>
-          <h2 id="services-title" class="section-title reveal">Services built for <em>modern brands</em></h2>
-          <div class="services-grid">
-            <div class="service-card reveal">
-              <div class="sc-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg></div>
-              <h3>Website Design</h3>
-              <p>Visually striking, conversion-focused website designs tailored to your brand and audience.</p>
-            </div>
-            <div class="service-card reveal">
-              <div class="sc-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
-              <h3>Website Development</h3>
-              <p>Clean, fast, and scalable front-end development using modern web standards.</p>
-            </div>
-            <div class="service-card reveal">
-              <div class="sc-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
-              <h3>UI/UX Design</h3>
-              <p>User-centered design with intuitive flows, wireframes, prototypes, and design systems.</p>
-            </div>
-            <div class="service-card reveal">
-              <div class="sc-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg></div>
-              <h3>Brand Identity</h3>
-              <p>Logo design, color palettes, typography, and brand guidelines to make you unforgettable.</p>
-            </div>
-            <div class="service-card reveal">
-              <div class="sc-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></div>
-              <h3>Landing Pages</h3>
-              <p>High-converting landing pages designed to capture leads and drive actions fast.</p>
-            </div>
-            <div class="service-card reveal">
-              <div class="sc-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
-              <h3>Portfolio Websites</h3>
-              <p>Premium portfolio sites that showcase your work and establish your authority.</p>
-            </div>
-            <div class="service-card reveal">
-              <div class="sc-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg></div>
-              <h3>Business Redesign</h3>
-              <p>Transform outdated websites into modern, fast, and brand-aligned digital experiences.</p>
-            </div>
-            <div class="service-card reveal">
-              <div class="sc-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18.01"/><path d="M8 6h8"/></svg></div>
-              <h3>Social Media Creatives</h3>
-              <p>Eye-catching post designs, stories, social media account management, and ad creatives that stop the scroll.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SELECTED WORK -->
-      <section class="section work-section" id="work" aria-labelledby="work-title">
-        <div class="container">
-          <div class="section-label reveal"><span class="eyebrow">Selected Work</span></div>
-          <h2 id="work-title" class="section-title reveal">Projects that <em>speak for themselves</em></h2>
-          <div class="work-grid">
-
-            <article class="project-card reveal" id="proj-florist">
-              <span class="proj-num" aria-hidden="true">01</span>
-              <div class="pc-image">
-                <img src="assets/project-florist.jpg" alt="The Secret Florist — Handcrafted Bouquets E-Commerce website" loading="lazy" decoding="async" width="800" height="450" />
-                <div class="pc-overlay"></div>
-              </div>
-              <div class="pc-body">
-                <div class="pc-meta">
-                  <span class="pc-cat">E-Commerce</span>
-                  <span class="pc-cat">Web Design</span>
-                  <span class="pc-cat">Development</span>
-                </div>
-                <h3>The Secret Florist</h3>
-                <p>A beautiful e-commerce platform for ordering handcrafted flower bouquets in Pondicherry. Designed with premium pastel aesthetics, seamless catalog browsing, and personalized order options.</p>
-                <div class="pc-tags">
-                  <span>HTML5</span><span>CSS3</span><span>JavaScript</span>
-                </div>
-                <div class="pc-actions">
-                  <a href="https://thesecretflorist.in" target="_blank" rel="noopener noreferrer" class="btn-outline-sm">View Live Site</a>
-                </div>
-              </div>
-            </article>
-
-            <article class="project-card reveal" id="proj-dashboard">
-              <span class="proj-num" aria-hidden="true">02</span>
-              <div class="pc-image">
-                <img src="assets/project-dashboard.png" alt="Signal Ops Analytics Dashboard UI design" loading="lazy" width="800" height="450" />
-                <div class="pc-overlay"></div>
-              </div>
-              <div class="pc-body">
-                <div class="pc-meta">
-                  <span class="pc-cat">Product Design</span>
-                  <span class="pc-cat">Frontend</span>
-                  <span class="pc-cat">Motion</span>
-                </div>
-                <h3>Signal Ops Dashboard</h3>
-                <p>A dense operational dashboard with scan-friendly cards, strong contrast, and motion that helps teams understand status without slowing decisions.</p>
-                <div class="pc-tags">
-                  <span>Figma</span><span>React</span><span>CSS Grid</span>
-                </div>
-                <div class="pc-actions">
-                  <a href="#contact" class="btn-outline-sm">View Project</a>
-                </div>
-              </div>
-            </article>
-
-            <article class="project-card reveal" id="proj-commerce">
-              <span class="proj-num" aria-hidden="true">03</span>
-              <div class="pc-image">
-                <img src="assets/project-commerce.png" alt="Monochrome Checkout minimal e-commerce UI design" loading="lazy" width="800" height="450" />
-                <div class="pc-overlay"></div>
-              </div>
-              <div class="pc-body">
-                <div class="pc-meta">
-                  <span class="pc-cat">Commerce</span>
-                  <span class="pc-cat">UX</span>
-                </div>
-                <h3>Monochrome Checkout</h3>
-                <p>Minimal e-commerce experience with a focus on clarity and frictionless product discovery that drives purchase intent.</p>
-                <div class="pc-tags">
-                  <span>Figma</span><span>HTML/CSS</span><span>JS</span>
-                </div>
-                <div class="pc-actions">
-                  <a href="#contact" class="btn-outline-sm">View Project</a>
-                </div>
-              </div>
-            </article>
-
-            <article class="project-card reveal" id="proj-mobile">
-              <span class="proj-num" aria-hidden="true">04</span>
-              <div class="pc-image">
-                <img src="assets/project-mobile.png" alt="Focus Mobile Suite productivity app UI kit" loading="lazy" width="800" height="450" />
-                <div class="pc-overlay"></div>
-              </div>
-              <div class="pc-body">
-                <div class="pc-meta">
-                  <span class="pc-cat">Mobile</span>
-                  <span class="pc-cat">Systems</span>
-                </div>
-                <h3>Focus Mobile Suite</h3>
-                <p>A productivity app UI kit built for precision — clean navigation, card-based layouts, and a bold typographic system.</p>
-                <div class="pc-tags">
-                  <span>Figma</span><span>Prototyping</span>
-                </div>
-                <div class="pc-actions">
-                  <a href="#contact" class="btn-outline-sm">View Project</a>
-                </div>
-              </div>
-            </article>
-
-            <article class="project-card reveal" id="proj-brand">
-              <span class="proj-num" aria-hidden="true">05</span>
-              <div class="pc-image">
-                <img src="assets/project-brand.png" alt="Studio Launch Kit full brand identity and website" loading="lazy" width="800" height="450" />
-                <div class="pc-overlay"></div>
-              </div>
-              <div class="pc-body">
-                <div class="pc-meta">
-                  <span class="pc-cat">Brand</span>
-                  <span class="pc-cat">Web</span>
-                </div>
-                <h3>Studio Launch Kit</h3>
-                <p>Full brand identity + launch website for a creative studio. Logo, type, color system, and a pixel-perfect marketing site.</p>
-                <div class="pc-tags">
-                  <span>Branding</span><span>Web Design</span>
-                </div>
-                <div class="pc-actions">
-                  <a href="#contact" class="btn-outline-sm">View Project</a>
-                </div>
-              </div>
-            </article>
-
-          </div>
-        </div>
-      </section>
-
-      <!-- TESTIMONIALS -->
-      <section class="section testimonials-section" aria-labelledby="testi-title">
-        <div class="container">
-          <div class="section-label reveal"><span class="eyebrow">Client Love</span></div>
-          <h2 id="testi-title" class="section-title reveal">What our clients <em>say about us</em></h2>
-          <div class="testi-grid">
-            <blockquote class="testi-card reveal">
-              <div class="testi-stars">★★★★★</div>
-              <p>"Ninja Design Hub completely transformed our online presence. The website they built is stunning, fast, and has already doubled our inquiry rate within the first month."</p>
-              <footer>
-                <div class="testi-avatar">AR</div>
-                <div>
-                  <cite>Arjun Rao</cite>
-                  <span>Founder, NovaBuild</span>
-                </div>
-              </footer>
-            </blockquote>
-            <blockquote class="testi-card reveal">
-              <div class="testi-stars">★★★★★</div>
-              <p>"Professional, creative, and incredibly fast. They delivered our brand identity and landing page in record time. The quality exceeded every expectation we had."</p>
-              <footer>
-                <div class="testi-avatar">SM</div>
-                <div>
-                  <cite>Sara Mitchell</cite>
-                  <span>CEO, LuxeHomes</span>
-                </div>
-              </footer>
-            </blockquote>
-            <blockquote class="testi-card reveal">
-              <div class="testi-stars">★★★★★</div>
-              <p>"Working with this team was seamless from start to finish. They understood our vision immediately and delivered a portfolio website that makes us look like the premium studio we are."</p>
-              <footer>
-                <div class="testi-avatar">KP</div>
-                <div>
-                  <cite>Karan Patel</cite>
-                  <span>Creative Director, StudioForge</span>
-                </div>
-              </footer>
-            </blockquote>
-          </div>
-        </div>
-      </section>
-
-      <!-- PROCESS -->
-      <section class="section process-section" id="process" aria-labelledby="process-title">
-        <div class="container">
-          <div class="section-label reveal"><span class="eyebrow">How We Work</span></div>
-          <h2 id="process-title" class="section-title reveal">Our <em>4-step process</em></h2>
-          <div class="process-grid">
-            <div class="process-card reveal">
-              <div class="process-num">01</div>
-              <div class="process-body">
-                <h3>Discovery</h3>
-                <p>We deep-dive into your brand, goals, target audience, and competitors to build a rock-solid brief that guides everything.</p>
-              </div>
-            </div>
-            <div class="process-card reveal">
-              <div class="process-num">02</div>
-              <div class="process-body">
-                <h3>Strategy</h3>
-                <p>Sitemap, wireframes, content structure, and design direction — we align on every detail before a single pixel is placed.</p>
-              </div>
-            </div>
-            <div class="process-card reveal">
-              <div class="process-num">03</div>
-              <div class="process-body">
-                <h3>Design &amp; Build</h3>
-                <p>High-fidelity designs in Figma followed by clean, responsive, production-ready code. Reviewed and refined with your feedback.</p>
-              </div>
-            </div>
-            <div class="process-card reveal">
-              <div class="process-num">04</div>
-              <div class="process-body">
-                <h3>Delivery</h3>
-                <p>Final QA, cross-device testing, handoff, and launch support. We don't just deliver — we make sure it works perfectly.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- FAQ -->
-      <section class="section faq-section" id="faq" aria-labelledby="faq-title">
-        <div class="container faq-container">
-          <div class="section-label reveal"><span class="eyebrow">FAQ</span></div>
-          <h2 id="faq-title" class="section-title reveal">Frequently asked <em>questions</em></h2>
-          <div class="faq-list">
-            <details class="faq-item reveal">
-              <summary>How long does a typical project take?</summary>
-              <div class="faq-answer">
-                <p>Most website projects are completed in 7–21 days depending on scope. Landing pages can be as fast as 3–5 days. We always agree on timelines upfront so there are no surprises.</p>
-              </div>
-            </details>
-            <details class="faq-item reveal">
-              <summary>What's included in a website project?</summary>
-              <div class="faq-answer">
-                <p>Every project includes custom design, responsive development, SEO basics, cross-browser testing, and delivery-ready code. We can also include copywriting, hosting setup, and CMS integration as add-ons.</p>
-              </div>
-            </details>
-            <details class="faq-item reveal">
-              <summary>Do you work with international clients?</summary>
-              <div class="faq-answer">
-                <p>Absolutely. We work with clients globally. All communication is done via email, Notion, or video calls — whatever works best for you.</p>
-              </div>
-            </details>
-            <details class="faq-item reveal">
-              <summary>What is your payment structure?</summary>
-              <div class="faq-answer">
-                <p>We typically work on a 50% upfront, 50% on delivery model. For larger projects, we can set up milestone-based payments. All terms are agreed in writing before work begins.</p>
-              </div>
-            </details>
-            <details class="faq-item reveal">
-              <summary>Can you redesign my existing website?</summary>
-              <div class="faq-answer">
-                <p>Yes! Business redesigns are one of our specialties. We audit your current site, identify opportunities, and deliver a modern, high-performance upgrade that keeps what works and elevates everything else.</p>
-              </div>
-            </details>
-            <details class="faq-item reveal">
-              <summary>Do you provide post-launch support?</summary>
-              <div class="faq-answer">
-                <p>We offer 30 days of complimentary support after every project launch, covering bug fixes and minor adjustments. Ongoing maintenance plans are available for longer-term support.</p>
-              </div>
-            </details>
-          </div>
-        </div>
-      </section>
-
-      <!-- CONTACT -->
-      <section class="section contact-section" id="contact" aria-labelledby="contact-title">
-        <div class="container">
-          <div class="contact-inner">
-            <div class="contact-copy reveal">
-              <div class="section-label"><span class="eyebrow">Get In Touch</span></div>
-              <h2 id="contact-title">Let's build something <em>extraordinary</em></h2>
-              <p>Ready to elevate your brand? Tell us about your project and we'll get back to you within 24 hours.</p>
-              <div class="contact-info">
-                <p class="contact-follow-label">Follow us on</p>
-                <div class="contact-socials">
-                  <a href="https://instagram.com/ninjadesignhub" target="_blank" rel="noopener noreferrer" aria-label="Follow Ninja Design Hub on Instagram">Instagram</a>
-                  <a href="https://wa.me/8124125555" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">WhatsApp</a>
-                </div>
-              </div>
-            </div>
-            <form class="contact-form reveal" id="contact-form" novalidate>
-              <p class="form-demo-note">This is a demo inquiry form — messages are not sent to a server.</p>
-              <div class="form-row">
-                <label class="form-group" id="group-name">
-                  <span>Your Name</span>
-                  <input type="text" name="name" id="field-name" placeholder="e.g. Arjun Sharma" required aria-describedby="error-name" />
-                  <span class="form-error" id="error-name" role="alert">Please enter your name.</span>
-                </label>
-                <label class="form-group" id="group-email">
-                  <span>Email Address</span>
-                  <input type="email" name="email" id="field-email" placeholder="you@example.com" required aria-describedby="error-email" />
-                  <span class="form-error" id="error-email" role="alert">Please enter a valid email address.</span>
-                </label>
-              </div>
-              <div class="form-row">
-                <label class="form-group">
-                  <span>Project Type</span>
-                  <select name="project_type" id="field-project">
-                    <option value="" disabled selected>Select a service</option>
-                    <option>Website Design</option>
-                    <option>Website Development</option>
-                    <option>UI/UX Design</option>
-                    <option>Brand Identity</option>
-                    <option>Landing Page</option>
-                    <option>Business Redesign</option>
-                    <option>Other</option>
-                  </select>
-                </label>
-                <label class="form-group">
-                  <span>Budget Range</span>
-                  <select name="budget" id="field-budget">
-                    <option value="" disabled selected>Select budget</option>
-                    <option>Under ₹10,000</option>
-                    <option>₹10,000 – ₹25,000</option>
-                    <option>₹25,000 – ₹50,000</option>
-                    <option>₹50,000+</option>
-                    <option>Let's discuss</option>
-                  </select>
-                </label>
-              </div>
-              <label class="form-group" id="group-message">
-                <span>Message</span>
-                <textarea name="message" id="field-message" rows="5" placeholder="Tell us about your project, goals, and timeline..." required aria-describedby="error-message"></textarea>
-                <span class="form-error" id="error-message" role="alert">Please enter a message.</span>
-              </label>
-              <button class="btn-gold form-submit" type="submit" id="form-submit-btn">
-                <span class="btn-label">Send Message</span>
-                <span class="btn-arrow">→</span>
-              </button>
-              <div class="form-success" id="form-success" role="alert" aria-live="polite">
-                <span class="success-icon">✓</span>
-                <div>
-                  <strong>Message sent!</strong>
-                  <p>We'll get back to you within 24 hours.</p>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="site-footer">
+  <main id="main-content">
+    <!-- =========================================================================
+         2. HERO SECTION
+         ========================================================================= -->
+    <section class="hero-section" id="home">
+      <!-- Background radial glow -->
+      <div class="hero-glow" aria-hidden="true"></div>
+      <!-- Decorative depth rings -->
+      <div class="hero-ring r1" aria-hidden="true"></div>
+      <div class="hero-ring r2" aria-hidden="true"></div>
       <div class="container">
-        <div class="footer-inner">
-          <div class="footer-brand">
-            <a href="#home" class="brand" aria-label="Ninja Design Hub — back to top">
-              <img src="assets/logo-sm.png" alt="Ninja Design Hub" width="55" height="55" decoding="async" />
-              <span>Ninja Design Hub</span>
-            </a>
-            <p class="footer-tagline">Crafting digital experiences for brands that refuse to be ordinary.</p>
+        <div class="hero-grid">
+          <div class="hero-content">
+            <div class="hero-avail-badge">
+              <span class="avail-dot"></span>
+              <span>Available for new projects</span>
+            </div>
+
+            <p class="terminal-intro mono">
+              <span class="terminal-prompt">&gt;</span>
+              <span id="terminal-line">crafting digital experiences</span>
+              <span class="terminal-cursor">|</span>
+            </p>
+            
+            <h1 class="hero-title">
+              DESIGN &amp; WEBSITES<br>
+              <span class="text-gradient-hero">FOR BRANDS THAT WANT TO STAND OUT</span>
+            </h1>
+
+            <p class="hero-desc">
+              We create stunning websites, UI/UX, branding, and digital experiences for businesses that demand more than ordinary.
+            </p>
+
+            <div class="hero-ctas">
+              <a href="#work" class="btn btn-primary">
+                <span>SEE OUR WORK</span>
+              </a>
+              <a href="#contact" class="btn btn-secondary">
+                <span>START A PROJECT</span>
+              </a>
+            </div>
+
+            <!-- 4 Quantifiable Stats Badges -->
+            <div class="hero-stats-grid">
+              <div class="hero-stat-card">
+                <div class="stat-number text-gradient mono">250+</div>
+                <div class="stat-label">Delivered Projects</div>
+              </div>
+              <div class="hero-stat-card">
+                <div class="stat-number text-gradient mono">85+</div>
+                <div class="stat-label">Global Clients</div>
+              </div>
+              <div class="hero-stat-card">
+                <div class="stat-number text-gradient mono">120M+</div>
+                <div class="stat-label">Views Generated</div>
+              </div>
+              <div class="hero-stat-card">
+                <div class="stat-number text-gradient mono">99.4%</div>
+                <div class="stat-label">Client Retention</div>
+              </div>
+            </div>
           </div>
-          <div class="footer-links">
-            <div class="footer-col">
-              <h4>Services</h4>
-              <a href="#services">Website Design</a>
-              <a href="#services">UI/UX Design</a>
-              <a href="#services">Brand Identity</a>
-              <a href="#services">Landing Pages</a>
-              <a href="#services">Web Development</a>
-            </div>
-            <div class="footer-col">
-              <h4>Company</h4>
-              <a href="#about">About</a>
-              <a href="#work">Work</a>
-              <a href="#process">Process</a>
-              <a href="#faq">FAQ</a>
-              <a href="#contact">Contact</a>
-            </div>
-            <div class="footer-col">
-              <h4>Connect</h4>
-              <a href="https://instagram.com/ninjadesignhub" target="_blank" rel="noopener noreferrer">Instagram</a>
-              <a href="https://wa.me/8124125555" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-            </div>
+        </div><!-- /.hero-grid -->
+      </div><!-- /.container -->
+
+
+
+      <!-- Smooth scroll cue -->
+      <a href="#services" class="scroll-cue" aria-label="Scroll to services">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </a>
+    </section>
+
+    <!-- =========================================================================
+         3. TRUST & SOCIAL PROOF MARQUEE
+         ========================================================================= -->
+    <section class="trust-section" aria-label="Trusted by industry leaders">
+      <div class="marquee-container">
+        <div class="marquee-track">
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+            <span>STRIPE ECOSYSTEM</span>
           </div>
-        </div>
-        <div class="footer-bottom">
-          <p>© 2026 Ninja Design Hub. All rights reserved.</p>
-          <p>Designed &amp; built with precision.</p>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="12 8 8 12 12 16 16 12 12 8"></polygon></svg>
+            <span>OPENAI PARTNERS</span>
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+            <span>SHOPIFY PLUS</span>
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            <span>NOTION CREATORS</span>
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+            <span>FIGMA ENTERPRISE</span>
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            <span>VERCEL VENTURES</span>
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            <span>WEBFLOW EXPERTS</span>
+          </div>
+          <!-- Duplicate for infinite seamless scroll -->
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+            <span>STRIPE ECOSYSTEM</span>
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="12 8 8 12 12 16 16 12 12 8"></polygon></svg>
+            <span>OPENAI PARTNERS</span>
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+            <span>SHOPIFY PLUS</span>
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            <span>NOTION CREATORS</span>
+          </div>
         </div>
       </div>
-    </footer>
+    </section>
 
-    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js" defer></script>
-    <script src="script.js" defer></script>
-  </body>
+    <!-- =========================================================================
+         4. INTERACTIVE 5-PILLAR SERVICES MATRIX
+         ========================================================================= -->
+    <section class="services-section" id="services">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+            <span>Core Disciplines</span>
+          </div>
+          <h2 class="section-title">5 Strategic Pillars Built to Dominate Markets</h2>
+          <p class="section-desc">We don't do cookie-cutter solutions. Each discipline is engineered to deliver immediate ROI, high engagement, and sustainable brand equity.</p>
+        </div>
+
+        <div class="services-grid">
+          <!-- Pillar 1: Web Development -->
+          <div class="service-card service-card-featured">
+            <div>
+              <div class="service-card-top">
+                <div class="service-icon-box">
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                </div>
+                <div class="service-number">01 / PILLAR</div>
+              </div>
+              <h3 class="service-title">High-Converting Web Development &amp; SaaS</h3>
+              <p class="service-desc">Ultra-fast, accessible, conversion-engineered web platforms, landing pages, and web apps with sub-second page loads and 100/100 Lighthouse performance.</p>
+              <ul class="service-features-list">
+                <li class="service-feature-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Custom React / TypeScript / Next.js web applications</span>
+                </li>
+                <li class="service-feature-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>High-converting direct-response landing pages &amp; funnels</span>
+                </li>
+                <li class="service-feature-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Headless Shopify &amp; Stripe e-commerce integrations</span>
+                </li>
+              </ul>
+              <div class="service-tools">
+                <span class="service-tool-badge">React</span>
+                <span class="service-tool-badge">TypeScript</span>
+                <span class="service-tool-badge">Tailwind CSS</span>
+                <span class="service-tool-badge">Next.js</span>
+                <span class="service-tool-badge">Vite</span>
+                <span class="service-tool-badge">Shopify</span>
+              </div>
+            </div>
+            <button class="service-action-btn select-service-inquiry" data-service="web-dev" type="button">
+              <span>Inquire About Web Development</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+          </div>
+
+          <!-- Pillar 2: Brand & Graphic Design -->
+          <div class="service-card">
+            <div>
+              <div class="service-card-top">
+                <div class="service-icon-box">
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                </div>
+                <div class="service-number">02 / PILLAR</div>
+              </div>
+              <h3 class="service-title">Graphic &amp; Brand Design Systems</h3>
+              <p class="service-desc">Complete visual identities, comprehensive design tokens, vector guidelines, and marketing collateral that establish effortless authority.</p>
+              <ul class="service-features-list">
+                <li class="service-feature-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Logo marks &amp; typographic design systems</span>
+                </li>
+                <li class="service-feature-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Design tokens, UI kits &amp; style guides</span>
+                </li>
+                <li class="service-feature-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Pitch decks, banners &amp; marketing packaging</span>
+                </li>
+              </ul>
+              <div class="service-tools">
+                <span class="service-tool-badge">Figma</span>
+                <span class="service-tool-badge">Illustrator</span>
+                <span class="service-tool-badge">Photoshop</span>
+                <span class="service-tool-badge">Brand Guidelines</span>
+              </div>
+            </div>
+            <button class="service-action-btn select-service-inquiry" data-service="brand-design" type="button">
+              <span>Inquire About Branding</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+          </div>
+
+          <!-- Pillar 3: High-Retention Video Editing -->
+          <div class="service-card">
+            <div>
+              <div class="service-card-top">
+                <div class="service-icon-box">
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+                </div>
+                <div class="service-number">03 / PILLAR</div>
+              </div>
+              <h3 class="service-title">High-Retention Video &amp; Motion</h3>
+              <p class="service-desc">Addictive pacing, motion graphics, sound design, and color grading tailored for maximum average view duration on Shorts, Reels, and YouTube.</p>
+              <ul class="service-features-list">
+                <li class="service-feature-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Viral Short-Form editing (Reels, TikTok, Shorts)</span>
+                </li>
+                <li class="service-feature-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>High-retention Long-Form YouTube production</span>
+                </li>
+                <li class="service-feature-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>High-converting product demo commercials</span>
+                </li>
+              </ul>
+              <div class="service-tools">
+                <span class="service-tool-badge">Premiere Pro</span>
+                <span class="service-tool-badge">After Effects</span>
+                <span class="service-tool-badge">DaVinci Resolve</span>
+                <span class="service-tool-badge">Sound FX</span>
+              </div>
+            </div>
+            <button class="service-action-btn select-service-inquiry" data-service="video-editing" type="button">
+              <span>Inquire About Video</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+          </div>
+
+          <!-- Pillar 4: Social Media Management & Growth -->
+          <div class="service-card">
+            <div>
+              <div class="service-card-top">
+                <div class="service-icon-box">
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                </div>
+                <div class="service-number">04 / PILLAR</div>
+              </div>
+              <h3 class="service-title">Viral Social Growth &amp; Strategy</h3>
+              <p class="service-desc">Data-backed content matrices, hook engineering, account audits, and organic scaling funnels that turn passive followers into paying customers.</p>
+              <ul class="service-features-list">
+                <li class="service-feature-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Organic reach optimization across X, IG &amp; LinkedIn</span>
+                </li>
+                <li class="service-feature-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Hook testing &amp; algorithmic retention framework</span>
+                </li>
+                <li class="service-feature-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Lead generation &amp; newsletter onboarding funnels</span>
+                </li>
+              </ul>
+              <div class="service-tools">
+                <span class="service-tool-badge">Analytics</span>
+                <span class="service-tool-badge">Content Matrix</span>
+                <span class="service-tool-badge">Hook Framework</span>
+                <span class="service-tool-badge">Funnels</span>
+              </div>
+            </div>
+            <button class="service-action-btn select-service-inquiry" data-service="social-growth" type="button">
+              <span>Inquire About Social Growth</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+          </div>
+
+          <!-- Pillar 5: Content Creation -->
+          <div class="service-card">
+            <div>
+              <div class="service-card-top">
+                <div class="service-icon-box">
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                </div>
+                <div class="service-number">05 / PILLAR</div>
+              </div>
+              <h3 class="service-title">Content Creation &amp; Creative Direction</h3>
+              <p class="service-desc">Compelling long-form copywriting, high-converting social carousels, infographics, and newsletter narratives that establish undeniable thought leadership.</p>
+              <ul class="service-features-list">
+                <li class="service-feature-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Engaging LinkedIn &amp; Instagram carousel decks</span>
+                </li>
+                <li class="service-feature-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>High-converting sales copy &amp; email newsletters</span>
+                </li>
+                <li class="service-feature-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Brand storytelling &amp; content calendar scheduling</span>
+                </li>
+              </ul>
+              <div class="service-tools">
+                <span class="service-tool-badge">Copywriting</span>
+                <span class="service-tool-badge">Storytelling</span>
+                <span class="service-tool-badge">Carousels</span>
+                <span class="service-tool-badge">Newsletters</span>
+              </div>
+            </div>
+            <button class="service-action-btn select-service-inquiry" data-service="content-creation" type="button">
+              <span>Inquire About Content Creation</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         5. MULTI-DISCIPLINE PORTFOLIO GALLERIES
+         ========================================================================= -->
+    <section class="portfolio-section" id="work">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+            <span>Curated Portfolio</span>
+          </div>
+          <h2 class="section-title">Proof Over Promises</h2>
+          <p class="section-desc">Explore verified case studies, interactive web apps, brand transformations, and video campaigns that drove tangible business growth.</p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="portfolio-filter-tabs" id="portfolio-tabs">
+          <button class="filter-btn active" data-filter="all">All Projects <span class="count-badge">8</span></button>
+          <button class="filter-btn" data-filter="web">Web Dev <span class="count-badge">3</span></button>
+          <button class="filter-btn" data-filter="brand">Brand Design <span class="count-badge">2</span></button>
+          <button class="filter-btn" data-filter="video">Video &amp; Motion <span class="count-badge">2</span></button>
+          <button class="filter-btn" data-filter="growth">Social Growth <span class="count-badge">1</span></button>
+        </div>
+
+        <!-- Portfolio Cards Grid -->
+        <div class="portfolio-grid" id="portfolio-grid">
+          <!-- Web Dev 1: SaaS Analytics -->
+          <div class="portfolio-card" data-category="web">
+            <div class="portfolio-card-media">
+              <img src="assets/project-dashboard.png" alt="SaaS Metrics Dashboard" loading="lazy" />
+              <span class="card-category-badge">Web Application</span>
+            </div>
+            <div class="portfolio-card-body">
+              <div>
+                <h3 class="portfolio-card-title">OmniMetrics Analytics Platform</h3>
+                <p class="portfolio-card-desc">Real-time enterprise analytics suite with sub-second querying and automated churn prediction models.</p>
+                <div class="preview-tech-chips" style="margin-bottom: 1rem;">
+                  <span class="tech-chip">React</span>
+                  <span class="tech-chip">TypeScript</span>
+                  <span class="tech-chip">Tailwind</span>
+                  <span class="tech-chip">Chart.js</span>
+                </div>
+              </div>
+              <div class="portfolio-card-footer">
+                <button class="btn btn-outline btn-sm open-case-study" data-case="omni-metrics">
+                  <span>View Case Study</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                <div class="portfolio-links">
+                  <a href="#contact" class="icon-link-btn" title="Live Demo" aria-label="Demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="icon-link-btn" title="Source Code" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Web Dev 2: Luxury E-Commerce -->
+          <div class="portfolio-card" data-category="web">
+            <div class="portfolio-card-media">
+              <img src="assets/project-commerce.png" alt="Aura Luxury E-Commerce" loading="lazy" />
+              <span class="card-category-badge">E-Commerce</span>
+            </div>
+            <div class="portfolio-card-body">
+              <div>
+                <h3 class="portfolio-card-title">Aura Modern Commerce</h3>
+                <p class="portfolio-card-desc">Headless e-commerce storefront with instant instant search, 3D product previews, and 1-click checkout.</p>
+                <div class="preview-tech-chips" style="margin-bottom: 1rem;">
+                  <span class="tech-chip">Next.js</span>
+                  <span class="tech-chip">Shopify Storefront</span>
+                  <span class="tech-chip">Stripe</span>
+                </div>
+              </div>
+              <div class="portfolio-card-footer">
+                <button class="btn btn-outline btn-sm open-case-study" data-case="aura-commerce">
+                  <span>View Case Study</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                <div class="portfolio-links">
+                  <a href="#contact" class="icon-link-btn" title="Live Store" aria-label="Store"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Web Dev 3: Florist Brand App -->
+          <div class="portfolio-card" data-category="web">
+            <div class="portfolio-card-media">
+              <img src="assets/project-florist.jpg" alt="Petal &amp; Stem Boutique" loading="lazy" />
+              <span class="card-category-badge">Web Design &amp; Dev</span>
+            </div>
+            <div class="portfolio-card-body">
+              <div>
+                <h3 class="portfolio-card-title">Petal &amp; Stem Luxury Florist</h3>
+                <p class="portfolio-card-desc">Bespoke floral design studio website featuring interactive custom bouquet builder and automated same-day dispatch.</p>
+                <div class="preview-tech-chips" style="margin-bottom: 1rem;">
+                  <span class="tech-chip">Tailwind CSS</span>
+                  <span class="tech-chip">JavaScript</span>
+                  <span class="tech-chip">Animations</span>
+                </div>
+              </div>
+              <div class="portfolio-card-footer">
+                <button class="btn btn-outline btn-sm open-case-study" data-case="petal-stem">
+                  <span>View Case Study</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                <div class="portfolio-links">
+                  <a href="#contact" class="icon-link-btn" title="Live Preview" aria-label="Preview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Brand Project 1 -->
+          <div class="portfolio-card" data-category="brand">
+            <div class="portfolio-card-media">
+              <img src="assets/project-brand.png" alt="Aether AI Brand Identity" loading="lazy" />
+              <span class="card-category-badge">Brand Identity System</span>
+            </div>
+            <div class="portfolio-card-body">
+              <div>
+                <h3 class="portfolio-card-title">Aether AI Identity &amp; Guidelines</h3>
+                <p class="portfolio-card-desc">Complete visual design system, custom typography rules, 40+ vector iconography assets, and pitch deck templates.</p>
+                <div class="palette-preview">
+                  <div class="palette-swatch" style="background: #080808;" title="#080808"></div>
+                  <div class="palette-swatch" style="background: #FF4B1F;" title="#FF4B1F"></div>
+                  <div class="palette-swatch" style="background: #FF9068;" title="#FF9068"></div>
+                  <div class="palette-swatch" style="background: #F4F4F6;" title="#F4F4F6"></div>
+                </div>
+              </div>
+              <div class="portfolio-card-footer">
+                <button class="btn btn-outline btn-sm open-case-study" data-case="aether-brand">
+                  <span>View Brand Guide</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                <span class="tech-chip">18 Deliverables</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Brand Project 2: Mobile App Branding -->
+          <div class="portfolio-card" data-category="brand">
+            <div class="portfolio-card-media">
+              <img src="assets/project-mobile.png" alt="Zenith Fintech Mobile App" loading="lazy" />
+              <span class="card-category-badge">UI/UX &amp; App Design</span>
+            </div>
+            <div class="portfolio-card-body">
+              <div>
+                <h3 class="portfolio-card-title">Zenith Neo-Banking App UI</h3>
+                <p class="portfolio-card-desc">Next-generation mobile banking experience with biometric verification, instant peer payments, and investment tracking.</p>
+                <div class="palette-preview">
+                  <div class="palette-swatch" style="background: #0B0E14;" title="#0B0E14"></div>
+                  <div class="palette-swatch" style="background: #3B82F6;" title="#3B82F6"></div>
+                  <div class="palette-swatch" style="background: #10B981;" title="#10B981"></div>
+                  <div class="palette-swatch" style="background: #FFFFFF;" title="#FFFFFF"></div>
+                </div>
+              </div>
+              <div class="portfolio-card-footer">
+                <button class="btn btn-outline btn-sm open-case-study" data-case="zenith-app">
+                  <span>View Case Study</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                <span class="tech-chip">Figma UI Kit</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video Project 1: Short-Form Viral Reel -->
+          <div class="portfolio-card" data-category="video">
+            <div class="portfolio-card-media">
+              <img src="assets/NDH.jpeg" alt="Viral Hook Reel Video" loading="lazy" />
+              <div class="video-play-overlay open-video-modal" data-video-title="Viral Tech Launch Reel (4.8M Views)" data-video-url="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" data-views="4.8M Views" data-duration="0:45">
+                <div class="play-circle">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </div>
+              </div>
+              <span class="card-category-badge">Short-Form / Reels</span>
+              <span class="duration-chip">0:45 • 4.8M Views</span>
+            </div>
+            <div class="portfolio-card-body">
+              <div>
+                <h3 class="portfolio-card-title">SaaS Product Launch Reel</h3>
+                <p class="portfolio-card-desc">High-tempo kinetic typography and sound-designed short-form campaign that drove 18,000+ app downloads in 7 days.</p>
+                <div class="preview-tech-chips" style="margin-bottom: 1rem;">
+                  <span class="tech-chip">Premiere Pro</span>
+                  <span class="tech-chip">After Effects</span>
+                  <span class="tech-chip">Sound Design</span>
+                </div>
+              </div>
+              <div class="portfolio-card-footer">
+                <button class="btn btn-primary btn-sm open-video-modal" data-video-title="Viral Tech Launch Reel (4.8M Views)" data-video-url="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" data-views="4.8M Views" data-duration="0:45">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                  <span>Play Video</span>
+                </button>
+                <span class="mono" style="font-size: 0.8rem; color: #34d399; font-weight:700;">+240% Conv</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video Project 2: Commercial Brand Film -->
+          <div class="portfolio-card" data-category="video">
+            <div class="portfolio-card-media">
+              <img src="assets/project-brand.png" alt="Commercial Brand Film" loading="lazy" />
+              <div class="video-play-overlay open-video-modal" data-video-title="NextGen AI Brand Anthem Commercial" data-video-url="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" data-views="1.2M Views" data-duration="1:30">
+                <div class="play-circle">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </div>
+              </div>
+              <span class="card-category-badge">Commercial Film</span>
+              <span class="duration-chip">1:30 • 1.2M Views</span>
+            </div>
+            <div class="portfolio-card-body">
+              <div>
+                <h3 class="portfolio-card-title">NextGen AI Brand Anthem</h3>
+                <p class="portfolio-card-desc">Cinematic commercial film featuring 3D product renders, custom voiceover narration, and original orchestral score.</p>
+                <div class="preview-tech-chips" style="margin-bottom: 1rem;">
+                  <span class="tech-chip">Cinema 4D</span>
+                  <span class="tech-chip">DaVinci Color</span>
+                  <span class="tech-chip">Soundtrack</span>
+                </div>
+              </div>
+              <div class="portfolio-card-footer">
+                <button class="btn btn-primary btn-sm open-video-modal" data-video-title="NextGen AI Brand Anthem Commercial" data-video-url="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" data-views="1.2M Views" data-duration="1:30">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                  <span>Play Video</span>
+                </button>
+                <span class="mono" style="font-size: 0.8rem; color: #34d399; font-weight:700;">Award Winner</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Growth Case Study -->
+          <div class="portfolio-card social-case-card" data-category="growth">
+            <div>
+              <div class="service-card-top" style="margin-bottom: 0.5rem;">
+                <span class="card-category-badge" style="position:static;">Social Growth Scale</span>
+                <span class="mono" style="color: #34d399; font-weight: 700; font-size: 0.85rem;">+840% Growth</span>
+              </div>
+              <h3 class="portfolio-card-title">Creator brand scale from 12k to 145k</h3>
+              <p class="portfolio-card-desc">Scaled a B2B tech founder's personal brand across X and LinkedIn using high-signal carousel templates and algorithmic hook testing.</p>
+              
+              <!-- Before vs After Metrics Comparison -->
+              <div class="metrics-comparison">
+                <div>
+                  <div class="metric-col-title metric-before-title">Before (Day 0)</div>
+                  <div class="metric-stat-item">
+                    <div class="metric-stat-label">Followers</div>
+                    <div class="metric-stat-val">12,400</div>
+                  </div>
+                  <div class="metric-stat-item">
+                    <div class="metric-stat-label">Monthly Views</div>
+                    <div class="metric-stat-val">85,000</div>
+                  </div>
+                  <div class="metric-stat-item">
+                    <div class="metric-stat-label">Engage Rate</div>
+                    <div class="metric-stat-val">1.2%</div>
+                  </div>
+                </div>
+                <div>
+                  <div class="metric-col-title metric-after-title">After (90 Days)</div>
+                  <div class="metric-stat-item">
+                    <div class="metric-stat-label">Followers</div>
+                    <div class="metric-stat-val after">145,800</div>
+                  </div>
+                  <div class="metric-stat-item">
+                    <div class="metric-stat-label">Monthly Views</div>
+                    <div class="metric-stat-val after">4,200,000</div>
+                  </div>
+                  <div class="metric-stat-item">
+                    <div class="metric-stat-label">Engage Rate</div>
+                    <div class="metric-stat-val after">5.8%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="portfolio-card-footer">
+              <button class="btn btn-primary btn-sm select-service-inquiry" data-service="social-growth" style="width: 100%;">
+                <span>Get Similar Growth Results</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         6. QUANTIFIABLE RESULTS & PROOF GRID
+         ========================================================================= -->
+    <section class="results-section" id="proof">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+            <span>Quantifiable Impact</span>
+          </div>
+          <h2 class="section-title">Numbers Don't Lie. We Deliver Outsized ROI.</h2>
+          <p class="section-desc">Every line of code and every pixel is ruthlessly optimized for measurable business outcomes.</p>
+        </div>
+
+        <div class="results-grid">
+          <div class="result-card">
+            <div class="result-number mono">₹125 Cr+</div>
+            <div class="result-label">Client Revenue Generated</div>
+            <div class="result-desc">Direct attributable pipeline and e-commerce gross merchandise value driven across client web platforms.</div>
+            <div class="result-trend-badge">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+              <span>+310% YoY growth</span>
+            </div>
+          </div>
+
+          <div class="result-card">
+            <div class="result-number mono">3.8x</div>
+            <div class="result-label">Average Ad Campaign ROAS</div>
+            <div class="result-desc">Achieved via high-retention video creatives, hook testing, and lightning-fast landing page load times.</div>
+            <div class="result-trend-badge">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+              <span>Benchmarked vs 1.4x standard</span>
+            </div>
+          </div>
+
+          <div class="result-card">
+            <div class="result-number mono">125M+</div>
+            <div class="result-label">Organic Video Impressions</div>
+            <div class="result-desc">Total cumulative views generated across TikTok, Instagram Reels, and YouTube Shorts for partner brands.</div>
+            <div class="result-trend-badge">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+              <span>Zero ad spend required</span>
+            </div>
+          </div>
+
+          <div class="result-card">
+            <div class="result-number mono">99.4%</div>
+            <div class="result-label">Client Retention &amp; Satisfaction</div>
+            <div class="result-desc">Our clients stick with us because we communicate proactively, hit deadlines, and obsess over details.</div>
+            <div class="result-trend-badge">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <span>5.0 / 5.0 Star Rating</span>
+            </div>
+          </div>
+
+          <div class="result-card">
+            <div class="result-number mono">&lt; 0.4s</div>
+            <div class="result-label">Average Page Load Speed</div>
+            <div class="result-desc">Ultra-clean semantic code, zero library bloat, and optimized assets ensure perfect 100/100 Core Web Vitals.</div>
+            <div class="result-trend-badge">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+              <span>Top 1% Global Web Speed</span>
+            </div>
+          </div>
+
+          <div class="result-card">
+            <div class="result-number mono">18+</div>
+            <div class="result-label">Design &amp; Code Accolades</div>
+            <div class="result-desc">Featured across Awwwards, SiteInspire, Behance Best of Branding, and Product Hunt top products of the day.</div>
+            <div class="result-trend-badge">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H7v2h10v-2h-2c-.55 0-1-.45-1-1v-2.34c3.34-.84 5-3.37 5-6.66H4c0 3.29 1.66 5.82 5 6.66z"></path></svg>
+              <span>Global Recognition</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         7. PROCESS TIMELINE (HOW WE WORK)
+         ========================================================================= -->
+    <section class="process-section" id="process">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <span>Our Agile Workflow</span>
+          </div>
+          <h2 class="section-title">From Vision to Launch in 5 Streamlined Steps</h2>
+          <p class="section-desc">Transparent timelines, continuous communication, and zero guesswork.</p>
+        </div>
+
+        <div class="process-timeline">
+          <!-- Step 1 -->
+          <div class="process-step-card">
+            <div class="step-meta">
+              <div class="step-number">01</div>
+              <span class="step-duration-badge">1–2 Days</span>
+            </div>
+            <div>
+              <h3 class="step-content-title">Discovery, Market Audit &amp; Strategy</h3>
+              <p class="step-content-desc">We deep dive into your product, competitive landscape, target audience psychographics, and conversion funnels to build an airtight project blueprint.</p>
+              <div class="step-deliverables-chips">
+                <span class="step-deliverable-chip">✓ Strategic Roadmap</span>
+                <span class="step-deliverable-chip">✓ Competitor Gap Analysis</span>
+                <span class="step-deliverable-chip">✓ Information Architecture</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="process-step-card">
+            <div class="step-meta">
+              <div class="step-number">02</div>
+              <span class="step-duration-badge">3–5 Days</span>
+            </div>
+            <div>
+              <h3 class="step-content-title">Concept, Wireframing &amp; Design System</h3>
+              <p class="step-content-desc">We craft interactive high-fidelity Figma prototypes, custom typography rules, color tokens, and responsive UI components for review.</p>
+              <div class="step-deliverables-chips">
+                <span class="step-deliverable-chip">✓ Clickable Figma Prototype</span>
+                <span class="step-deliverable-chip">✓ Design Tokens &amp; UI Kit</span>
+                <span class="step-deliverable-chip">✓ Responsive Mobile Layouts</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="process-step-card">
+            <div class="step-meta">
+              <div class="step-number">03</div>
+              <span class="step-duration-badge">1–2 Weeks</span>
+            </div>
+            <div>
+              <h3 class="step-content-title">Full-Stack Development &amp; Production</h3>
+              <p class="step-content-desc">Pixel-perfect engineering using ultra-fast modern tech. We build clean, accessible, semantic code and produce studio-grade motion assets.</p>
+              <div class="step-deliverables-chips">
+                <span class="step-deliverable-chip">✓ Production Codebase</span>
+                <span class="step-deliverable-chip">✓ Micro-Interactions</span>
+                <span class="step-deliverable-chip">✓ 4K Master Video Exports</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="process-step-card">
+            <div class="step-meta">
+              <div class="step-number">04</div>
+              <span class="step-duration-badge">2–3 Days</span>
+            </div>
+            <div>
+              <h3 class="step-content-title">Review, QA &amp; Performance Optimization</h3>
+              <p class="step-content-desc">Rigorous cross-browser testing across mobile, tablet, and widescreen. We optimize Core Web Vitals, SEO meta tags, and accessibility.</p>
+              <div class="step-deliverables-chips">
+                <span class="step-deliverable-chip">✓ 100/100 Lighthouse Audit</span>
+                <span class="step-deliverable-chip">✓ Cross-Device QA Matrix</span>
+                <span class="step-deliverable-chip">✓ Technical SEO Setup</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="process-step-card">
+            <div class="step-meta">
+              <div class="step-number">05</div>
+              <span class="step-duration-badge">Ongoing</span>
+            </div>
+            <div>
+              <h3 class="step-content-title">Launch, Handover &amp; Growth Scaling</h3>
+              <p class="step-content-desc">Seamless domain deployment, complete documentation handover, analytics integration, and proactive organic growth guidance.</p>
+              <div class="step-deliverables-chips">
+                <span class="step-deliverable-chip">✓ Production Deployment</span>
+                <span class="step-deliverable-chip">✓ Video Walkthrough Guide</span>
+                <span class="step-deliverable-chip">✓ 30-Day Post-Launch Support</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         8. SEARCHABLE FAQ ACCORDION
+         ========================================================================= -->
+    <section class="faq-section" id="faq">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <span>Everything Answered</span>
+          </div>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-desc">Search or filter through common questions regarding our process, terms, and technical execution.</p>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="faq-search-wrapper">
+          <svg class="faq-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="faq-search-input" class="faq-search-input" placeholder="Search questions (e.g., turnaround, tech stack, revisions)..." />
+        </div>
+
+        <!-- Category Filter Pills -->
+        <div class="faq-categories" id="faq-categories">
+          <button class="faq-cat-btn active" data-cat="all">All Questions</button>
+          <button class="faq-cat-btn" data-cat="turnaround">Turnaround</button>
+          <button class="faq-cat-btn" data-cat="revisions">Revisions</button>
+          <button class="faq-cat-btn" data-cat="tech">Tech Stack</button>
+          <button class="faq-cat-btn" data-cat="payment">Payment Terms</button>
+          <button class="faq-cat-btn" data-cat="communication">Communication</button>
+        </div>
+
+        <!-- FAQ Items -->
+        <div class="faq-accordion" id="faq-accordion">
+          <!-- Item 1 -->
+          <div class="faq-item" data-category="turnaround" data-keywords="turnaround time speed delivery timeline launch">
+            <button class="faq-question-btn" type="button">
+              <span>What is the typical turnaround time for a complete project?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              A standard high-converting landing page is delivered within 7–10 business days. Full-stack web applications and complete brand systems typically take 2–3 weeks. We work with strict milestone sprint deliveries so you're never left wondering about status.
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="faq-item" data-category="revisions" data-keywords="revisions changes feedback guarantee satisfaction">
+            <button class="faq-question-btn" type="button">
+              <span>How do revisions work? What if I need adjustments?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              We provide iterative checkpoints at every phase (Wireframes → Design → Interactive Build). Minor tweaks and copy refinements are unlimited during the build phase. Our goal is 100% client satisfaction before any public launch.
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="faq-item" data-category="tech" data-keywords="tech stack react vite tailwind wordpress node framework backend code">
+            <button class="faq-question-btn" type="button">
+              <span>What technology stack do you use for web development?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              We specialize in lightweight, ultra-fast modern web technologies: React 19, TypeScript, Vite, Tailwind CSS, clean semantic HTML5, and Headless APIs (Shopify, Stripe, Supabase). We strictly avoid heavy bloated CMS themes that slow down your conversion rates.
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="faq-item" data-category="payment" data-keywords="payment terms milestones invoicing deposit stripe wire inr upi">
+            <button class="faq-question-btn" type="button">
+              <span>What are your payment terms and billing structure?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              Standard fixed-scope projects operate on a 50% upfront deposit and 50% upon final sign-off and deployment. We accept direct Bank Transfer (NEFT/IMPS/UPI), Razorpay, Stripe, and major debit/credit cards with GST invoicing.
+            </div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="faq-item" data-category="communication" data-keywords="communication slack updates async calls timezone video whatsapp">
+            <button class="faq-question-btn" type="button">
+              <span>How do you handle day-to-day project communication?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              We prioritize high-efficiency asynchronous communication via dedicated WhatsApp/Slack channels, Loom video walkthroughs, and weekly scheduled milestone check-ins. You receive a live project board to track progress in real-time.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         9. SMART CONTACT & INQUIRY SECTION
+         ========================================================================= -->
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <div class="contact-grid">
+          <!-- Left Info Panel -->
+          <div class="contact-info-panel">
+            <div>
+              <div class="section-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                <span>Start a Project</span>
+              </div>
+              <h2 class="section-title">Let's Build Something Legendary Together.</h2>
+              <p class="section-desc">Have an ambitious project in mind? Fill out the brief below or reach out directly for a response within 4 hours.</p>
+
+              <!-- Direct fallback channels -->
+              <div class="direct-channels">
+                <a href="mailto:Ninjadesignhub@gmail.com" class="direct-channel-card" title="Direct Email">
+                  <div class="channel-icon-box">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                  </div>
+                  <div>
+                    <div class="channel-label">Email Us Directly</div>
+                    <div class="channel-val">Ninjadesignhub@gmail.com</div>
+                  </div>
+                </a>
+
+                <a href="https://wa.me/8124125555" target="_blank" rel="noopener noreferrer" class="direct-channel-card" title="Instant WhatsApp">
+                  <div class="channel-icon-box">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                  </div>
+                  <div>
+                    <div class="channel-label">Quick Chat on WhatsApp</div>
+                    <div class="channel-val">+91 81241 25555</div>
+                  </div>
+                </a>
+
+                <a href="mailto:thushyanth12082006@gmail.com?subject=Project%20Inquiry%20-%20Ninja%20Design%20Hub" class="direct-channel-card">
+                  <div class="channel-icon-box">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <div>
+                    <div class="channel-label">Guaranteed Fast Response</div>
+                    <div class="channel-val">Within 4 Hours Response Time</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Smart Form Card -->
+          <div class="contact-form-card">
+            <div class="form-demo-banner">
+              This is a demo inquiry form &mdash; messages are not sent to a server.
+            </div>
+            <form id="smart-contact-form">
+              <!-- Name & Email Row -->
+              <div class="form-row-2col">
+                <div class="form-group">
+                  <label class="form-label" for="contact-name">YOUR NAME</label>
+                  <input type="text" id="contact-name" name="name" class="form-input" placeholder="e.g. Arjun Sharma" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="contact-email">EMAIL ADDRESS</label>
+                  <input type="email" id="contact-email" name="email" class="form-input" placeholder="you@example.com" required />
+                </div>
+              </div>
+
+              <!-- Project Type & Budget Range Row -->
+              <div class="form-row-2col">
+                <div class="form-group">
+                  <label class="form-label" for="contact-service">PROJECT TYPE</label>
+                  <select id="contact-service" name="service" class="form-input form-select">
+                    <option value="" disabled selected>Select a service</option>
+                    <option value="web-dev">Web Development</option>
+                    <option value="brand-design">Brand &amp; Graphic Design</option>
+                    <option value="video-editing">Video Editing</option>
+                    <option value="social-growth">Social Growth &amp; Marketing</option>
+                    <option value="content-creation">Content Creation</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="contact-budget">BUDGET RANGE</label>
+                  <select id="contact-budget" name="budget" class="form-input form-select">
+                    <option value="" disabled selected>Select budget</option>
+                    <option value="₹10k - ₹15k">₹10k – ₹15k</option>
+                    <option value="₹15k - ₹25k">₹15k – ₹25k</option>
+                    <option value="₹25k - ₹50k">₹25k – ₹50k</option>
+                    <option value="₹50k - ₹1 Lakh">₹50k – ₹1 Lakh</option>
+                    <option value="₹1 Lakh+">₹1 Lakh+</option>
+                    <option value="Let's Discuss">Let's discuss</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Message -->
+              <div class="form-group">
+                <label class="form-label" for="contact-message">MESSAGE</label>
+                <textarea id="contact-message" name="message" class="form-textarea" placeholder="Tell us about your project, goals, and timeline..." required></textarea>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="btn btn-primary btn-submit-full" id="form-submit-btn">
+                <span id="submit-btn-text">SEND MESSAGE &rarr;</span>
+              </button>
+            </form>
+
+            <!-- Success Box (Hidden by default) -->
+            <div id="form-success-message" class="form-success-box" style="display: none;">
+              <div class="success-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; color: #fff;">Inquiry Sent Successfully!</h3>
+              <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.6;">
+                Thank you for reaching out! We've received your project specifications and will review them immediately. Expect a tailored proposal within 4 hours.
+              </p>
+              <button type="button" class="btn btn-secondary btn-sm" id="reset-form-btn">
+                <span>Send Another Message</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       10. FOOTER
+       ========================================================================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <!-- Brand Info -->
+        <div class="footer-brand-col">
+          <a href="#home" class="brand-logo">
+            <img src="assets/logo-sm.png" alt="Ninja Design Hub" width="36" height="36" onerror="this.style.display='none';" />
+            <span>Ninja Design Hub</span>
+          </a>
+          <p class="footer-desc">
+            Multidisciplinary digital agency engineering high-converting web applications, iconic brand systems, and organic viral growth for modern innovators.
+          </p>
+
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-links-col">
+          <h4>Navigation</h4>
+          <ul class="footer-links-list">
+            <li><a href="#services" class="footer-link">Core Services</a></li>
+            <li><a href="#work" class="footer-link">Selected Work</a></li>
+            <li><a href="#proof" class="footer-link">Verified Results</a></li>
+            <li><a href="#process" class="footer-link">How We Work</a></li>
+            <li><a href="#faq" class="footer-link">FAQ</a></li>
+            <li><a href="#contact" class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Connect & Social -->
+        <div class="footer-links-col">
+          <h4>Connect</h4>
+          <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+            Follow our daily design breakdowns and full-stack engineering teardowns.
+          </p>
+          <div class="social-links-row">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-link-btn" title="GitHub" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link-btn" title="LinkedIn" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+            <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="social-link-btn" title="X (Twitter)" aria-label="Twitter">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link-btn" title="Instagram" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="social-link-btn" title="YouTube" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="footer-bottom">
+        <div>
+          © <span id="current-year">2026</span> Ninja Design Hub. All rights reserved. Crafted for high performance.
+        </div>
+        <button class="back-to-top-btn" id="back-to-top-btn" type="button">
+          <span>Back to top</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       MODALS & OVERLAYS
+       ========================================================================= -->
+
+  <!-- 1. Case Study Slide-over / Modal -->
+  <div class="modal-backdrop" id="case-study-modal" aria-hidden="true" role="dialog">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span class="card-category-badge" id="modal-case-category">Case Study</span>
+          <span class="mono" id="modal-case-timeline" style="font-size: 0.8rem; color: var(--text-muted);">2 Weeks</span>
+        </div>
+        <button class="modal-close-btn close-modal-btn" aria-label="Close dialog">✕</button>
+      </div>
+      <div class="modal-body" id="modal-case-body">
+        <!-- Dynamically injected case study content -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Video Showcase Lightbox Modal -->
+  <div class="modal-backdrop" id="video-lightbox-modal" aria-hidden="true" role="dialog">
+    <div class="modal-card" style="max-width: 850px; background: #000; padding: 0;">
+      <div class="modal-header" style="background: rgba(15,15,20,0.9);">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span class="card-category-badge" id="lightbox-video-badge">Video Showcase</span>
+          <span id="lightbox-video-title" style="font-weight: 700; color: #fff; font-size: 0.95rem;"></span>
+        </div>
+        <button class="modal-close-btn close-modal-btn" aria-label="Close video">✕</button>
+      </div>
+      <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;">
+        <iframe id="video-iframe" src="" style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div style="padding: 1.25rem 1.75rem; display: flex; align-items: center; justify-content: space-between; background: #0c0c10;">
+        <div style="font-size: 0.85rem; color: var(--text-secondary);" id="lightbox-video-meta">4.8M Organic Views • High Retention Edit</div>
+        <button class="btn btn-primary btn-sm select-service-inquiry close-modal-btn" data-service="video-editing">
+          <span>Inquire About Video Production</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Toast Notification -->
+  <div class="toast-notification" id="toast">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    <span id="toast-message">Notification</span>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
 </html>

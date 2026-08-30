@@ -1,504 +1,754 @@
-/* ============================================================
-   NINJA DESIGN HUB — Enhanced Main Script
-   ============================================================ */
-
-'use strict';
-
-/* -- PREFERS-REDUCED-MOTION --------------------------------- */
-const PRM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/* -- LOADER ------------------------------------------------- */
-const loader = document.getElementById('loader');
-document.body.style.overflow = 'hidden';
-
-/* Safety fallback: guarantee body overflow is restored even if scripts fail */
-setTimeout(function () {
-  if (loader && !loader.classList.contains('hidden')) {
-    loader.classList.add('hidden');
-    document.body.style.overflow = '';
-  }
-}, 4000);
-
-window.addEventListener('load', function () {
-  var delay = PRM ? 0 : 600;
-  setTimeout(function () {
-    loader.classList.add('hidden');
-    document.body.style.overflow = '';
-  }, delay);
-});
-
-/* -- LENIS SMOOTH SCROLL ------------------------------------ */
-let lenis;
-if (!PRM && typeof Lenis !== 'undefined') {
-  lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    direction: 'vertical',
-    gestureDirection: 'vertical',
-    smoothWave: true,
-    syncTouch: false,
-  });
-
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
-
-  // Smooth scroll anchors using Lenis
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      const targetId = this.getAttribute('href');
-      if (targetId === '#') return;
-      const target = document.querySelector(targetId);
-      if (target) {
-        e.preventDefault();
-        lenis.scrollTo(target, {
-          offset: -80,
-          duration: 1.2,
-        });
-
-        // Support closing mobile menu panel on anchor link click
-        if (typeof closeMenu === 'function') {
-          closeMenu();
-        }
-      }
-    });
-  });
-}
-
-/* -- SCROLL STATE (single rAF loop) ------------------------- */
-const progressBar   = document.getElementById('scroll-progress');
-const header        = document.querySelector('[data-header]');
-
-const allSections = Array.from(document.querySelectorAll('section[id]'));
-const navLinks    = document.querySelectorAll('.desktop-nav a');
-
-let ticking = false;
-
-function onScroll() {
-  if (ticking) return;
-  ticking = true;
-  requestAnimationFrame(updateScroll);
-}
-
-function updateScroll() {
-  const scrollY     = window.scrollY;
-  const docH        = document.documentElement.scrollHeight - window.innerHeight;
-  const pct         = docH > 0 ? Math.min((scrollY / docH) * 100, 100) : 0;
-
-  /* Progress bar */
-  if (progressBar) progressBar.style.width = pct + '%';
-
-  /* Header scrolled state */
-  if (header) header.classList.toggle('is-scrolled', scrollY > 30);
-
-  /* Scrollspy active class */
-  updateActiveNavLink(scrollY);
-
-  ticking = false;
-}
-
-function updateActiveNavLink(scrollY) {
-  const scrollPosition = scrollY + 120; // offset for fixed header
-  let activeSectionId = '';
-  
-  // Handle bottom of page scroll override
-  const isAtBottom = (scrollY + window.innerHeight) >= (document.documentElement.scrollHeight - 20);
-  
-  if (isAtBottom && allSections.length > 0) {
-    activeSectionId = allSections[allSections.length - 1].id;
-  } else {
-    allSections.forEach(section => {
-      const top = section.getBoundingClientRect().top + scrollY;
-      const height = section.offsetHeight;
-      if (scrollPosition >= top && scrollPosition < top + height) {
-        activeSectionId = section.id;
-      }
-    });
-  }
-  
-  if (activeSectionId) {
-    navLinks.forEach(link => {
-      link.classList.toggle('active', link.getAttribute('href') === `#${activeSectionId}`);
-    });
-  }
-}
-
-window.addEventListener('scroll', onScroll, { passive: true });
-onScroll(); // run once on load
-
-/* -- MOBILE MENU -------------------------------------------- */
-const menuToggles   = document.querySelectorAll('[data-menu-toggle]');
-const mobilePanel   = document.querySelector('[data-mobile-panel]');
-const mobileOverlay = document.querySelector('[data-mobile-overlay]');
-const mobileCloseBtn = mobilePanel ? mobilePanel.querySelector('.mobile-close') : null;
-const hamburgerBtn   = document.querySelector('.menu-toggle[data-menu-toggle]');
-
-const openMenu = () => {
-  mobilePanel.classList.add('is-open');
-  mobileOverlay.classList.add('is-open');
-  document.body.style.overflow = 'hidden';
-  // Update aria-expanded on all toggles
-  menuToggles.forEach(t => t.setAttribute('aria-expanded', 'true'));
-  // Move focus to close button for keyboard users
-  if (mobileCloseBtn) {
-    mobileCloseBtn.focus();
-  }
-};
-
-const closeMenu = () => {
-  mobilePanel.classList.remove('is-open');
-  mobileOverlay.classList.remove('is-open');
-  document.body.style.overflow = '';
-  // Update aria-expanded on all toggles
-  menuToggles.forEach(t => t.setAttribute('aria-expanded', 'false'));
-  // Return focus to hamburger button for keyboard users
-  if (hamburgerBtn) {
-    hamburgerBtn.focus();
-  }
-};
-
-menuToggles.forEach(toggle => {
-  toggle.addEventListener('click', () => {
-    mobilePanel.classList.contains('is-open') ? closeMenu() : openMenu();
-  });
-});
-if (mobileOverlay) mobileOverlay.addEventListener('click', closeMenu);
-if (mobilePanel) {
-  mobilePanel.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
-}
-
-// Escape key closes mobile menu
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape' && mobilePanel && mobilePanel.classList.contains('is-open')) {
-    closeMenu();
-  }
-});
-
-/* -- HERO TITLE WORD SPLIT ---------------------------------- */
-const splitEl = document.querySelector('[data-split]');
-if (splitEl) {
-  let wordCount = 0;
-  let newHtml = '';
-  splitEl.childNodes.forEach(node => {
-    if (node.nodeType === Node.TEXT_NODE) {
-      const words = node.textContent.trim().split(/\s+/);
-      words.forEach(w => {
-        if (w) {
-          newHtml += `<span class="word" style="animation-delay:${wordCount * 0.09 + 0.3}s">${w}</span> `;
-          wordCount++;
-        }
-      });
-    } else if (node.nodeType === Node.ELEMENT_NODE) {
-      newHtml += node.outerHTML;
-    }
-  });
-  if (newHtml.trim()) splitEl.innerHTML = newHtml;
-}
-
-/* -- TERMINAL CURSOR ---------------------------------------- */
-const terminalLine = document.getElementById('terminal-line');
-if (terminalLine) {
-  const phrases = [
-    'crafting digital experiences',
-    'building premium websites',
-    'designing brand identities',
-    'shipping pixel-perfect UI',
-  ];
-  let pIdx = 0, cIdx = 0, deleting = false;
-  const SPEED_TYPE = 65, SPEED_DEL = 35, PAUSE = 2000;
-
-  function typeLoop() {
-    const phrase = phrases[pIdx];
-    terminalLine.textContent = phrase.slice(0, cIdx);
-    if (!deleting) {
-      if (cIdx < phrase.length) { cIdx++; setTimeout(typeLoop, SPEED_TYPE); }
-      else { deleting = true; setTimeout(typeLoop, PAUSE); }
-    } else {
-      if (cIdx > 0) { cIdx--; setTimeout(typeLoop, SPEED_DEL); }
-      else { deleting = false; pIdx = (pIdx + 1) % phrases.length; setTimeout(typeLoop, 400); }
-    }
-  }
-  if (!PRM) typeLoop();
-  else terminalLine.textContent = phrases[0];
-}
-
-/* -- INTERSECTION OBSERVER: .reveal (staggered by group) ---- */
-const revealObs = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('is-visible');
-      revealObs.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.06, rootMargin: '0px 0px -4% 0px' });
-
-// Group siblings in same parent for stagger
-document.querySelectorAll('.reveal').forEach((el) => {
-  const siblings = el.parentElement
-    ? Array.from(el.parentElement.querySelectorAll('.reveal'))
-    : [el];
-  const idx = siblings.indexOf(el);
-  // Max 5 items stagger, 70ms step
-  el.style.transitionDelay = `${Math.min(idx, 4) * 70}ms`;
-  revealObs.observe(el);
-});
-
-/* -- INTERSECTION OBSERVER: .fade-up (reusable class) ------- */
-const fadeUpObs = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('is-visible');
-      fadeUpObs.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -5% 0px' });
-
-document.querySelectorAll('.fade-up').forEach((el, i) => {
-  el.style.transitionDelay = `${(i % 4) * 75}ms`;
-  fadeUpObs.observe(el);
-});
-
-/* -- STAT COUNTER ------------------------------------------- */
-const counters = document.querySelectorAll('.stat-num[data-count]');
-const countObs = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    const el     = entry.target;
-    const target = parseInt(el.dataset.count, 10);
-    const dur    = 1600;
-    const step   = target / (dur / 16);
-    let cur = 0;
-    const tick = () => {
-      cur = Math.min(cur + step, target);
-      el.textContent = Math.floor(cur);
-      if (cur < target) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-    countObs.unobserve(el);
-  });
-}, { threshold: 0.5 });
-counters.forEach(c => countObs.observe(c));
-
-/* -- PARALLAX HERO ELEMENTS (glow + floating cards) --------- */
-const heroSection = document.querySelector('.hero');
-const heroGlow = document.querySelector('.hero-glow');
-const fc1 = document.querySelector('.fc1');
-const fc2 = document.querySelector('.fc2');
-const fc3 = document.querySelector('.fc3');
-
-if (!PRM && heroSection) {
-  let glowX = 30, glowY = 50, targetX = 30, targetY = 50;
-  let fc1X = 0, fc1Y = 0, fc2X = 0, fc2Y = 0, fc3X = 0, fc3Y = 0;
-  let targetFc1X = 0, targetFc1Y = 0, targetFc2X = 0, targetFc2Y = 0, targetFc3X = 0, targetFc3Y = 0;
-  let parallaxRaf = null;
-
-  function lerpParallax() {
-    // Glow lerp
-    glowX += (targetX - glowX) * 0.08;
-    glowY += (targetY - glowY) * 0.08;
-    if (heroGlow) {
-      heroGlow.style.left = `${glowX}%`;
-      heroGlow.style.top  = `${glowY}%`;
-    }
-
-    // Float cards lerp (3D parallax translations)
-    fc1X += (targetFc1X - fc1X) * 0.08;
-    fc1Y += (targetFc1Y - fc1Y) * 0.08;
-    fc2X += (targetFc2X - fc2X) * 0.08;
-    fc2Y += (targetFc2Y - fc2Y) * 0.08;
-    fc3X += (targetFc3X - fc3X) * 0.08;
-    fc3Y += (targetFc3Y - fc3Y) * 0.08;
-
-    if (fc1) fc1.style.transform = `translate(${fc1X}px, ${fc1Y}px)`;
-    if (fc2) fc2.style.transform = `translate(${fc2X}px, ${fc2Y}px)`;
-    if (fc3) fc3.style.transform = `translate(${fc3X}px, ${fc3Y}px)`;
-
-    parallaxRaf = requestAnimationFrame(lerpParallax);
-  }
-
-  heroSection.addEventListener('mouseenter', () => {
-    parallaxRaf = requestAnimationFrame(lerpParallax);
-  }, { passive: true });
-
-  heroSection.addEventListener('mouseleave', () => {
-    cancelAnimationFrame(parallaxRaf);
-    // Reset to defaults
-    targetX = 30; targetY = 50;
-    targetFc1X = 0; targetFc1Y = 0;
-    targetFc2X = 0; targetFc2Y = 0;
-    targetFc3X = 0; targetFc3Y = 0;
-    
-    // Lerp back to center
-    parallaxRaf = requestAnimationFrame(lerpParallax);
-    setTimeout(() => cancelAnimationFrame(parallaxRaf), 1200);
-  }, { passive: true });
-
-  heroSection.addEventListener('mousemove', e => {
-    const rect = heroSection.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    // Normalized coordinates (-0.5 to 0.5)
-    const nx = (x / rect.width) - 0.5;
-    const ny = (y / rect.height) - 0.5;
-
-    // Set glow targets
-    targetX = (x / rect.width) * 100;
-    targetY = (y / rect.height) * 100;
-
-    // Set float card offsets (different weights for 3D depth)
-    targetFc1X = nx * 35;  targetFc1Y = ny * 35;
-    targetFc2X = -nx * 45; targetFc2Y = -ny * 45;
-    targetFc3X = nx * 20;  targetFc3Y = ny * 20;
-  }, { passive: true });
-}
-
-/* -- CARD 3D TILT & GLOW ------------------------------------ */
-if (!PRM) {
-  const tiltCards = document.querySelectorAll('.why-card, .service-card, .project-card, .testi-card');
-  tiltCards.forEach(card => {
-    card.addEventListener('mousemove', e => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const w = rect.width;
-      const h = rect.height;
-      
-      // Calculate rotation angles (max 8 degrees)
-      const rotateX = ((h / 2 - y) / (h / 2)) * 8;
-      const rotateY = ((x - w / 2) / (w / 2)) * 8;
-      
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
-      
-      // Update mouse glow coordinates
-      const mx = (x / w) * 100;
-      const my = (y / h) * 100;
-      card.style.setProperty('--mx', `${mx}%`);
-      card.style.setProperty('--my', `${my}%`);
-    }, { passive: true });
-    
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
-    });
-  });
-}
-
-/* -- CONTACT FORM ------------------------------------------- */
-const form        = document.getElementById('contact-form');
-const formSuccess = document.getElementById('form-success');
-const submitBtn   = document.getElementById('form-submit-btn');
-
 /**
- * Show an inline error for a field.
- * Adds visual class to the parent .form-group, shows the error span,
- * and sets aria-invalid on the field.
+ * Ninja Design Hub — High-Converting Interactive Portfolio Logic
+ * Pure Vanilla JavaScript | Zero Bloat | Accessible | Ultra-Fast | INR Currency
  */
-function showFieldError(field, errorId, message) {
-  const group = field.closest('.form-group');
-  if (group) group.classList.add('has-error');
-  field.setAttribute('aria-invalid', 'true');
-  const errorEl = document.getElementById(errorId);
-  if (errorEl) {
-    if (message) errorEl.textContent = message;
-    errorEl.classList.add('show');
-  }
-}
 
-/**
- * Clear an inline error for a field.
- */
-function clearFieldError(field, errorId) {
-  const group = field.closest('.form-group');
-  if (group) group.classList.remove('has-error');
-  field.removeAttribute('aria-invalid');
-  field.style.borderColor = '';
-  const errorEl = document.getElementById(errorId);
-  if (errorEl) errorEl.classList.remove('show');
-}
-
-if (form) {
-  // Clear errors on input
-  const fieldErrorMap = {
-    'field-name': 'error-name',
-    'field-email': 'error-email',
-    'field-message': 'error-message',
+document.addEventListener('DOMContentLoaded', () => {
+  // =========================================================================
+  // 1. DATA DICTIONARY FOR CASE STUDIES & PREVIEWS
+  // =========================================================================
+  const caseStudiesData = {
+    'omni-metrics': {
+      title: 'OmniMetrics — Enterprise SaaS Analytics Suite',
+      category: 'Web Application & SaaS',
+      timeline: '3 Weeks Delivery',
+      client: 'OmniMetrics AI',
+      heroImage: 'assets/project-dashboard.png',
+      overview: 'OmniMetrics is an AI-powered customer intelligence and revenue analytics platform handling over 10M events daily for B2B SaaS teams.',
+      challenge: 'The client had a clunky, sluggish legacy dashboard with 4.5s load times and high user churn during trial onboarding. Data visualization was rigid and mobile experience was broken.',
+      solution: 'We engineered a bespoke, ultra-fast dashboard with sub-second querying, responsive Chart.js real-time streaming components, dark-mode native interface, and frictionless onboarding workflows.',
+      deliverables: ['Full React 19 / TypeScript SPA', 'Real-time Chart Visualizations', 'Custom Design Token System', 'Mobile-Responsive Viewports', 'API Query Optimization'],
+      techStack: ['React', 'TypeScript', 'Tailwind CSS', 'FastAPI', 'Chart.js', 'Vite'],
+      results: [
+        { metric: '0.38s', label: 'Dashboard Load Time', sublabel: 'Down from 4.5s (-91%)' },
+        { metric: '+340%', label: 'Trial-to-Paid Conv', sublabel: '3.4x higher conversion' },
+        { metric: '99.9%', label: 'Uptime Reliability', sublabel: 'Zero client-side crashes' }
+      ]
+    },
+    'aura-commerce': {
+      title: 'Aura — Modern Luxury E-Commerce Experience',
+      category: 'Headless E-Commerce',
+      timeline: '2 Weeks Delivery',
+      client: 'Aura Lifestyle',
+      heroImage: 'assets/project-commerce.png',
+      overview: 'Aura is a high-end luxury lifestyle brand demanding an ultra-minimalist, editorial storefront with instantaneous product previews and zero checkout friction.',
+      challenge: 'Standard Shopify themes were bloated with third-party app scripts, causing 60% mobile bounce rate and poor organic Google rankings.',
+      solution: 'We architected a custom headless storefront with instant client-side search, smooth image transitions, and an optimized 1-click checkout flow.',
+      deliverables: ['Custom Headless Storefront', 'Shopify Storefront API Integration', 'Mobile-First Checkout Funnel', 'High-Res Image Optimization', '100/100 Core Web Vitals'],
+      techStack: ['Next.js', 'Shopify API', 'Tailwind CSS', 'Razorpay & Stripe', 'Edge CDN'],
+      results: [
+        { metric: '+215%', label: 'Mobile Revenue Growth', sublabel: 'Within 60 days of launch' },
+        { metric: '100/100', label: 'Google Performance Score', sublabel: 'Ranked #1 for core keywords' },
+        { metric: '-42%', label: 'Cart Abandonment Rate', sublabel: 'Frictionless checkout' }
+      ]
+    },
+    'petal-stem': {
+      title: 'Petal & Stem — Luxury Floral Boutique',
+      category: 'Brand & Web Experience',
+      timeline: '10 Days Delivery',
+      client: 'Petal & Stem Boutique',
+      heroImage: 'assets/project-florist.jpg',
+      overview: 'A high-end artisan florist boutique seeking an interactive online presence with a custom flower bouquet builder and same-day delivery scheduling.',
+      challenge: 'The business lacked an online booking engine and relied on manual phone orders, limiting regional expansion and weekend sales.',
+      solution: 'Created an evocative, visual-first online store with smooth micro-interactions, an interactive stem customizer, and automated local dispatch logic.',
+      deliverables: ['Custom Web Platform', 'Interactive Bouquet Builder', 'Automated Dispatch System', 'Full Brand Guidelines'],
+      techStack: ['HTML5', 'CSS3 Modern Grid', 'JavaScript', 'Online Payments'],
+      results: [
+        { metric: '+180%', label: 'Online Order Volume', sublabel: 'In first month of launch' },
+        { metric: '4.9/5', label: 'Customer Review Rating', sublabel: 'Over 400 verified reviews' },
+        { metric: '100%', label: 'Automated Invoicing', sublabel: 'Saved 15 hrs/wk admin time' }
+      ]
+    },
+    'aether-brand': {
+      title: 'Aether AI — Full Visual Identity & Design System',
+      category: 'Brand Identity System',
+      timeline: '2 Weeks Delivery',
+      client: 'Aether Technologies',
+      heroImage: 'assets/project-brand.png',
+      overview: 'A fast-growing generative AI startup needed a world-class brand system to stand out during their institutional fundraising round.',
+      challenge: 'The founders had no cohesive visual identity, inconsistent typography, and amateur pitch decks that failed to command enterprise trust.',
+      solution: 'We crafted a futuristic yet timeless brand identity: custom vector logo mark, dark-mode design token architecture, complete marketing collateral, and a high-converting pitch deck.',
+      deliverables: ['Vector Logo Suite & Favicon System', 'Design Token Color & Typography Specs', '40+ Custom 3D Vector Icons', 'Pitch Deck Template (Keynote/Figma)', 'Social Media Design Kit'],
+      techStack: ['Figma', 'Adobe Illustrator', 'Photoshop', 'Design Tokens'],
+      results: [
+        { metric: '₹68 Cr+', label: 'Funding Capital Raised', sublabel: 'Oversubscribed institutional round' },
+        { metric: '100%', label: 'Brand Asset Consistency', sublabel: 'Used across all products' },
+        { metric: '50k+', label: 'Waitlist Signups', sublabel: 'During launch campaign' }
+      ]
+    },
+    'zenith-app': {
+      title: 'Zenith Neo-Bank — Mobile App UI/UX Design',
+      category: 'Mobile UI/UX Design',
+      timeline: '2.5 Weeks Delivery',
+      client: 'Zenith Financial',
+      heroImage: 'assets/project-mobile.png',
+      overview: 'Next-generation mobile financial application combining biometric verification, multi-currency wallets, and automated micro-investing.',
+      challenge: 'Complex banking flows caused steep onboarding drop-offs and low user engagement in wealth management tabs.',
+      solution: 'Designed an intuitive, thumb-friendly mobile app architecture with micro-haptics, crystal-clear typography, and simplified 3-step KYC verification.',
+      deliverables: ['65+ Figma Mobile Screens (iOS & Android)', 'Interactive Clickable Prototype', 'Design System & Component Library', 'Complete UX Journey Documentation'],
+      techStack: ['Figma', 'Protopie', 'iOS Human Interface', 'Material 3'],
+      results: [
+        { metric: '88%', label: 'KYC Completion Rate', sublabel: 'Up from 41%' },
+        { metric: '4.8 ★', label: 'App Store Rating', sublabel: 'Over 25,000 ratings' },
+        { metric: '+160%', label: 'Weekly Active Users', sublabel: 'High retention loops' }
+      ]
+    }
   };
 
-  Object.keys(fieldErrorMap).forEach(function (fieldId) {
-    var field = document.getElementById(fieldId);
-    if (field) {
-      field.addEventListener('input', function () {
-        clearFieldError(field, fieldErrorMap[fieldId]);
-      });
+  const heroPreviewTabsData = {
+    web: {
+      badge: 'Live Web App',
+      image: 'assets/project-dashboard.png',
+      title: 'OmniMetrics — AI Analytics Suite',
+      desc: 'Full-stack React & TypeScript dashboard with sub-second real-time queries.',
+      chips: ['React', 'TypeScript', 'Tailwind', 'FastAPI']
+    },
+    brand: {
+      badge: 'Brand Identity',
+      image: 'assets/project-brand.png',
+      title: 'Aether AI — Brand System',
+      desc: 'Complete visual design language, design tokens, and investor pitch collateral.',
+      chips: ['Figma', 'Vector Suite', 'Design Tokens', 'Pitch Deck']
+    },
+    video: {
+      badge: 'Video & Motion',
+      image: 'assets/NDH.jpeg',
+      title: 'High-Retention Short-Form Launch',
+      desc: 'Kinetic typography and sound-designed campaign generating 4.8M organic views.',
+      chips: ['Premiere Pro', 'After Effects', 'Sound FX', '4.8M Views']
+    },
+    growth: {
+      badge: 'Social Scale',
+      image: 'assets/project-mobile.png',
+      title: 'Creator Scale (12k → 145k)',
+      desc: 'Data-backed content matrix and hook engineering scaling founder pipeline.',
+      chips: ['+840% Growth', 'LinkedIn', 'X Platform', 'Viral Hooks']
     }
-  });
+  };
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
 
-    // Clear all previous errors
-    Object.keys(fieldErrorMap).forEach(function (fieldId) {
-      var field = document.getElementById(fieldId);
-      if (field) clearFieldError(field, fieldErrorMap[fieldId]);
+  // =========================================================================
+  // 2. FLOAT CARD INTERSECTION OBSERVER (Hero reveal animations)
+  // =========================================================================
+  const revealCards = document.querySelectorAll('.reveal');
+
+  if (revealCards.length > 0 && 'IntersectionObserver' in window) {
+    let visibleCount = 0;
+    const floatCardObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+          visibleCount++;
+          // Disconnect once all cards have been revealed
+          if (visibleCount >= revealCards.length) {
+            observer.disconnect();
+          }
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -30px 0px'
     });
 
-    let valid = true;
+    revealCards.forEach(card => floatCardObserver.observe(card));
+  } else {
+    // Fallback: make all visible immediately if no IntersectionObserver support
+    revealCards.forEach(card => card.classList.add('is-visible'));
+  }
 
-    // Validate name
-    const nameField = document.getElementById('field-name');
-    if (nameField && !nameField.value.trim()) {
-      showFieldError(nameField, 'error-name', 'Please enter your name.');
-      valid = false;
-    }
+  // =========================================================================
+  // 3. HERO ORBITAL — Cursor-driven 3D parallax & glow tracking
+  // =========================================================================
+  const orbitalScene = document.querySelector('.hero-orbital-scene');
+  const heroOrbital  = document.querySelector('.hero-orbital');
 
-    // Validate email
-    const emailField = document.getElementById('field-email');
-    const emailRx    = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (emailField) {
-      if (!emailField.value.trim()) {
-        showFieldError(emailField, 'error-email', 'Please enter your email address.');
-        valid = false;
-      } else if (!emailRx.test(emailField.value)) {
-        showFieldError(emailField, 'error-email', 'Please enter a valid email address.');
-        valid = false;
+  if (orbitalScene && heroOrbital) {
+    const orbGlow    = heroOrbital.querySelector('.orbital-glow');
+    const orbitCards = [...heroOrbital.querySelectorAll('.orbit-card')];
+
+    // Depth multiplier per card (foreground → deeper)
+    const CARD_DEPTH = [0.55, 0.85, 0.65];
+
+    let targetX = 0, targetY = 0; // normalized -1 … +1
+    let curX    = 0, curY    = 0; // lerped current value
+    let rafId   = null;
+
+    /** Linear interpolation — smooth catch-up */
+    const lerp = (a, b, t) => a + (b - a) * t;
+
+    function tick() {
+      // Smooth lerp toward target (0.065 ≈ ~60fps silky feel)
+      curX = lerp(curX, targetX, 0.065);
+      curY = lerp(curY, targetY, 0.065);
+
+      // 3D tilt — whole orbital tilts in perspective (max ±12°)
+      heroOrbital.style.transform =
+        `perspective(900px) rotateX(${curY * -12}deg) rotateY(${curX * 12}deg)`;
+
+      // Glow blob tracks cursor with larger amplitude (feels magnetically attached)
+      if (orbGlow) {
+        orbGlow.style.setProperty('--gx', `${curX * 55}px`);
+        orbGlow.style.setProperty('--gy', `${curY * 55}px`);
+      }
+
+      // Cards parallax at depth-weighted speeds
+      orbitCards.forEach((card, i) => {
+        const d = CARD_DEPTH[i] ?? 0.6;
+        card.style.setProperty('--px', `${curX * 22 * d}px`);
+        card.style.setProperty('--py', `${curY * 22 * d}px`);
+      });
+
+      // Stop RAF when sufficiently at rest (prevents idle CPU burn after leave)
+      const atRest = Math.abs(curX - targetX) < 0.001 && Math.abs(curY - targetY) < 0.001;
+      if (atRest && targetX === 0 && targetY === 0) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+        // Final cleanup — hand off rest state to CSS transition
+        heroOrbital.style.transform = '';
+        if (orbGlow) {
+          orbGlow.style.setProperty('--gx', '0px');
+          orbGlow.style.setProperty('--gy', '0px');
+        }
+        orbitCards.forEach(card => {
+          card.style.setProperty('--px', '0px');
+          card.style.setProperty('--py', '0px');
+        });
+      } else {
+        rafId = requestAnimationFrame(tick);
       }
     }
 
-    // Validate message
-    const messageField = document.getElementById('field-message');
-    if (messageField && !messageField.value.trim()) {
-      showFieldError(messageField, 'error-message', 'Please enter a message.');
-      valid = false;
+    orbitalScene.addEventListener('mousemove', (e) => {
+      const rect = orbitalScene.getBoundingClientRect();
+      // Normalized -1…+1 relative to element center
+      targetX = ((e.clientX - rect.left)  / rect.width  - 0.5) * 2;
+      targetY = ((e.clientY - rect.top)   / rect.height - 0.5) * 2;
+      // Clamp to avoid extreme edge values
+      targetX = Math.max(-1, Math.min(1, targetX));
+      targetY = Math.max(-1, Math.min(1, targetY));
+
+      if (!rafId) rafId = requestAnimationFrame(tick);
+    }, { passive: true });
+
+    orbitalScene.addEventListener('mouseleave', () => {
+      // Let lerp glide back to rest
+      targetX = 0;
+      targetY = 0;
+      if (!rafId) rafId = requestAnimationFrame(tick);
+    });
+
+    // Touch support — single touch parallax for mobile
+    orbitalScene.addEventListener('touchmove', (e) => {
+      if (!e.touches[0]) return;
+      const rect = orbitalScene.getBoundingClientRect();
+      targetX = ((e.touches[0].clientX - rect.left)  / rect.width  - 0.5) * 2;
+      targetY = ((e.touches[0].clientY - rect.top)   / rect.height - 0.5) * 2;
+      targetX = Math.max(-0.6, Math.min(0.6, targetX)); // softer on touch
+      targetY = Math.max(-0.6, Math.min(0.6, targetY));
+      if (!rafId) rafId = requestAnimationFrame(tick);
+    }, { passive: true });
+
+    orbitalScene.addEventListener('touchend', () => {
+      targetX = 0;
+      targetY = 0;
+    });
+  }
+
+  // =========================================================================
+  // 4. SCROLL PROGRESS & HEADER SCROLLED EFFECT
+
+  // =========================================================================
+  const scrollProgressBar = document.getElementById('scroll-progress');
+  const siteHeader = document.getElementById('site-header');
+  const currentYearSpan = document.getElementById('current-year');
+
+  if (currentYearSpan) {
+    currentYearSpan.textContent = new Date().getFullYear();
+  }
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPercent = (scrollTop / (scrollHeight || 1)) * 100;
+
+    if (scrollProgressBar) {
+      scrollProgressBar.style.width = `${scrollPercent}%`;
     }
 
-    if (!valid) {
-      // Focus the first invalid field
-      var firstInvalid = form.querySelector('[aria-invalid="true"]');
-      if (firstInvalid) firstInvalid.focus();
-      return;
+    if (siteHeader) {
+      if (scrollTop > 40) {
+        siteHeader.classList.add('scrolled');
+      } else {
+        siteHeader.classList.remove('scrolled');
+      }
     }
+  }, { passive: true });
 
-    const label = submitBtn.querySelector('.btn-label');
-    label.textContent = 'Sending\u2026';
-    submitBtn.disabled = true;
+  // =========================================================================
+  // 3. MOBILE MENU DRAWER
+  // =========================================================================
+  const menuToggleBtn = document.getElementById('menu-toggle-btn');
+  const mobileDrawer = document.getElementById('mobile-drawer');
+  const mobileBackdrop = document.getElementById('mobile-backdrop');
+  const mobileCloseBtn = document.getElementById('mobile-close-btn');
+  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+  function openMobileMenu() {
+    mobileDrawer?.classList.add('open');
+    mobileBackdrop?.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMobileMenu() {
+    mobileDrawer?.classList.remove('open');
+    mobileBackdrop?.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  menuToggleBtn?.addEventListener('click', openMobileMenu);
+  mobileCloseBtn?.addEventListener('click', closeMobileMenu);
+  mobileBackdrop?.addEventListener('click', closeMobileMenu);
+
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', closeMobileMenu);
+  });
+
+  // =========================================================================
+  // 4. HERO PREVIEW TAB SWITCHER
+  // =========================================================================
+  const heroTabs = document.querySelectorAll('#hero-preview-tabs .preview-tab-btn');
+  const heroContentArea = document.getElementById('hero-preview-content');
+
+  heroTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      heroTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const tabKey = tab.getAttribute('data-tab');
+      const data = heroPreviewTabsData[tabKey];
+
+      if (data && heroContentArea) {
+        heroContentArea.innerHTML = `
+          <div class="preview-card-showcase">
+            <div class="preview-image-wrap">
+              <img src="${data.image}" alt="${data.title}" />
+              <div class="preview-badge-overlay">${data.badge}</div>
+            </div>
+            <div class="preview-info">
+              <div class="preview-title">${data.title}</div>
+              <div class="preview-desc">${data.desc}</div>
+              <div class="preview-tech-chips">
+                ${data.chips.map(chip => `<span class="tech-chip">${chip}</span>`).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      }
+    });
+  });
+
+  // =========================================================================
+  // 5. PORTFOLIO FILTERING
+  // =========================================================================
+  const portfolioFilterBtns = document.querySelectorAll('#portfolio-tabs .filter-btn');
+  const portfolioCards = document.querySelectorAll('#portfolio-grid .portfolio-card');
+
+  portfolioFilterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      portfolioFilterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.getAttribute('data-filter');
+
+      portfolioCards.forEach(card => {
+        const category = card.getAttribute('data-category');
+        if (filter === 'all' || category === filter) {
+          card.style.display = 'flex';
+          card.style.animation = 'fadeIn 0.3s ease';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // =========================================================================
+  // 6. MODAL UTILITIES (CASE STUDY, VIDEO LIGHTBOX)
+  // =========================================================================
+  const caseStudyModal = document.getElementById('case-study-modal');
+  const videoLightboxModal = document.getElementById('video-lightbox-modal');
+  const toast = document.getElementById('toast');
+  const toastMessage = document.getElementById('toast-message');
+
+  function showToast(msg) {
+    if (!toast || !toastMessage) return;
+    toastMessage.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3500);
+  }
+
+  function openModal(modalEl) {
+    if (!modalEl) return;
+    modalEl.classList.add('open');
+    modalEl.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(modalEl) {
+    if (!modalEl) return;
+    modalEl.classList.remove('open');
+    modalEl.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+
+    if (modalEl === videoLightboxModal) {
+      const iframe = document.getElementById('video-iframe');
+      if (iframe) iframe.src = '';
+    }
+  }
+
+  document.querySelectorAll('.close-modal-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const modal = e.target.closest('.modal-backdrop');
+      closeModal(modal);
+    });
+  });
+
+  [caseStudyModal, videoLightboxModal].forEach(modal => {
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal(modal);
+      }
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeModal(caseStudyModal);
+      closeModal(videoLightboxModal);
+      closeMobileMenu();
+    }
+  });
+
+  // =========================================================================
+  // 7. CASE STUDY MODAL INJECTION
+  // =========================================================================
+  const caseStudyButtons = document.querySelectorAll('.open-case-study');
+  const modalCaseBody = document.getElementById('modal-case-body');
+  const modalCaseCategory = document.getElementById('modal-case-category');
+  const modalCaseTimeline = document.getElementById('modal-case-timeline');
+
+  caseStudyButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const caseId = btn.getAttribute('data-case');
+      const cs = caseStudiesData[caseId];
+      if (!cs || !modalCaseBody) return;
+
+      if (modalCaseCategory) modalCaseCategory.textContent = cs.category;
+      if (modalCaseTimeline) modalCaseTimeline.textContent = cs.timeline;
+
+      modalCaseBody.innerHTML = `
+        <h2 style="font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 0.75rem; line-height: 1.2;">
+          ${cs.title}
+        </h2>
+        <p style="font-size: 0.95rem; color: var(--accent-secondary); margin-bottom: 1.5rem; font-weight: 600;">
+          Client: ${cs.client}
+        </p>
+
+        <div style="border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 2rem; border: 1px solid var(--border-subtle);">
+          <img src="${cs.heroImage}" alt="${cs.title}" style="width: 100%; height: 320px; object-fit: cover;" />
+        </div>
+
+        <!-- 3 Key Metric Results -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2.5rem;">
+          ${cs.results.map(r => `
+            <div style="background: #15151e; border: 1px solid var(--border-subtle); padding: 1.25rem; border-radius: var(--radius-md);">
+              <div class="mono" style="font-size: 1.8rem; font-weight: 800; color: #ff4b1f; line-height: 1; margin-bottom: 0.35rem;">${r.metric}</div>
+              <div style="font-size: 0.875rem; font-weight: 700; color: #fff;">${r.label}</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">${r.sublabel}</div>
+            </div>
+          `).join('')}
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 1.75rem; margin-bottom: 2.5rem;">
+          <div>
+            <h4 style="font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem;">The Challenge</h4>
+            <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">${cs.challenge}</p>
+          </div>
+
+          <div>
+            <h4 style="font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem;">The Engineering &amp; Design Solution</h4>
+            <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">${cs.solution}</p>
+          </div>
+
+          <div>
+            <h4 style="font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 0.75rem;">Key Deliverables</h4>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+              ${cs.deliverables.map(d => `<span class="step-deliverable-chip">${d}</span>`).join('')}
+            </div>
+          </div>
+
+          <div>
+            <h4 style="font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 0.75rem;">Technology Stack</h4>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+              ${cs.techStack.map(t => `<span class="service-tool-badge">${t}</span>`).join('')}
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem; border-top: 1px solid var(--border-subtle); padding-top: 1.5rem;">
+          <a href="#contact" class="btn btn-primary close-modal-btn" style="flex: 1;">
+            <span>Contact About Similar Project</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </div>
+      `;
+
+      openModal(caseStudyModal);
+    });
+  });
+
+  // =========================================================================
+  // 8. VIDEO LIGHTBOX MODAL
+  // =========================================================================
+  const openVideoBtns = document.querySelectorAll('.open-video-modal');
+  const lightboxVideoTitle = document.getElementById('lightbox-video-title');
+  const lightboxVideoMeta = document.getElementById('lightbox-video-meta');
+  const videoIframe = document.getElementById('video-iframe');
+
+  openVideoBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const videoTitle = btn.getAttribute('data-video-title') || 'Featured Video Project';
+      const videoUrl = btn.getAttribute('data-video-url') || 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1';
+      const views = btn.getAttribute('data-views') || '1.5M Views';
+      const duration = btn.getAttribute('data-duration') || '0:45';
+
+      if (lightboxVideoTitle) lightboxVideoTitle.textContent = videoTitle;
+      if (lightboxVideoMeta) lightboxVideoMeta.textContent = `${duration} • ${views} • High-Retention Production`;
+      if (videoIframe) videoIframe.src = videoUrl;
+
+      openModal(videoLightboxModal);
+    });
+  });
+
+  // =========================================================================
+  // 9. SEARCHABLE & CATEGORIZED FAQ ACCORDION
+  // =========================================================================
+  const faqSearchInput = document.getElementById('faq-search-input');
+  const faqCatBtns = document.querySelectorAll('#faq-categories .faq-cat-btn');
+  const faqItems = document.querySelectorAll('#faq-accordion .faq-item');
+
+  function filterFaqs() {
+    const query = faqSearchInput?.value.toLowerCase().trim() || '';
+    const activeCategory = document.querySelector('#faq-categories .faq-cat-btn.active')?.getAttribute('data-cat') || 'all';
+
+    faqItems.forEach(item => {
+      const itemCategory = item.getAttribute('data-category') || '';
+      const itemKeywords = item.getAttribute('data-keywords') || '';
+      const questionText = item.querySelector('.faq-question-btn span')?.textContent.toLowerCase() || '';
+      const answerText = item.querySelector('.faq-answer')?.textContent.toLowerCase() || '';
+
+      const matchesSearch = !query || questionText.includes(query) || answerText.includes(query) || itemKeywords.includes(query);
+      const matchesCategory = activeCategory === 'all' || itemCategory === activeCategory;
+
+      if (matchesSearch && matchesCategory) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+
+  faqSearchInput?.addEventListener('input', filterFaqs);
+
+  faqCatBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      faqCatBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterFaqs();
+    });
+  });
+
+  // Accordion Toggle
+  faqItems.forEach(item => {
+    const btn = item.querySelector('.faq-question-btn');
+    btn?.addEventListener('click', () => {
+      const isActive = item.classList.contains('active');
+      faqItems.forEach(i => i.classList.remove('active'));
+      if (!isActive) {
+        item.classList.add('active');
+      }
+    });
+  });
+
+  // =========================================================================
+  // 10. INQUIRY FORM SYNCHRONIZATION & SELECT / PILL SELECTORS
+  // =========================================================================
+  const serviceSelect = document.getElementById('contact-service');
+  const budgetSelect = document.getElementById('contact-budget');
+
+  const servicePillBtns = document.querySelectorAll('#service-pills .form-pill-btn');
+  const selectedServiceInput = document.getElementById('selected-service-input');
+
+  const budgetPillBtns = document.querySelectorAll('#budget-pills .form-pill-btn');
+  const selectedBudgetInput = document.getElementById('selected-budget-input');
+
+  const timelinePillBtns = document.querySelectorAll('#timeline-pills .form-pill-btn');
+  const selectedTimelineInput = document.getElementById('selected-timeline-input');
+
+  function setupPills(buttons, inputHidden) {
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        if (inputHidden) {
+          inputHidden.value = btn.getAttribute('data-value');
+        }
+      });
+    });
+  }
+
+  setupPills(servicePillBtns, selectedServiceInput);
+  setupPills(budgetPillBtns, selectedBudgetInput);
+  setupPills(timelinePillBtns, selectedTimelineInput);
+
+  // Sync "Inquire About This Service" buttons
+  const serviceInquiryBtns = document.querySelectorAll('.select-service-inquiry');
+  serviceInquiryBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const serviceVal = btn.getAttribute('data-service');
+      if (serviceVal) {
+        if (serviceSelect) {
+          serviceSelect.value = serviceVal;
+        }
+        servicePillBtns.forEach(p => {
+          if (p.getAttribute('data-value') === serviceVal) {
+            p.click();
+          }
+        });
+      }
+
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => {
+          document.getElementById('contact-name')?.focus();
+        }, 600);
+      }
+    });
+  });
+
+  // Contact Form Submission
+  const smartContactForm = document.getElementById('smart-contact-form');
+  const formSubmitBtn = document.getElementById('form-submit-btn');
+  const submitBtnText = document.getElementById('submit-btn-text');
+  const formSuccessMessage = document.getElementById('form-success-message');
+  const resetFormBtn = document.getElementById('reset-form-btn');
+
+  smartContactForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    if (formSubmitBtn && submitBtnText) {
+      formSubmitBtn.disabled = true;
+      submitBtnText.textContent = 'Transmitting Project Brief...';
+    }
 
     setTimeout(() => {
-      form.reset();
-      form.style.display = 'none';
-      formSuccess.classList.add('show');
-      submitBtn.disabled = false;
-      label.textContent  = 'Send Message';
-    }, 1400);
+      if (smartContactForm) smartContactForm.style.display = 'none';
+      if (formSuccessMessage) formSuccessMessage.style.display = 'block';
+      showToast('Project Brief received! We will reply within 4 hours.');
+
+      if (formSubmitBtn && submitBtnText) {
+        formSubmitBtn.disabled = false;
+        submitBtnText.textContent = 'Submit Inquiry (Guaranteed 4h Reply)';
+      }
+    }, 900);
   });
-}
 
-/* -- DESKTOP NAV ACTIVE INITIALIZATION ---------------------- */
-// Handled reactively by the main tick listener updateActiveNavLink
+  resetFormBtn?.addEventListener('click', () => {
+    if (smartContactForm) {
+      smartContactForm.reset();
+      smartContactForm.style.display = 'block';
+    }
+    if (formSuccessMessage) formSuccessMessage.style.display = 'none';
+  });
 
-/* -- PROJECT CARD: number labels ---------------------------- */
-document.querySelectorAll('.project-card').forEach((card, i) => {
-  const num = card.querySelector('.proj-num');
-  if (num) num.textContent = String(i + 1).padStart(2, '0');
+  // =========================================================================
+  // 11. BACK TO TOP SMOOTH SCROLL
+  // =========================================================================
+  const backToTopBtn = document.getElementById('back-to-top-btn');
+  backToTopBtn?.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
+  // =========================================================================
+  // 12. BRAND PRELOADER DISMISSAL
+  // =========================================================================
+  const loader = document.getElementById('loader');
+  if (loader) {
+    const hideLoader = () => {
+      loader.classList.add('hidden');
+      document.body.style.overflow = '';
+    };
+
+    if (document.readyState === 'complete') {
+      setTimeout(hideLoader, 500);
+    } else {
+      window.addEventListener('load', () => {
+        setTimeout(hideLoader, 500);
+      });
+      // Safety fallback
+      setTimeout(hideLoader, 2000);
+    }
+  }
+
+  // =========================================================================
+  // 13. TERMINAL LINE TYPING ANIMATION
+  // =========================================================================
+  const terminalLine = document.getElementById('terminal-line');
+  if (terminalLine) {
+    const phrases = [
+      'crafting digital experiences',
+      'designing brand identities',
+      'engineering high-converting web apps',
+      'scaling viral social growth'
+    ];
+    let phraseIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+
+    function typeLoop() {
+      const current = phrases[phraseIdx];
+      
+      if (isDeleting) {
+        terminalLine.textContent = current.substring(0, charIdx - 1);
+        charIdx--;
+      } else {
+        terminalLine.textContent = current.substring(0, charIdx + 1);
+        charIdx++;
+      }
+
+      let speed = isDeleting ? 35 : 75;
+
+      if (!isDeleting && charIdx === current.length) {
+        speed = 2000;
+        isDeleting = true;
+      } else if (isDeleting && charIdx === 0) {
+        isDeleting = false;
+        phraseIdx = (phraseIdx + 1) % phrases.length;
+        speed = 400;
+      }
+
+      setTimeout(typeLoop, speed);
+    }
+
+    setTimeout(typeLoop, 600);
+  }
+
 });
+
