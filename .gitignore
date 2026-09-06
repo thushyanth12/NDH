@@ -1,5 +1,8 @@
 # ── Antigravity / AI agents ──────────────────────────────────
 .agents/
+.gemini/
+.github/
+.playwright-mcp/
 
 # ── Editor & IDE ─────────────────────────────────────────────
 .vscode/

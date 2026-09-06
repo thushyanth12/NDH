@@ -364,15 +364,153 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // =========================================================================
-  // 5. PORTFOLIO FILTERING
+  // 5. PORTFOLIO FILTERING & CAROUSEL TRAILING + MORPH TRANSITION
   // =========================================================================
+  const portfolioTabsWrap   = document.getElementById('portfolio-filter-wrapper');
+  const portfolioTabs       = document.getElementById('portfolio-tabs');
+  const scrollLeftBtn       = document.getElementById('filter-scroll-left');
+  const scrollRightBtn      = document.getElementById('filter-scroll-right');
   const portfolioFilterBtns = document.querySelectorAll('#portfolio-tabs .filter-btn');
-  const portfolioCards = document.querySelectorAll('#portfolio-grid .portfolio-card');
+  const portfolioCards      = document.querySelectorAll('#portfolio-grid .portfolio-card');
+
+  function updateCategoryMorphFlow() {
+    if (!portfolioTabs) return;
+
+    // Update trailing masks & arrow disabled states
+    const maxScroll = portfolioTabs.scrollWidth - portfolioTabs.clientWidth;
+    const currentScroll = portfolioTabs.scrollLeft;
+
+    if (portfolioTabsWrap) {
+      if (maxScroll <= 4) {
+        portfolioTabsWrap.classList.remove('can-scroll-left', 'can-scroll-right');
+      } else {
+        portfolioTabsWrap.classList.toggle('can-scroll-left', currentScroll > 6);
+        portfolioTabsWrap.classList.toggle('can-scroll-right', currentScroll < maxScroll - 6);
+      }
+    }
+
+    if (scrollLeftBtn && scrollRightBtn) {
+      scrollLeftBtn.disabled = currentScroll <= 2;
+      scrollRightBtn.disabled = currentScroll >= maxScroll - 2;
+    }
+
+    // Dynamic morph transition (scale & opacity transition based on viewport intersection)
+    const containerRect = portfolioTabs.getBoundingClientRect();
+    const containerLeft = containerRect.left;
+    const containerRight = containerRect.right;
+
+    portfolioFilterBtns.forEach(pill => {
+      const rect = pill.getBoundingClientRect();
+      const pillWidth = rect.width;
+      let ratio = 1;
+
+      if (rect.right <= containerLeft) {
+        ratio = 0;
+      } else if (rect.left >= containerRight) {
+        ratio = 0;
+      } else if (rect.left < containerLeft) {
+        const visibleWidth = rect.right - containerLeft;
+        ratio = Math.max(0, Math.min(1, visibleWidth / pillWidth));
+      } else if (rect.right > containerRight) {
+        const visibleWidth = containerRight - rect.left;
+        ratio = Math.max(0, Math.min(1, visibleWidth / pillWidth));
+      }
+
+      const opacity = 0.35 + 0.65 * ratio;
+      const scale = 0.86 + 0.14 * ratio;
+
+      pill.style.opacity = opacity;
+      pill.style.transform = `scale(${scale})`;
+    });
+  }
+
+  if (portfolioTabs) {
+    portfolioTabs.addEventListener('scroll', updateCategoryMorphFlow, { passive: true });
+    window.addEventListener('resize', updateCategoryMorphFlow, { passive: true });
+    setTimeout(updateCategoryMorphFlow, 150);
+    setTimeout(updateCategoryMorphFlow, 600);
+
+    // Arrow Buttons Scrolling
+    if (scrollLeftBtn) {
+      scrollLeftBtn.addEventListener('click', () => {
+        const scrollAmount = Math.max(180, portfolioTabs.clientWidth * 0.5);
+        portfolioTabs.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        setTimeout(updateCategoryMorphFlow, 350);
+      });
+    }
+
+    if (scrollRightBtn) {
+      scrollRightBtn.addEventListener('click', () => {
+        const scrollAmount = Math.max(180, portfolioTabs.clientWidth * 0.5);
+        portfolioTabs.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        setTimeout(updateCategoryMorphFlow, 350);
+      });
+    }
+
+    // Mouse drag-to-scroll support for desktop / PC view
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+    let hasMoved = false;
+
+    portfolioTabs.addEventListener('mousedown', (e) => {
+      isDown = true;
+      hasMoved = false;
+      portfolioTabs.classList.add('is-dragging');
+      startX = e.pageX - portfolioTabs.offsetLeft;
+      scrollLeft = portfolioTabs.scrollLeft;
+    });
+
+    portfolioTabs.addEventListener('mouseleave', () => {
+      if (!isDown) return;
+      isDown = false;
+      portfolioTabs.classList.remove('is-dragging');
+    });
+
+    portfolioTabs.addEventListener('mouseup', () => {
+      isDown = false;
+      portfolioTabs.classList.remove('is-dragging');
+    });
+
+    portfolioTabs.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - portfolioTabs.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      if (Math.abs(walk) > 4) {
+        hasMoved = true;
+      }
+      portfolioTabs.scrollLeft = scrollLeft - walk;
+      updateCategoryMorphFlow();
+    });
+
+    // Horizontal wheel scroll support
+    portfolioTabs.addEventListener('wheel', (e) => {
+      if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) {
+        portfolioTabs.scrollLeft += e.deltaY;
+        updateCategoryMorphFlow();
+      }
+    }, { passive: true });
+  }
 
   portfolioFilterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      portfolioFilterBtns.forEach(b => b.classList.remove('active'));
+    btn.addEventListener('click', (e) => {
+      portfolioFilterBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
       btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+
+      // Smoothly center the clicked tab in the carousel track
+      if (portfolioTabs) {
+        const btnLeft = btn.offsetLeft;
+        const btnWidth = btn.offsetWidth;
+        const trackWidth = portfolioTabs.clientWidth;
+        const targetScroll = btnLeft - (trackWidth / 2) + (btnWidth / 2);
+        portfolioTabs.scrollTo({ left: targetScroll, behavior: 'smooth' });
+        setTimeout(updateCategoryMorphFlow, 350);
+      }
 
       const filter = btn.getAttribute('data-filter');
 
