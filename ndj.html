@@ -257,7 +257,21 @@ section[id]{scroll-margin-top:68px}
 @media(hover:none){
   .feat-card:hover,.work-card:hover,.price-card:hover,.testi-card:hover,.process-step:hover,.metric:hover{transform:none;box-shadow:none}
 }
+
+/* Keyboard focus ring */
+:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
+  /* Never leave scroll-revealed content hidden when motion is disabled */
+  .reveal{opacity:1;transform:none;transition:none}
+}
 </style>
+<noscript>
+<style>.reveal{opacity:1;transform:none}</style>
+</noscript>
 </head>
 <body>
 <!-- NAV -->
@@ -648,13 +662,22 @@ section[id]{scroll-margin-top:68px}
   var navLinks=document.querySelectorAll('.nav-links a');
   function highlightNav(){
     var scrollY=window.scrollY+80;
+    var matched=false;
     sections.forEach(function(s){
       if(scrollY>=s.offsetTop&&scrollY<s.offsetTop+s.offsetHeight){
         navLinks.forEach(function(l){l.classList.remove('active')});
         var active=document.querySelector('.nav-links a[href="#'+s.id+'"]');
         if(active)active.classList.add('active');
+        matched=true;
       }
     });
+    // "Contact" lives in the footer (a div, not a section) — light it up at the page end
+    var contactEl=document.getElementById('contact');
+    if(!matched&&contactEl&&window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-8){
+      navLinks.forEach(function(l){l.classList.remove('active')});
+      var contactLink=document.querySelector('.nav-links a[href="#contact"]');
+      if(contactLink)contactLink.classList.add('active');
+    }
   }
 
   // Hamburger
@@ -707,22 +730,31 @@ section[id]{scroll-margin-top:68px}
   // Number counter
   var counters=document.querySelectorAll('.metric-value[data-target]');
   var counted=false;
-  var co=new IntersectionObserver(function(entries){
-    if(entries.some(function(e){return e.isIntersecting;})&&!counted){
-      counted=true;
-      counters.forEach(function(c){
-        var target=parseInt(c.getAttribute('data-target'));
-        var suffix=c.getAttribute('data-suffix')||'';
-        var start=0;var dur=2000;var step=target/dur*16;
-        var t=setInterval(function(){
-          start+=step;
-          if(start>=target){start=target;clearInterval(t);}
-          c.textContent=Math.floor(start)+suffix;
-        },16);
-      });
-    }
-  },{threshold:0.3});
-  counters.forEach(function(c){co.observe(c);});
+  function setFinalCounter(c){
+    var target=parseInt(c.getAttribute('data-target'));
+    var suffix=c.getAttribute('data-suffix')||'';
+    c.textContent=target+suffix;
+  }
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    counters.forEach(setFinalCounter);
+  } else {
+    var co=new IntersectionObserver(function(entries){
+      if(entries.some(function(e){return e.isIntersecting;})&&!counted){
+        counted=true;
+        counters.forEach(function(c){
+          var target=parseInt(c.getAttribute('data-target'));
+          var suffix=c.getAttribute('data-suffix')||'';
+          var start=0;var dur=2000;var step=target/dur*16;
+          var t=setInterval(function(){
+            start+=step;
+            if(start>=target){start=target;clearInterval(t);}
+            c.textContent=Math.floor(start)+suffix;
+          },16);
+        });
+      }
+    },{threshold:0.3});
+    counters.forEach(function(c){co.observe(c);});
+  }
 
   // Smooth scroll for all anchor links
   document.querySelectorAll('a[href^="#"]').forEach(function(a){

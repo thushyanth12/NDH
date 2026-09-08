@@ -1,7 +1,6 @@
-# ── Antigravity / AI agents ──────────────────────────────────
+# ── Antigravity / AI Agents ──────────────────────────────────
 .agents/
 .gemini/
-.github/
 .playwright-mcp/
 
 # ── Editor & IDE ─────────────────────────────────────────────
@@ -15,7 +14,7 @@
 *.swo
 *~
 
-# ── OS generated files ────────────────────────────────────────
+# ── OS Generated Files ────────────────────────────────────────
 .DS_Store
 .DS_Store?
 ._*
@@ -25,18 +24,15 @@ ehthumbs.db
 Thumbs.db
 desktop.ini
 
-# ── Node / npm ───────────────────────────────────────────────
+# ── Node / Dependencies ──────────────────────────────────────
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 .pnpm-store/
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
 
-# ── Build outputs ─────────────────────────────────────────────
+# ── Build Outputs ─────────────────────────────────────────────
 dist/
 build/
 out/
@@ -45,8 +41,10 @@ out/
 .output/
 .cache/
 .parcel-cache/
+.vite/
+.turbo/
 
-# ── Environment & secrets ─────────────────────────────────────
+# ── Environment & Secrets ─────────────────────────────────────
 .env
 .env.local
 .env.*.local
@@ -59,16 +57,13 @@ out/
 logs/
 *.log
 
-# ── Temporary files ───────────────────────────────────────────
+# ── Temporary Files ───────────────────────────────────────────
 tmp/
 temp/
 *.tmp
 *.bak
 *.orig
 
-# ── Coverage & testing ────────────────────────────────────────
+# ── Coverage & Testing ────────────────────────────────────────
 coverage/
 .nyc_output/
-
-# ── Internal planning artefacts ───────────────────────────────
-implementation_plan.md

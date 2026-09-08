@@ -219,6 +219,8 @@ html {
   background-color: var(--bg-dark);
   color: var(--text-primary);
   scroll-behavior: smooth;
+  /* Keep anchored sections clear of the floating pill navbar */
+  scroll-padding-top: 6rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
@@ -226,7 +228,9 @@ html {
 
 body {
   min-height: 100vh;
+  /* clip (where supported) avoids breaking position:sticky; hidden is the fallback */
   overflow-x: hidden;
+  overflow-x: clip;
   background-color: var(--bg-dark);
   background-image:
     radial-gradient(circle at 15% 10%, rgba(255, 75, 31, 0.04) 0%, transparent 40%),
@@ -317,6 +321,12 @@ select {
 ::selection {
   background: rgba(255, 75, 31, 0.3);
   color: #ffffff;
+}
+
+/* Visible keyboard focus ring */
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 3px;
 }
 
 /* Container — fluid spacing pattern (clamp replaces rigid breakpoint padding) */
@@ -523,7 +533,7 @@ select {
    ========================================================================== */
 
 .site-header {
-  position: relative;
+  position: sticky;
   top: 1rem;
   left: 0;
   right: 0;
@@ -550,10 +560,15 @@ select {
   transition: all var(--transition-normal);
 }
 
+.site-header.scrolled {
+  top: 0.6rem;
+}
+
 .site-header.scrolled .navbar-inner {
   background: rgba(10, 10, 14, 0.95);
   border-color: var(--border-medium);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.65);
+  padding-block: 0.55rem;
 }
 
 .brand-logo {
@@ -615,11 +630,31 @@ select {
   color: var(--text-secondary);
   transition: color var(--transition-fast);
   padding: 0.25rem 0.5rem;
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  right: 0.5rem;
+  bottom: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--grad-primary);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--transition-normal);
 }
 
 .nav-link:hover,
 .nav-link.active {
   color: #ffffff;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
 }
 
 .nav-actions {
@@ -694,12 +729,16 @@ select {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: right var(--transition-normal);
+  transition: right var(--transition-normal), visibility 0s linear var(--transition-normal);
+  /* Hidden from the tab order & screen readers while closed */
+  visibility: hidden;
   overflow-y: auto;
 }
 
 .mobile-drawer.open {
   right: 0;
+  visibility: visible;
+  transition: right var(--transition-normal);
 }
 
 .mobile-drawer-header {
@@ -834,7 +873,7 @@ select {
 .hero-title {
   font-family: var(--font-heading);
   font-size: clamp(2.1rem, 5vw, 3.1rem);
-  font-weight: 800px;
+  font-weight: 800;
   line-height: 1.12;
   letter-spacing: -0.01em;
   margin-bottom: 1.5rem;
@@ -1255,49 +1294,7 @@ select {
   white-space: nowrap;
 }
 
-/* --- Scroll Cue Anchor --- */
-.scroll-cue {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 69, 0, 0.25);
-  background: rgba(255, 69, 0, 0.06);
-  color: var(--accent-primary);
-  position: absolute;
-  bottom: 1.75rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 5;
-  transition: background var(--transition-normal), border-color var(--transition-normal);
-  animation: scrollCueBounce 2.2s ease-in-out infinite;
-}
 
-.scroll-cue svg {
-  width: 20px;
-  height: 20px;
-  display: block;
-}
-
-.scroll-cue:hover {
-  background: rgba(255, 69, 0, 0.14);
-  border-color: rgba(255, 69, 0, 0.55);
-  animation-play-state: paused;
-}
-
-@keyframes scrollCueBounce {
-
-  0%,
-  100% {
-    transform: translateX(-50%) translateY(0);
-  }
-
-  50% {
-    transform: translateX(-50%) translateY(7px);
-  }
-}
 
 
 /* ==========================================================================
@@ -2493,6 +2490,19 @@ select {
   padding: 0 1.75rem 1.5rem 1.75rem;
 }
 
+/* Empty FAQ state shown when search / category filtering finds nothing */
+.faq-empty {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  border: 1px dashed var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card-subtle);
+}
+
 /* ==========================================================================
    SMART CONTACT & INQUIRY SECTION
    ========================================================================== */
@@ -2728,12 +2738,15 @@ select {
   padding: 1.5rem;
   opacity: 0;
   pointer-events: none;
-  transition: opacity var(--transition-normal);
+  visibility: hidden;
+  transition: opacity var(--transition-normal), visibility 0s linear var(--transition-normal);
 }
 
 .modal-backdrop.open {
   opacity: 1;
   pointer-events: auto;
+  visibility: visible;
+  transition: opacity var(--transition-normal);
 }
 
 .modal-card {
@@ -2991,6 +3004,68 @@ select {
 }
 
 /* ==========================================================================
+   SCROLL-REVEAL & PAGE-ENTRANCE CHOREOGRAPHY
+   (Only hidden when JS is available — see <noscript> fallback in index.html)
+   ========================================================================== */
+
+html.js .fx-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+  transition-delay: var(--fx-delay, 0s);
+  will-change: opacity, transform;
+}
+
+html.js .fx-reveal.fx-left {
+  transform: translateX(-28px);
+}
+
+html.js .fx-reveal.fx-right {
+  transform: translateX(28px);
+}
+
+html.js .fx-reveal.fx-zoom {
+  transform: scale(0.94) translateY(0);
+}
+
+html.js .fx-reveal.in-view {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero load-in — plays once the preloader curtain lifts */
+body.page-ready .hero-entrance {
+  animation: heroEntranceIn 0.75s var(--ease-out) both;
+}
+
+body.page-ready .hero-title.hero-entrance {
+  animation-delay: 0.08s;
+}
+
+body.page-ready .hero-desc.hero-entrance {
+  animation-delay: 0.16s;
+}
+
+body.page-ready .hero-ctas.hero-entrance {
+  animation-delay: 0.24s;
+}
+
+body.page-ready .hero-stats-grid.hero-entrance {
+  animation-delay: 0.34s;
+}
+
+@keyframes heroEntranceIn {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==========================================================================
    COMPREHENSIVE MOBILE MEDIA QUERIES
    Small phones  ≤ 480px
    Tablets       641px – 959px (nav toggle visible)
@@ -3214,5 +3289,43 @@ select {
   .menu-toggle-btn {
     width: 32px;
     height: 32px;
+  }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY: PREFERS-REDUCED-MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Never leave reveal states invisible when motion is disabled */
+  html.js .fx-reveal,
+  html.js .fx-reveal.in-view {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  body.page-ready .hero-entrance {
+    animation: none;
+  }
+
+  /* Keep the infinite decorative loops from running */
+  .marquee-track,
+  .hero-ring,
+  .orbital-ring,
+  .hero-glow,
+  .orbital-glow {
+    animation: none !important;
   }
 }

@@ -5,6 +5,13 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
+  // 0. MOTION & ACCESSIBILITY HELPERS
+  // =========================================================================
+  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const REDUCED_MOTION = reducedMotionQuery.matches;
+  const smoothIfAllowed = REDUCED_MOTION ? 'auto' : 'smooth';
+
+  // =========================================================================
   // 1. DATA DICTIONARY FOR CASE STUDIES & PREVIEWS
   // =========================================================================
   const caseStudiesData = {
@@ -58,22 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
         { metric: '100%', label: 'Automated Invoicing', sublabel: 'Saved 15 hrs/wk admin time' }
       ]
     },
-    'petal-stem': {
-      title: 'The secretflorist — Luxury Floral & Bouquet Studio',
-      category: 'Bouquet & Floral Experience',
-      timeline: '10 Days Delivery',
-      client: 'The secretflorist',
-      heroImage: 'assets/project-florist.jpg',
-      overview: 'A bespoke luxury bouquet studio seeking an evocative, visual-first online presence with custom floral arrangement curation and same-day delivery scheduling.',
-      challenge: 'The business needed an intuitive online booking experience that reflects their artisan aesthetic and streamlines customized bouquet orders.',
-      solution: 'Created an elegant, visual-first digital storefront with smooth micro-interactions, an interactive stem customizer, and automated local dispatch logic.',
-      deliverables: ['Custom Web Storefront', 'Interactive Bouquet Curation', 'Automated Dispatch System', 'Full Brand Guidelines'],
-      results: [
-        { metric: '+180%', label: 'Online Order Volume', sublabel: 'In first month of launch' },
-        { metric: '4.9/5', label: 'Customer Review Rating', sublabel: 'Over 400 verified reviews' },
-        { metric: '100%', label: 'Automated Invoicing', sublabel: 'Saved 15 hrs/wk admin time' }
-      ]
-    },
     'aether-brand': {
       title: 'Aether AI — Full Visual Identity & Design System',
       category: 'Brand Identity System',
@@ -110,41 +101,59 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  const heroPreviewTabsData = {
-    web: {
-      badge: 'Live Web App',
-      image: 'assets/project-dashboard.png',
-      title: 'OmniMetrics — AI Analytics Suite',
-      desc: 'Full-stack React & TypeScript dashboard with sub-second real-time queries.',
-      chips: ['React', 'TypeScript', 'Tailwind', 'FastAPI']
-    },
-    brand: {
-      badge: 'Brand Identity',
-      image: 'assets/project-brand.png',
-      title: 'Aether AI — Brand System',
-      desc: 'Complete visual design language, design tokens, and investor pitch collateral.',
-      chips: ['Figma', 'Vector Suite', 'Design Tokens', 'Pitch Deck']
-    },
-    video: {
-      badge: 'Video & Motion',
-      image: 'assets/NDH.jpeg',
-      title: 'High-Retention Short-Form Launch',
-      desc: 'Kinetic typography and sound-designed campaign generating 4.8M organic views.',
-      chips: ['Premiere Pro', 'After Effects', 'Sound FX', '4.8M Views']
-    },
-    growth: {
-      badge: 'Social Scale',
-      image: 'assets/project-mobile.png',
-      title: 'Creator Scale (12k → 145k)',
-      desc: 'Data-backed content matrix and hook engineering scaling founder pipeline.',
-      chips: ['+840% Growth', 'LinkedIn', 'X Platform', 'Viral Hooks']
+  // =========================================================================
+  // 2. SCROLL-REVEAL SYSTEM (fx-reveal) & HERO ORBIT CARDS
+  // =========================================================================
+
+  // Generic reveal-on-scroll: elements animate once when they enter the viewport.
+  // Once revealed, the helper classes are removed so hover transforms keep working.
+  const fxRevealEls = document.querySelectorAll('.fx-reveal');
+  const FX_GROUPS = ['.services-grid', '.portfolio-grid', '.results-grid', '.process-timeline', '.faq-accordion'];
+
+  function assignRevealDelays() {
+    FX_GROUPS.forEach(selector => {
+      const group = document.querySelector(selector);
+      if (!group) return;
+      group.querySelectorAll('.fx-reveal').forEach((el, index) => {
+        el.style.setProperty('--fx-delay', `${Math.min(index * 75, 375)}ms`);
+      });
+    });
+  }
+
+  function finalizeReveal(el) {
+    if (!el || el.dataset.fxDone === 'true') return;
+    el.dataset.fxDone = 'true';
+    el.classList.remove('fx-reveal', 'in-view');
+    el.style.removeProperty('--fx-delay');
+  }
+
+  if (fxRevealEls.length) {
+    assignRevealDelays();
+
+    if ('IntersectionObserver' in window && !REDUCED_MOTION) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          observer.unobserve(el);
+          el.classList.add('in-view');
+          // Clean up once the entrance transition has finished.
+          const onEnd = () => finalizeReveal(el);
+          el.addEventListener('transitionend', (e) => {
+            if (e.target === el && e.propertyName === 'opacity') onEnd();
+          }, { once: true });
+          window.setTimeout(onEnd, 1500);
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+
+      fxRevealEls.forEach(el => revealObserver.observe(el));
+    } else {
+      // Reduced motion or unsupported: show immediately, no animation.
+      fxRevealEls.forEach(el => finalizeReveal(el));
     }
-  };
+  }
 
-
-  // =========================================================================
-  // 2. FLOAT CARD INTERSECTION OBSERVER (Hero reveal animations)
-  // =========================================================================
+  // Hero orbit-card reveal (parallax cards around the glow orb)
   const revealCards = document.querySelectorAll('.reveal');
 
   if (revealCards.length > 0 && 'IntersectionObserver' in window) {
@@ -234,55 +243,61 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    orbitalScene.addEventListener('mousemove', (e) => {
-      const rect = orbitalScene.getBoundingClientRect();
-      // Normalized -1…+1 relative to element center
-      targetX = ((e.clientX - rect.left)  / rect.width  - 0.5) * 2;
-      targetY = ((e.clientY - rect.top)   / rect.height - 0.5) * 2;
-      // Clamp to avoid extreme edge values
-      targetX = Math.max(-1, Math.min(1, targetX));
-      targetY = Math.max(-1, Math.min(1, targetY));
+    // Cursor/touch parallax is disabled entirely for users who prefer reduced motion.
+    if (!REDUCED_MOTION) {
+      orbitalScene.addEventListener('mousemove', (e) => {
+        const rect = orbitalScene.getBoundingClientRect();
+        // Normalized -1…+1 relative to element center
+        targetX = ((e.clientX - rect.left)  / rect.width  - 0.5) * 2;
+        targetY = ((e.clientY - rect.top)   / rect.height - 0.5) * 2;
+        // Clamp to avoid extreme edge values
+        targetX = Math.max(-1, Math.min(1, targetX));
+        targetY = Math.max(-1, Math.min(1, targetY));
 
-      if (!rafId) rafId = requestAnimationFrame(tick);
-    }, { passive: true });
+        if (!rafId) rafId = requestAnimationFrame(tick);
+      }, { passive: true });
 
-    orbitalScene.addEventListener('mouseleave', () => {
-      // Let lerp glide back to rest
-      targetX = 0;
-      targetY = 0;
-      if (!rafId) rafId = requestAnimationFrame(tick);
-    });
+      orbitalScene.addEventListener('mouseleave', () => {
+        // Let lerp glide back to rest
+        targetX = 0;
+        targetY = 0;
+        if (!rafId) rafId = requestAnimationFrame(tick);
+      });
 
-    // Touch support — single touch parallax for mobile
-    orbitalScene.addEventListener('touchmove', (e) => {
-      if (!e.touches[0]) return;
-      const rect = orbitalScene.getBoundingClientRect();
-      targetX = ((e.touches[0].clientX - rect.left)  / rect.width  - 0.5) * 2;
-      targetY = ((e.touches[0].clientY - rect.top)   / rect.height - 0.5) * 2;
-      targetX = Math.max(-0.6, Math.min(0.6, targetX)); // softer on touch
-      targetY = Math.max(-0.6, Math.min(0.6, targetY));
-      if (!rafId) rafId = requestAnimationFrame(tick);
-    }, { passive: true });
+      // Touch support — single touch parallax for mobile
+      orbitalScene.addEventListener('touchmove', (e) => {
+        if (!e.touches[0]) return;
+        const rect = orbitalScene.getBoundingClientRect();
+        targetX = ((e.touches[0].clientX - rect.left)  / rect.width  - 0.5) * 2;
+        targetY = ((e.touches[0].clientY - rect.top)   / rect.height - 0.5) * 2;
+        targetX = Math.max(-0.6, Math.min(0.6, targetX)); // softer on touch
+        targetY = Math.max(-0.6, Math.min(0.6, targetY));
+        if (!rafId) rafId = requestAnimationFrame(tick);
+      }, { passive: true });
 
-    orbitalScene.addEventListener('touchend', () => {
-      targetX = 0;
-      targetY = 0;
-    });
+      orbitalScene.addEventListener('touchend', () => {
+        targetX = 0;
+        targetY = 0;
+      });
+    }
   }
 
   // =========================================================================
-  // 4. SCROLL PROGRESS & HEADER SCROLLED EFFECT
-
+  // 4. SCROLL PROGRESS, HEADER SCROLLED STATE & ACTIVE NAV HIGHLIGHT
   // =========================================================================
   const scrollProgressBar = document.getElementById('scroll-progress');
   const siteHeader = document.getElementById('site-header');
   const currentYearSpan = document.getElementById('current-year');
+  const navLinks = document.querySelectorAll('.nav-link');
 
   if (currentYearSpan) {
     currentYearSpan.textContent = new Date().getFullYear();
   }
 
-  window.addEventListener('scroll', () => {
+  let scrollTicking = false;
+
+  function updateScrollUI() {
+    scrollTicking = false;
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
     const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const scrollPercent = (scrollTop / (scrollHeight || 1)) * 100;
@@ -292,16 +307,50 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (siteHeader) {
-      if (scrollTop > 40) {
-        siteHeader.classList.add('scrolled');
-      } else {
-        siteHeader.classList.remove('scrolled');
-      }
+      siteHeader.classList.toggle('scrolled', scrollTop > 40);
+    }
+
+    // Active section highlight in the primary nav
+    if (navLinks.length) {
+      let currentId = '';
+      const probe = scrollTop + Math.min(window.innerHeight * 0.35, 260);
+      document.querySelectorAll('main section[id]').forEach(section => {
+        if (probe >= section.offsetTop - 10) currentId = section.id;
+      });
+
+      navLinks.forEach(link => {
+        const isCurrent = link.getAttribute('href') === `#${currentId}`;
+        link.classList.toggle('active', isCurrent);
+        if (isCurrent) {
+          link.setAttribute('aria-current', 'true');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+    }
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!scrollTicking) {
+      scrollTicking = true;
+      requestAnimationFrame(updateScrollUI);
     }
   }, { passive: true });
 
+  window.addEventListener('resize', () => {
+    if (!scrollTicking) {
+      scrollTicking = true;
+      requestAnimationFrame(updateScrollUI);
+    }
+  }, { passive: true });
+
+  window.addEventListener('hashchange', updateScrollUI);
+
+  // Initial paint / after the preloader fades so the header state is correct.
+  updateScrollUI();
+
   // =========================================================================
-  // 3. MOBILE MENU DRAWER
+  // 5. MOBILE MENU DRAWER
   // =========================================================================
   const menuToggleBtn = document.getElementById('menu-toggle-btn');
   const mobileDrawer = document.getElementById('mobile-drawer');
@@ -309,62 +358,55 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileCloseBtn = document.getElementById('mobile-close-btn');
   const mobileLinks = document.querySelectorAll('.mobile-nav-link');
 
+  let menuLastFocus = null;
+
+  function syncBodyScrollLock() {
+    const locked = !!document.querySelector('.modal-backdrop.open, .mobile-drawer.open');
+    document.body.style.overflow = locked ? 'hidden' : '';
+  }
+
   function openMobileMenu() {
+    if (mobileDrawer?.classList.contains('open')) return;
+    menuLastFocus = document.activeElement;
+    menuToggleBtn?.setAttribute('aria-expanded', 'true');
     mobileDrawer?.classList.add('open');
     mobileBackdrop?.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    syncBodyScrollLock();
+    // Move focus inside the drawer once the slide-in transition has begun.
+    window.setTimeout(() => {
+      const firstLink = mobileDrawer?.querySelector('.mobile-nav-link, .modal-close-btn');
+      firstLink?.focus({ preventScroll: true });
+    }, 300);
   }
 
-  function closeMobileMenu() {
+  function closeMobileMenu(returnFocus = true) {
     mobileDrawer?.classList.remove('open');
     mobileBackdrop?.classList.remove('open');
-    document.body.style.overflow = '';
+    menuToggleBtn?.setAttribute('aria-expanded', 'false');
+    syncBodyScrollLock();
+    if (returnFocus) {
+      const target = menuLastFocus && document.contains(menuLastFocus) ? menuLastFocus : menuToggleBtn;
+      menuLastFocus = null;
+      window.setTimeout(() => target?.focus({ preventScroll: true }), 80);
+    }
   }
 
-  menuToggleBtn?.addEventListener('click', openMobileMenu);
-  mobileCloseBtn?.addEventListener('click', closeMobileMenu);
-  mobileBackdrop?.addEventListener('click', closeMobileMenu);
+  menuToggleBtn?.addEventListener('click', () => {
+    if (mobileDrawer?.classList.contains('open')) {
+      closeMobileMenu();
+    } else {
+      openMobileMenu();
+    }
+  });
+  mobileCloseBtn?.addEventListener('click', () => closeMobileMenu());
+  mobileBackdrop?.addEventListener('click', () => closeMobileMenu());
 
   mobileLinks.forEach(link => {
-    link.addEventListener('click', closeMobileMenu);
+    link.addEventListener('click', () => closeMobileMenu(false));
   });
 
   // =========================================================================
-  // 4. HERO PREVIEW TAB SWITCHER
-  // =========================================================================
-  const heroTabs = document.querySelectorAll('#hero-preview-tabs .preview-tab-btn');
-  const heroContentArea = document.getElementById('hero-preview-content');
-
-  heroTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      heroTabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-
-      const tabKey = tab.getAttribute('data-tab');
-      const data = heroPreviewTabsData[tabKey];
-
-      if (data && heroContentArea) {
-        heroContentArea.innerHTML = `
-          <div class="preview-card-showcase">
-            <div class="preview-image-wrap">
-              <img src="${data.image}" alt="${data.title}" />
-              <div class="preview-badge-overlay">${data.badge}</div>
-            </div>
-            <div class="preview-info">
-              <div class="preview-title">${data.title}</div>
-              <div class="preview-desc">${data.desc}</div>
-              <div class="preview-tech-chips">
-                ${data.chips.map(chip => `<span class="tech-chip">${chip}</span>`).join('')}
-              </div>
-            </div>
-          </div>
-        `;
-      }
-    });
-  });
-
-  // =========================================================================
-  // 5. PORTFOLIO FILTERING & CAROUSEL TRAILING + MORPH TRANSITION
+  // 6. PORTFOLIO FILTERING & CAROUSEL TRAILING + MORPH TRANSITION
   // =========================================================================
   const portfolioTabsWrap   = document.getElementById('portfolio-filter-wrapper');
   const portfolioTabs       = document.getElementById('portfolio-tabs');
@@ -427,6 +469,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (portfolioTabs) {
     portfolioTabs.addEventListener('scroll', updateCategoryMorphFlow, { passive: true });
     window.addEventListener('resize', updateCategoryMorphFlow, { passive: true });
+    if ('onscrollend' in window) {
+      portfolioTabs.addEventListener('scrollend', updateCategoryMorphFlow);
+    }
     setTimeout(updateCategoryMorphFlow, 150);
     setTimeout(updateCategoryMorphFlow, 600);
 
@@ -434,7 +479,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (scrollLeftBtn) {
       scrollLeftBtn.addEventListener('click', () => {
         const scrollAmount = Math.max(180, portfolioTabs.clientWidth * 0.5);
-        portfolioTabs.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        portfolioTabs.scrollBy({ left: -scrollAmount, behavior: smoothIfAllowed });
         setTimeout(updateCategoryMorphFlow, 350);
       });
     }
@@ -442,7 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (scrollRightBtn) {
       scrollRightBtn.addEventListener('click', () => {
         const scrollAmount = Math.max(180, portfolioTabs.clientWidth * 0.5);
-        portfolioTabs.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        portfolioTabs.scrollBy({ left: scrollAmount, behavior: smoothIfAllowed });
         setTimeout(updateCategoryMorphFlow, 350);
       });
     }
@@ -452,10 +497,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let startX = 0;
     let scrollLeft = 0;
     let hasMoved = false;
+    let dragFired = false;
 
     portfolioTabs.addEventListener('mousedown', (e) => {
       isDown = true;
       hasMoved = false;
+      dragFired = false;
       portfolioTabs.classList.add('is-dragging');
       startX = e.pageX - portfolioTabs.offsetLeft;
       scrollLeft = portfolioTabs.scrollLeft;
@@ -465,11 +512,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!isDown) return;
       isDown = false;
       portfolioTabs.classList.remove('is-dragging');
+      if (hasMoved) dragFired = true;
     });
 
     portfolioTabs.addEventListener('mouseup', () => {
       isDown = false;
       portfolioTabs.classList.remove('is-dragging');
+      if (hasMoved) dragFired = true;
     });
 
     portfolioTabs.addEventListener('mousemove', (e) => {
@@ -484,17 +533,33 @@ document.addEventListener('DOMContentLoaded', () => {
       updateCategoryMorphFlow();
     });
 
-    // Horizontal wheel scroll support
+    // Suppress the click that browsers fire after a drag gesture, otherwise
+    // releasing the mouse after scrolling would accidentally switch the filter.
+    portfolioTabs.addEventListener('click', (e) => {
+      if (!dragFired) return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      dragFired = false;
+    }, true);
+
+    // Wheel support: translate vertical wheel into pill scrolling, but only
+    // while the track can still scroll — so page scrolling is never hijacked.
     portfolioTabs.addEventListener('wheel', (e) => {
-      if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) {
-        portfolioTabs.scrollLeft += e.deltaY;
-        updateCategoryMorphFlow();
-      }
-    }, { passive: true });
+      const isVertical = Math.abs(e.deltaY) > Math.abs(e.deltaX);
+      if (!isVertical) return;
+      const dir = Math.sign(e.deltaY);
+      const atStart = portfolioTabs.scrollLeft <= 1;
+      const atEnd = portfolioTabs.scrollLeft >= portfolioTabs.scrollWidth - portfolioTabs.clientWidth - 1;
+      const canConsume = (dir < 0 && !atStart) || (dir > 0 && !atEnd);
+      if (!canConsume) return;
+      e.preventDefault();
+      portfolioTabs.scrollLeft += e.deltaY;
+      updateCategoryMorphFlow();
+    }, { passive: false });
   }
 
   portfolioFilterBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
+    btn.addEventListener('click', () => {
       portfolioFilterBtns.forEach(b => {
         b.classList.remove('active');
         b.setAttribute('aria-selected', 'false');
@@ -508,7 +573,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const btnWidth = btn.offsetWidth;
         const trackWidth = portfolioTabs.clientWidth;
         const targetScroll = btnLeft - (trackWidth / 2) + (btnWidth / 2);
-        portfolioTabs.scrollTo({ left: targetScroll, behavior: 'smooth' });
+        portfolioTabs.scrollTo({ left: targetScroll, behavior: smoothIfAllowed });
         setTimeout(updateCategoryMorphFlow, 350);
       }
 
@@ -519,6 +584,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (filter === 'all' || category === filter) {
           card.style.display = 'flex';
           card.style.animation = 'fadeIn 0.3s ease';
+          // If this card never finished its first scroll reveal, show it now
+          // so filtering never leaves an invisible card behind.
+          if (card.classList.contains('fx-reveal')) {
+            card.classList.remove('fx-reveal', 'in-view');
+            card.style.removeProperty('--fx-delay');
+          }
         } else {
           card.style.display = 'none';
         }
@@ -527,38 +598,67 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // =========================================================================
-  // 6. MODAL UTILITIES (CASE STUDY, VIDEO LIGHTBOX)
+  // 7. MODAL UTILITIES (CASE STUDY, VIDEO LIGHTBOX) — FOCUS MANAGED
   // =========================================================================
   const caseStudyModal = document.getElementById('case-study-modal');
   const videoLightboxModal = document.getElementById('video-lightbox-modal');
   const toast = document.getElementById('toast');
   const toastMessage = document.getElementById('toast-message');
 
+  let toastTimer = null;
+
   function showToast(msg) {
     if (!toast || !toastMessage) return;
     toastMessage.textContent = msg;
     toast.classList.add('show');
-    setTimeout(() => {
+    window.clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(() => {
       toast.classList.remove('show');
     }, 3500);
   }
 
-  function openModal(modalEl) {
-    if (!modalEl) return;
-    modalEl.classList.add('open');
-    modalEl.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
+  let modalLastFocus = null;
+
+  function getFocusable(scope) {
+    if (!scope) return [];
+    return [...scope.querySelectorAll(
+      'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )].filter(el => el.getClientRects().length > 0);
   }
 
-  function closeModal(modalEl) {
+  function openModal(modalEl) {
     if (!modalEl) return;
+    modalLastFocus = document.activeElement;
+    modalEl.classList.add('open');
+    modalEl.setAttribute('aria-hidden', 'false');
+    syncBodyScrollLock();
+    // Focus the first interactive control inside the dialog.
+    window.setTimeout(() => {
+      const first = getFocusable(modalEl)[0];
+      first?.focus({ preventScroll: true });
+    }, 60);
+  }
+
+  function closeModal(modalEl, returnFocus = true) {
+    if (!modalEl || !modalEl.classList.contains('open')) return;
     modalEl.classList.remove('open');
     modalEl.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
 
     if (modalEl === videoLightboxModal) {
+      // Remove the source entirely (clearing playback) rather than setting an
+      // empty string, which some browsers re-resolve to the page URL.
       const iframe = document.getElementById('video-iframe');
-      if (iframe) iframe.src = '';
+      if (iframe) iframe.removeAttribute('src');
+    }
+
+    syncBodyScrollLock();
+
+    if (returnFocus && modalLastFocus && document.contains(modalLastFocus)) {
+      const target = modalLastFocus;
+      modalLastFocus = null;
+      window.setTimeout(() => target.focus({ preventScroll: true }), 60);
+    } else {
+      modalLastFocus = null;
     }
   }
 
@@ -577,16 +677,40 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Escape closes overlays; Tab is trapped inside an open dialog.
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       closeModal(caseStudyModal);
       closeModal(videoLightboxModal);
       closeMobileMenu();
+      return;
+    }
+
+    if (e.key === 'Tab') {
+      const openModalEl = [caseStudyModal, videoLightboxModal].find(m => m?.classList.contains('open'));
+      if (!openModalEl) return;
+
+      const focusables = getFocusable(openModalEl);
+      if (!focusables.length) {
+        e.preventDefault();
+        return;
+      }
+
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     }
   });
 
   // =========================================================================
-  // 7. CASE STUDY MODAL INJECTION
+  // 8. CASE STUDY MODAL INJECTION
   // =========================================================================
   const caseStudyButtons = document.querySelectorAll('.open-case-study');
   const modalCaseBody = document.getElementById('modal-case-body');
@@ -665,7 +789,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // =========================================================================
-  // 8. VIDEO LIGHTBOX MODAL
+  // 9. VIDEO LIGHTBOX MODAL
   // =========================================================================
   const openVideoBtns = document.querySelectorAll('.open-video-modal');
   const lightboxVideoTitle = document.getElementById('lightbox-video-title');
@@ -688,15 +812,18 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // =========================================================================
-  // 9. SEARCHABLE & CATEGORIZED FAQ ACCORDION
+  // 10. SEARCHABLE & CATEGORIZED FAQ ACCORDION
   // =========================================================================
   const faqSearchInput = document.getElementById('faq-search-input');
   const faqCatBtns = document.querySelectorAll('#faq-categories .faq-cat-btn');
   const faqItems = document.querySelectorAll('#faq-accordion .faq-item');
+  const faqEmpty = document.getElementById('faq-empty');
 
   function filterFaqs() {
     const query = faqSearchInput?.value.toLowerCase().trim() || '';
     const activeCategory = document.querySelector('#faq-categories .faq-cat-btn.active')?.getAttribute('data-cat') || 'all';
+
+    let visibleCount = 0;
 
     faqItems.forEach(item => {
       const itemCategory = item.getAttribute('data-category') || '';
@@ -709,10 +836,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (matchesSearch && matchesCategory) {
         item.style.display = 'block';
+        visibleCount++;
       } else {
         item.style.display = 'none';
       }
     });
+
+    // Friendly empty state instead of a silent blank list.
+    if (faqEmpty) {
+      faqEmpty.hidden = visibleCount > 0;
+    }
   }
 
   faqSearchInput?.addEventListener('input', filterFaqs);
@@ -738,7 +871,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // =========================================================================
-  // 10. INQUIRY FORM SYNCHRONIZATION & SELECT / PILL SELECTORS
+  // 11. INQUIRY FORM SYNCHRONIZATION & SELECT / PILL SELECTORS
   // =========================================================================
   const serviceSelect = document.getElementById('contact-service');
   const budgetSelect = document.getElementById('contact-budget');
@@ -786,10 +919,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const contactSection = document.getElementById('contact');
       if (contactSection) {
-        contactSection.scrollIntoView({ behavior: 'smooth' });
+        contactSection.scrollIntoView({ behavior: smoothIfAllowed, block: 'start' });
         setTimeout(() => {
-          document.getElementById('contact-name')?.focus();
-        }, 600);
+          document.getElementById('contact-name')?.focus({ preventScroll: true });
+        }, 650);
       }
     });
   });
@@ -801,22 +934,31 @@ document.addEventListener('DOMContentLoaded', () => {
   const formSuccessMessage = document.getElementById('form-success-message');
   const resetFormBtn = document.getElementById('reset-form-btn');
 
+  const submitDefaultLabel = submitBtnText?.textContent.trim() || 'SEND MESSAGE →';
+  const submitBusyLabel = 'Transmitting Project Brief...';
+
   smartContactForm?.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    if (formSubmitBtn && submitBtnText) {
-      formSubmitBtn.disabled = true;
-      submitBtnText.textContent = 'Transmitting Project Brief...';
+    // Safety net — native HTML5 validation should already have caught these.
+    if (!smartContactForm.checkValidity()) {
+      smartContactForm.reportValidity();
+      return;
     }
 
-    setTimeout(() => {
+    if (formSubmitBtn && submitBtnText) {
+      formSubmitBtn.disabled = true;
+      submitBtnText.textContent = submitBusyLabel;
+    }
+
+    window.setTimeout(() => {
       if (smartContactForm) smartContactForm.style.display = 'none';
       if (formSuccessMessage) formSuccessMessage.style.display = 'block';
       showToast('Project Brief received! We will reply within 4 hours.');
 
       if (formSubmitBtn && submitBtnText) {
         formSubmitBtn.disabled = false;
-        submitBtnText.textContent = 'Submit Inquiry (Guaranteed 4h Reply)';
+        submitBtnText.textContent = submitDefaultLabel;
       }
     }, 900);
   });
@@ -827,38 +969,50 @@ document.addEventListener('DOMContentLoaded', () => {
       smartContactForm.style.display = 'block';
     }
     if (formSuccessMessage) formSuccessMessage.style.display = 'none';
+    if (formSubmitBtn && submitBtnText) {
+      formSubmitBtn.disabled = false;
+      submitBtnText.textContent = submitDefaultLabel;
+    }
   });
 
   // =========================================================================
-  // 11. BACK TO TOP SMOOTH SCROLL
+  // 12. BACK TO TOP SMOOTH SCROLL
   // =========================================================================
   const backToTopBtn = document.getElementById('back-to-top-btn');
   backToTopBtn?.addEventListener('click', () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: smoothIfAllowed
     });
   });
 
   // =========================================================================
-  // 12. BRAND PRELOADER DISMISSAL
+  // 13. BRAND PRELOADER DISMISSAL
   // =========================================================================
   const loader = document.getElementById('loader');
   if (loader) {
     const hideLoader = () => {
       loader.classList.add('hidden');
       document.body.style.overflow = '';
+      // Kick off the hero entrance choreography right as the curtain lifts.
+      requestAnimationFrame(() => document.body.classList.add('page-ready'));
     };
 
+    const loadDelay = REDUCED_MOTION ? 0 : 500;
+    const safetyDelay = REDUCED_MOTION ? 0 : 2000;
+
     if (document.readyState === 'complete') {
-      setTimeout(hideLoader, 500);
+      setTimeout(hideLoader, loadDelay);
     } else {
       window.addEventListener('load', () => {
-        setTimeout(hideLoader, 500);
+        setTimeout(hideLoader, loadDelay);
       });
       // Safety fallback
-      setTimeout(hideLoader, 2000);
+      setTimeout(hideLoader, safetyDelay);
     }
+  } else {
+    // No preloader markup — still trigger hero entrance.
+    document.body.classList.add('page-ready');
   }
 
 });
