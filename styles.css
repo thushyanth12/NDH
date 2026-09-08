@@ -1811,12 +1811,27 @@ select {
   box-shadow: var(--shadow-lg);
 }
 
+.portfolio-card[data-external-url] {
+  cursor: pointer;
+}
+
 .portfolio-card-media {
+  display: block;
   position: relative;
   width: 100%;
   height: 220px;
   overflow: hidden;
   background: #181822;
+}
+
+.portfolio-title-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.portfolio-title-link:hover {
+  color: var(--accent-primary);
 }
 
 .portfolio-card-media img {

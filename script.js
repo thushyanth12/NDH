@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: 'Bouquet & Floral Experience',
       timeline: '10 Days Delivery',
       client: 'The secretflorist',
+      liveUrl: 'https://thesecretflorist.in',
       heroImage: 'assets/project-florist.webp',
       overview: 'A bespoke luxury bouquet studio seeking an evocative, visual-first online presence with custom floral arrangement curation and same-day delivery scheduling.',
       challenge: 'The business needed an intuitive online booking experience that reflects their artisan aesthetic and streamlines customized bouquet orders.',
@@ -763,6 +764,11 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
 
         <div style="display: flex; flex-wrap: wrap; gap: 1rem; border-top: 1px solid var(--border-subtle); padding-top: 1.5rem;">
+          ${cs.liveUrl ? `
+          <a href="${cs.liveUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="flex: 1;">
+            <span>Visit Live Website</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </a>` : ''}
           <a href="#contact" class="btn btn-primary close-modal-btn" style="flex: 1;">
             <span>Contact About Similar Project</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -771,6 +777,20 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
 
       openModal(caseStudyModal);
+    });
+  });
+
+  // Handle cards configured with an external redirect URL
+  document.querySelectorAll('.portfolio-card[data-external-url]').forEach(card => {
+    card.addEventListener('click', (e) => {
+      // Allow internal buttons and links to handle their own events
+      if (e.target.closest('.open-case-study') || e.target.closest('a') || e.target.closest('button')) {
+        return;
+      }
+      const url = card.getAttribute('data-external-url');
+      if (url) {
+        window.open(url, '_blank', 'noopener,noreferrer');
+      }
     });
   });
 
