@@ -25,11 +25,10 @@
   <meta property="twitter:description" content="High-performance web apps, brand systems, and organic social scale." />
   <meta property="twitter:image" content="assets/NDH.jpeg" />
 
-  <!-- Preconnect & Google Fonts -->
+  <!-- Preconnect & Google Fonts (Streamlined weights + swap for speed) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link href="https://fonts.cdnfonts.com/css/proxima-nova" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Progressive enhancement flag: gates entrance/reveal styles on JS availability -->
   <script>document.documentElement.classList.add('js');</script>
@@ -96,7 +95,10 @@
   <header class="site-header" id="site-header">
     <div class="navbar-inner">
       <a href="#home" class="brand-logo" aria-label="Ninja Design Hub Home">
-        <img src="assets/logo-sm.png" alt="Ninja Design Hub" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        <picture>
+          <source srcset="assets/logo-sm.webp" type="image/webp" />
+          <img src="assets/logo-sm.png" alt="Ninja Design Hub" width="32" height="32" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        </picture>
         <div class="brand-logo-fallback" style="display:none;">N</div>
         <span>Ninja Design Hub</span>
       </a>
@@ -130,7 +132,10 @@
     <div>
       <div class="mobile-drawer-header">
         <div class="brand-logo">
-          <img src="assets/logo-sm.png" alt="Ninja Design Hub" width="32" height="32" onerror="this.style.display='none';" />
+          <picture>
+            <source srcset="assets/logo-sm.webp" type="image/webp" />
+            <img src="assets/logo-sm.png" alt="Ninja Design Hub" width="32" height="32" decoding="async" onerror="this.style.display='none';" />
+          </picture>
           <span>Ninja Design Hub</span>
         </div>
         <button class="modal-close-btn" id="mobile-close-btn" aria-label="Close menu">✕</button>
@@ -562,7 +567,10 @@
           <!-- Project 1: The secretflorist (Bouquet & Floral Experience) -->
           <div class="portfolio-card fx-reveal" data-category="web">
             <div class="portfolio-card-media">
-              <img src="assets/project-florist.jpg" alt="The secretflorist" loading="lazy" />
+              <picture>
+                <source srcset="assets/project-florist.webp" type="image/webp" />
+                <img src="assets/project-florist.jpg" alt="The secretflorist" width="800" height="450" loading="lazy" decoding="async" />
+              </picture>
               <span class="card-category-badge">Bouquet &amp; Floral Experience</span>
             </div>
             <div class="portfolio-card-body">
@@ -585,7 +593,10 @@
           <!-- Web Dev 2: SaaS Analytics -->
           <div class="portfolio-card fx-reveal" data-category="web">
             <div class="portfolio-card-media">
-              <img src="assets/project-dashboard.png" alt="SaaS Metrics Dashboard" loading="lazy" />
+              <picture>
+                <source srcset="assets/project-dashboard.webp" type="image/webp" />
+                <img src="assets/project-dashboard.png" alt="SaaS Metrics Dashboard" width="1600" height="1100" loading="lazy" decoding="async" />
+              </picture>
               <span class="card-category-badge">Web Application</span>
             </div>
             <div class="portfolio-card-body">
@@ -615,7 +626,10 @@
           <!-- Web Dev 3: Luxury E-Commerce -->
           <div class="portfolio-card fx-reveal" data-category="web">
             <div class="portfolio-card-media">
-              <img src="assets/project-commerce.png" alt="Aura Luxury E-Commerce" loading="lazy" />
+              <picture>
+                <source srcset="assets/project-commerce.webp" type="image/webp" />
+                <img src="assets/project-commerce.png" alt="Aura Luxury E-Commerce" width="1200" height="1400" loading="lazy" decoding="async" />
+              </picture>
               <span class="card-category-badge">E-Commerce</span>
             </div>
             <div class="portfolio-card-body">
@@ -643,7 +657,10 @@
           <!-- Brand Project 1 -->
           <div class="portfolio-card fx-reveal" data-category="brand">
             <div class="portfolio-card-media">
-              <img src="assets/project-brand.png" alt="Aether AI Brand Identity" loading="lazy" />
+              <picture>
+                <source srcset="assets/project-brand.webp" type="image/webp" />
+                <img src="assets/project-brand.png" alt="Aether AI Brand Identity" width="1200" height="1200" loading="lazy" decoding="async" />
+              </picture>
               <span class="card-category-badge">Brand Identity System</span>
             </div>
             <div class="portfolio-card-body">
@@ -670,7 +687,10 @@
           <!-- Brand Project 2: Mobile App Branding -->
           <div class="portfolio-card fx-reveal" data-category="brand">
             <div class="portfolio-card-media">
-              <img src="assets/project-mobile.png" alt="Zenith Fintech Mobile App" loading="lazy" />
+              <picture>
+                <source srcset="assets/project-mobile.webp" type="image/webp" />
+                <img src="assets/project-mobile.png" alt="Zenith Fintech Mobile App" width="1200" height="1700" loading="lazy" decoding="async" />
+              </picture>
               <span class="card-category-badge">UI/UX &amp; App Design</span>
             </div>
             <div class="portfolio-card-body">
@@ -697,7 +717,10 @@
           <!-- Video Project 1: Short-Form Viral Reel -->
           <div class="portfolio-card fx-reveal" data-category="video">
             <div class="portfolio-card-media">
-              <img src="assets/NDH.jpeg" alt="Viral Hook Reel Video" loading="lazy" />
+              <picture>
+                <source srcset="assets/NDH.webp" type="image/webp" />
+                <img src="assets/NDH.jpeg" alt="Viral Hook Reel Video" width="1200" height="1200" loading="lazy" decoding="async" />
+              </picture>
               <div class="video-play-overlay open-video-modal" data-video-title="Viral Tech Launch Reel (4.8M Views)" data-video-url="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" data-views="4.8M Views" data-duration="0:45">
                 <div class="play-circle">
                   <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
@@ -729,7 +752,10 @@
           <!-- Video Project 2: Commercial Brand Film -->
           <div class="portfolio-card fx-reveal" data-category="video">
             <div class="portfolio-card-media">
-              <img src="assets/project-brand.png" alt="Commercial Brand Film" loading="lazy" />
+              <picture>
+                <source srcset="assets/project-brand.webp" type="image/webp" />
+                <img src="assets/project-brand.png" alt="Commercial Brand Film" width="1200" height="1200" loading="lazy" decoding="async" />
+              </picture>
               <div class="video-play-overlay open-video-modal" data-video-title="NextGen AI Brand Anthem Commercial" data-video-url="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" data-views="1.2M Views" data-duration="1:30">
                 <div class="play-circle">
                   <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
@@ -1226,7 +1252,10 @@
         <!-- Brand Info -->
         <div class="footer-brand-col">
           <a href="#home" class="brand-logo">
-            <img src="assets/logo-sm.png" alt="Ninja Design Hub" width="36" height="36" onerror="this.style.display='none';" />
+            <picture>
+              <source srcset="assets/logo-sm.webp" type="image/webp" />
+              <img src="assets/logo-sm.png" alt="Ninja Design Hub" width="36" height="36" decoding="async" onerror="this.style.display='none';" />
+            </picture>
             <span>Ninja Design Hub</span>
           </a>
           <p class="footer-desc">
@@ -1330,6 +1359,6 @@
   </div>
 
   <!-- JavaScript -->
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>

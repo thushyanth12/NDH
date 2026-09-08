@@ -5,7 +5,6 @@
    ========================================================================== */
 
 /* Typography: Custom Fonts */
-@import url('https://fonts.cdnfonts.com/css/proxima-nova');
 
 @font-face {
   font-family: 'Ethnocentric';
@@ -86,7 +85,7 @@
 
   /* Typography Stacks */
   --font-heading: 'Ethnocentric', 'Space Grotesk', sans-serif;
-  --font-brand: 'Proxima Nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-brand: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
@@ -235,7 +234,21 @@ body {
   background-image:
     radial-gradient(circle at 15% 10%, rgba(255, 75, 31, 0.04) 0%, transparent 40%),
     radial-gradient(circle at 85% 60%, rgba(59, 130, 246, 0.04) 0%, transparent 40%);
-  background-attachment: fixed;
+  background-attachment: scroll; /* Mobile scroll smoothness: prevents full-screen repaint jank */
+}
+
+@media (min-width: 1025px) and (hover: hover) {
+  body {
+    background-attachment: fixed;
+  }
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  touch-action: manipulation; /* Eliminate 300ms touch tap delay on mobile */
 }
 
 img,
@@ -683,13 +696,16 @@ select {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  min-width: 44px;
+  min-height: 44px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--radius-full);
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   color: #ffffff;
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 @media (min-width: 960px) {
@@ -718,7 +734,8 @@ select {
 .mobile-drawer {
   position: fixed;
   top: 0;
-  right: -100%;
+  right: 0;
+  transform: translateX(100%) translateZ(0);
   width: 85%;
   max-width: 380px;
   height: 100vh;
@@ -729,16 +746,18 @@ select {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: right var(--transition-normal), visibility 0s linear var(--transition-normal);
+  will-change: transform;
+  transition: transform var(--transition-normal), visibility 0s linear var(--transition-normal);
   /* Hidden from the tab order & screen readers while closed */
   visibility: hidden;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mobile-drawer.open {
-  right: 0;
+  transform: translateX(0) translateZ(0);
   visibility: visible;
-  transition: right var(--transition-normal);
+  transition: transform var(--transition-normal);
 }
 
 .mobile-drawer-header {
@@ -2635,7 +2654,7 @@ select {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   color: #ffffff;
-  font-size: 0.9375rem;
+  font-size: 1rem; /* 16px minimum prevents iOS Safari auto-zoom on focus */
   outline: none;
   transition: all var(--transition-normal);
 }
@@ -2779,8 +2798,10 @@ select {
 }
 
 .modal-close-btn {
-  width: 36px;
-  height: 36px;
+  min-width: 44px;
+  min-height: 44px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.05);
   display: flex;
@@ -2788,6 +2809,7 @@ select {
   justify-content: center;
   color: var(--text-secondary);
   transition: all var(--transition-fast);
+  cursor: pointer;
 }
 
 .modal-close-btn:hover {
@@ -2945,8 +2967,10 @@ select {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  min-width: 44px;
+  min-height: 44px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--radius-full);
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
@@ -3287,8 +3311,8 @@ body.page-ready .hero-stats-grid.hero-entrance {
   }
 
   .menu-toggle-btn {
-    width: 32px;
-    height: 32px;
+    min-width: 44px;
+    min-height: 44px;
   }
 }
 

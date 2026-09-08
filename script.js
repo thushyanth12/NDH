@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: 'Web Application & SaaS',
       timeline: '3 Weeks Delivery',
       client: 'OmniMetrics AI',
-      heroImage: 'assets/project-dashboard.png',
+      heroImage: 'assets/project-dashboard.webp',
       overview: 'OmniMetrics is an AI-powered customer intelligence and revenue analytics platform handling over 10M events daily for B2B SaaS teams.',
       challenge: 'The client had a clunky, sluggish legacy dashboard with 4.5s load times and high user churn during trial onboarding. Data visualization was rigid and mobile experience was broken.',
       solution: 'We engineered a bespoke, ultra-fast dashboard with sub-second querying, responsive Chart.js real-time streaming components, dark-mode native interface, and frictionless onboarding workflows.',
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: 'Headless E-Commerce',
       timeline: '2 Weeks Delivery',
       client: 'Aura Lifestyle',
-      heroImage: 'assets/project-commerce.png',
+      heroImage: 'assets/project-commerce.webp',
       overview: 'Aura is a high-end luxury lifestyle brand demanding an ultra-minimalist, editorial storefront with instantaneous product previews and zero checkout friction.',
       challenge: 'Standard Shopify themes were bloated with third-party app scripts, causing 60% mobile bounce rate and poor organic Google rankings.',
       solution: 'We architected a custom headless storefront with instant client-side search, smooth image transitions, and an optimized 1-click checkout flow.',
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: 'Bouquet & Floral Experience',
       timeline: '10 Days Delivery',
       client: 'The secretflorist',
-      heroImage: 'assets/project-florist.jpg',
+      heroImage: 'assets/project-florist.webp',
       overview: 'A bespoke luxury bouquet studio seeking an evocative, visual-first online presence with custom floral arrangement curation and same-day delivery scheduling.',
       challenge: 'The business needed an intuitive online booking experience that reflects their artisan aesthetic and streamlines customized bouquet orders.',
       solution: 'Created an elegant, visual-first digital storefront with smooth micro-interactions, an interactive stem customizer, and automated local dispatch logic.',
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: 'Brand Identity System',
       timeline: '2 Weeks Delivery',
       client: 'Aether Technologies',
-      heroImage: 'assets/project-brand.png',
+      heroImage: 'assets/project-brand.webp',
       overview: 'A fast-growing generative AI startup needed a world-class brand system to stand out during their institutional fundraising round.',
       challenge: 'The founders had no cohesive visual identity, inconsistent typography, and amateur pitch decks that failed to command enterprise trust.',
       solution: 'We crafted a futuristic yet timeless brand identity: custom vector logo mark, dark-mode design token architecture, complete marketing collateral, and a high-converting pitch deck.',
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: 'Mobile UI/UX Design',
       timeline: '2.5 Weeks Delivery',
       client: 'Zenith Financial',
-      heroImage: 'assets/project-mobile.png',
+      heroImage: 'assets/project-mobile.webp',
       overview: 'Next-generation mobile financial application combining biometric verification, multi-currency wallets, and automated micro-investing.',
       challenge: 'Complex banking flows caused steep onboarding drop-offs and low user engagement in wealth management tabs.',
       solution: 'Designed an intuitive, thumb-friendly mobile app architecture with micro-haptics, crystal-clear typography, and simplified 3-step KYC verification.',
@@ -243,8 +243,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Cursor/touch parallax is disabled entirely for users who prefer reduced motion.
-    if (!REDUCED_MOTION) {
+    // Cursor parallax: enabled strictly for fine-pointer desktop devices (no touch fighting scroll on mobile)
+    const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+    if (!REDUCED_MOTION && isFinePointer) {
       orbitalScene.addEventListener('mousemove', (e) => {
         const rect = orbitalScene.getBoundingClientRect();
         // Normalized -1…+1 relative to element center
@@ -263,22 +264,6 @@ document.addEventListener('DOMContentLoaded', () => {
         targetY = 0;
         if (!rafId) rafId = requestAnimationFrame(tick);
       });
-
-      // Touch support — single touch parallax for mobile
-      orbitalScene.addEventListener('touchmove', (e) => {
-        if (!e.touches[0]) return;
-        const rect = orbitalScene.getBoundingClientRect();
-        targetX = ((e.touches[0].clientX - rect.left)  / rect.width  - 0.5) * 2;
-        targetY = ((e.touches[0].clientY - rect.top)   / rect.height - 0.5) * 2;
-        targetX = Math.max(-0.6, Math.min(0.6, targetX)); // softer on touch
-        targetY = Math.max(-0.6, Math.min(0.6, targetY));
-        if (!rafId) rafId = requestAnimationFrame(tick);
-      }, { passive: true });
-
-      orbitalScene.addEventListener('touchend', () => {
-        targetX = 0;
-        targetY = 0;
-      });
     }
   }
 
@@ -294,6 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
     currentYearSpan.textContent = new Date().getFullYear();
   }
 
+  const mainSections = document.querySelectorAll('main section[id]');
   let scrollTicking = false;
 
   function updateScrollUI() {
@@ -310,11 +296,11 @@ document.addEventListener('DOMContentLoaded', () => {
       siteHeader.classList.toggle('scrolled', scrollTop > 40);
     }
 
-    // Active section highlight in the primary nav
-    if (navLinks.length) {
+    // Active section highlight in the primary nav (skip on mobile viewports where primary nav is hidden)
+    if (navLinks.length && window.innerWidth >= 960) {
       let currentId = '';
       const probe = scrollTop + Math.min(window.innerHeight * 0.35, 260);
-      document.querySelectorAll('main section[id]').forEach(section => {
+      mainSections.forEach(section => {
         if (probe >= section.offsetTop - 10) currentId = section.id;
       });
 
@@ -998,8 +984,8 @@ document.addEventListener('DOMContentLoaded', () => {
       requestAnimationFrame(() => document.body.classList.add('page-ready'));
     };
 
-    const loadDelay = REDUCED_MOTION ? 0 : 500;
-    const safetyDelay = REDUCED_MOTION ? 0 : 2000;
+    const loadDelay = REDUCED_MOTION ? 0 : 200;
+    const safetyDelay = REDUCED_MOTION ? 0 : 800;
 
     if (document.readyState === 'complete') {
       setTimeout(hideLoader, loadDelay);
