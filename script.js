@@ -269,18 +269,79 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================================
-  // 4. SCROLL PROGRESS, HEADER SCROLLED STATE & ACTIVE NAV HIGHLIGHT
+  // 4. SCROLL PROGRESS, HEADER SCROLLED STATE & APPEND SCROLLSPY
   // =========================================================================
   const scrollProgressBar = document.getElementById('scroll-progress');
   const siteHeader = document.getElementById('site-header');
   const currentYearSpan = document.getElementById('current-year');
   const navLinks = document.querySelectorAll('.nav-link');
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+  const scrollTopBtn = document.getElementById('scroll-top');
 
   if (currentYearSpan) {
     currentYearSpan.textContent = new Date().getFullYear();
   }
 
-  const mainSections = document.querySelectorAll('main section[id]');
+  const allAnchorLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+
+  /**
+   * Append Exact Navmenu Scrollspy
+   */
+  function navmenuScrollspy() {
+    const position = window.scrollY + 200;
+    allAnchorLinks.forEach(navmenulink => {
+      if (!navmenulink.hash) return;
+      const section = document.querySelector(navmenulink.hash);
+      if (!section) return;
+      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
+        navmenulink.classList.add('active');
+        navmenulink.setAttribute('aria-current', 'true');
+      } else {
+        navmenulink.classList.remove('active');
+        navmenulink.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  /**
+   * Append Exact Scroll-To-Top Toggle
+   */
+  function toggleScrollTop() {
+    if (scrollTopBtn) {
+      if (window.scrollY > 100) {
+        scrollTopBtn.classList.add('active');
+      } else {
+        scrollTopBtn.classList.remove('active');
+      }
+    }
+  }
+
+  scrollTopBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: smoothIfAllowed
+    });
+  });
+
+  /**
+   * Append Exact Hash Offset Scroll Correction on Load
+   */
+  window.addEventListener('load', () => {
+    if (window.location.hash) {
+      const section = document.querySelector(window.location.hash);
+      if (section) {
+        setTimeout(() => {
+          const scrollMarginTop = getComputedStyle(section).scrollMarginTop;
+          window.scrollTo({
+            top: section.offsetTop - (parseInt(scrollMarginTop) || 0),
+            behavior: 'smooth'
+          });
+        }, 100);
+      }
+    }
+  });
+
   let scrollTicking = false;
 
   function updateScrollUI() {
@@ -297,24 +358,8 @@ document.addEventListener('DOMContentLoaded', () => {
       siteHeader.classList.toggle('scrolled', scrollTop > 40);
     }
 
-    // Active section highlight in the primary nav (skip on mobile viewports where primary nav is hidden)
-    if (navLinks.length && window.innerWidth >= 960) {
-      let currentId = '';
-      const probe = scrollTop + Math.min(window.innerHeight * 0.35, 260);
-      mainSections.forEach(section => {
-        if (probe >= section.offsetTop - 10) currentId = section.id;
-      });
-
-      navLinks.forEach(link => {
-        const isCurrent = link.getAttribute('href') === `#${currentId}`;
-        link.classList.toggle('active', isCurrent);
-        if (isCurrent) {
-          link.setAttribute('aria-current', 'true');
-        } else {
-          link.removeAttribute('aria-current');
-        }
-      });
-    }
+    navmenuScrollspy();
+    toggleScrollTop();
   }
 
   window.addEventListener('scroll', () => {
@@ -332,34 +377,28 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: true });
 
   window.addEventListener('hashchange', updateScrollUI);
+  window.addEventListener('load', updateScrollUI);
 
-  // Initial paint / after the preloader fades so the header state is correct.
+  // Initial paint
   updateScrollUI();
 
   // =========================================================================
-  // 5. MOBILE MENU DRAWER
+  // 5. MOBILE MENU DRAWER (Append mobile-nav-active state & scroll lock)
   // =========================================================================
   const menuToggleBtn = document.getElementById('menu-toggle-btn');
   const mobileDrawer = document.getElementById('mobile-drawer');
   const mobileBackdrop = document.getElementById('mobile-backdrop');
   const mobileCloseBtn = document.getElementById('mobile-close-btn');
-  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
 
   let menuLastFocus = null;
 
-  function syncBodyScrollLock() {
-    const locked = !!document.querySelector('.modal-backdrop.open, .mobile-drawer.open');
-    document.body.style.overflow = locked ? 'hidden' : '';
-  }
-
   function openMobileMenu() {
-    if (mobileDrawer?.classList.contains('open')) return;
+    if (document.body.classList.contains('mobile-nav-active')) return;
     menuLastFocus = document.activeElement;
     menuToggleBtn?.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('mobile-nav-active');
     mobileDrawer?.classList.add('open');
     mobileBackdrop?.classList.add('open');
-    syncBodyScrollLock();
-    // Move focus inside the drawer once the slide-in transition has begun.
     window.setTimeout(() => {
       const firstLink = mobileDrawer?.querySelector('.mobile-nav-link, .modal-close-btn');
       firstLink?.focus({ preventScroll: true });
@@ -367,10 +406,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function closeMobileMenu(returnFocus = true) {
+    document.body.classList.remove('mobile-nav-active');
     mobileDrawer?.classList.remove('open');
     mobileBackdrop?.classList.remove('open');
     menuToggleBtn?.setAttribute('aria-expanded', 'false');
-    syncBodyScrollLock();
     if (returnFocus) {
       const target = menuLastFocus && document.contains(menuLastFocus) ? menuLastFocus : menuToggleBtn;
       menuLastFocus = null;
@@ -379,17 +418,24 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   menuToggleBtn?.addEventListener('click', () => {
-    if (mobileDrawer?.classList.contains('open')) {
+    if (document.body.classList.contains('mobile-nav-active')) {
       closeMobileMenu();
     } else {
       openMobileMenu();
     }
   });
+
   mobileCloseBtn?.addEventListener('click', () => closeMobileMenu());
   mobileBackdrop?.addEventListener('click', () => closeMobileMenu());
 
-  mobileLinks.forEach(link => {
+  mobileNavLinks.forEach(link => {
     link.addEventListener('click', () => closeMobileMenu(false));
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.body.classList.contains('mobile-nav-active')) {
+      closeMobileMenu();
+    }
   });
 
   // =========================================================================
@@ -546,7 +592,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   portfolioFilterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+      const href = btn.getAttribute('href');
+      if (href && !href.startsWith('#')) {
+        // Direct page navigation (e.g. web-development.html)
+        return;
+      }
+
       portfolioFilterBtns.forEach(b => {
         b.classList.remove('active');
         b.setAttribute('aria-selected', 'false');
@@ -611,6 +663,16 @@ document.addEventListener('DOMContentLoaded', () => {
     return [...scope.querySelectorAll(
       'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
     )].filter(el => el.getClientRects().length > 0);
+  }
+
+  function syncBodyScrollLock() {
+    const hasOpenModal = !!document.querySelector('.modal-backdrop.open');
+    const hasOpenDrawer = !!mobileDrawer?.classList.contains('open');
+    if (hasOpenModal || hasOpenDrawer) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
   }
 
   function openModal(modalEl) {
@@ -818,53 +880,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // =========================================================================
-  // 10. SEARCHABLE & CATEGORIZED FAQ ACCORDION
+  // 10. FAQ ACCORDION
   // =========================================================================
-  const faqSearchInput = document.getElementById('faq-search-input');
-  const faqCatBtns = document.querySelectorAll('#faq-categories .faq-cat-btn');
   const faqItems = document.querySelectorAll('#faq-accordion .faq-item');
-  const faqEmpty = document.getElementById('faq-empty');
 
-  function filterFaqs() {
-    const query = faqSearchInput?.value.toLowerCase().trim() || '';
-    const activeCategory = document.querySelector('#faq-categories .faq-cat-btn.active')?.getAttribute('data-cat') || 'all';
-
-    let visibleCount = 0;
-
-    faqItems.forEach(item => {
-      const itemCategory = item.getAttribute('data-category') || '';
-      const itemKeywords = item.getAttribute('data-keywords') || '';
-      const questionText = item.querySelector('.faq-question-btn span')?.textContent.toLowerCase() || '';
-      const answerText = item.querySelector('.faq-answer')?.textContent.toLowerCase() || '';
-
-      const matchesSearch = !query || questionText.includes(query) || answerText.includes(query) || itemKeywords.includes(query);
-      const matchesCategory = activeCategory === 'all' || itemCategory === activeCategory;
-
-      if (matchesSearch && matchesCategory) {
-        item.style.display = 'block';
-        visibleCount++;
-      } else {
-        item.style.display = 'none';
-      }
-    });
-
-    // Friendly empty state instead of a silent blank list.
-    if (faqEmpty) {
-      faqEmpty.hidden = visibleCount > 0;
-    }
-  }
-
-  faqSearchInput?.addEventListener('input', filterFaqs);
-
-  faqCatBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      faqCatBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      filterFaqs();
-    });
-  });
-
-  // Accordion Toggle
   faqItems.forEach(item => {
     const btn = item.querySelector('.faq-question-btn');
     btn?.addEventListener('click', () => {
@@ -993,28 +1012,39 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // =========================================================================
-  // 13. BRAND PRELOADER DISMISSAL
+  // 13. PRELOADER DISMISSAL (Ninja Design Hub Brand Loader Logo)
   // =========================================================================
-  const loader = document.getElementById('loader');
-  if (loader) {
-    const hideLoader = () => {
-      loader.classList.add('hidden');
-      document.body.style.overflow = '';
-      // Kick off the hero entrance choreography right as the curtain lifts.
-      requestAnimationFrame(() => document.body.classList.add('page-ready'));
+  const preloader = document.getElementById('preloader') || document.getElementById('loader') || document.querySelector('.loader');
+  if (preloader) {
+    const minDisplayTime = REDUCED_MOTION ? 0 : 800;
+    const startTime = performance.now();
+    let isDismissed = false;
+
+    const dismissPreloader = () => {
+      if (isDismissed) return;
+      isDismissed = true;
+      preloader.classList.add('preloader-hidden');
+      preloader.classList.add('hidden');
+      document.body.classList.add('page-ready');
+      setTimeout(() => {
+        if (preloader.parentNode) {
+          preloader.remove();
+        }
+      }, 650);
     };
 
-    const loadDelay = REDUCED_MOTION ? 0 : 200;
-    const safetyDelay = REDUCED_MOTION ? 0 : 800;
+    const triggerDismissal = () => {
+      const elapsed = performance.now() - startTime;
+      const remaining = Math.max(0, minDisplayTime - elapsed);
+      setTimeout(dismissPreloader, remaining);
+    };
 
     if (document.readyState === 'complete') {
-      setTimeout(hideLoader, loadDelay);
+      triggerDismissal();
     } else {
-      window.addEventListener('load', () => {
-        setTimeout(hideLoader, loadDelay);
-      });
-      // Safety fallback
-      setTimeout(hideLoader, safetyDelay);
+      window.addEventListener('load', triggerDismissal);
+      // Safety fallback in case external assets stall
+      setTimeout(dismissPreloader, 2500);
     }
   } else {
     // No preloader markup — still trigger hero entrance.

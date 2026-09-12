@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
   
   <!-- Primary Meta Tags -->
   <title>Ninja Design Hub | Elite Web Development, Brand Systems &amp; Social Growth Agency</title>
@@ -39,7 +39,7 @@
   <!-- If JavaScript is unavailable, skip the preloader & reveal animations -->
   <noscript>
     <style>
-      .loader { display: none !important; }
+      .loader, #preloader { display: none !important; }
       html .orbit-card, html .fx-reveal { opacity: 1 !important; transform: none !important; }
     </style>
   </noscript>
@@ -69,11 +69,19 @@
 </head>
 <body>
 
-  <!-- Brand Preloader -->
-  <div class="loader" id="loader" aria-hidden="true">
+  <!-- Brand Preloader (Ninja Design Hub Loader Logo) -->
+  <div class="loader" id="preloader" aria-hidden="true">
     <div class="loader-inner">
+      <div class="loader-emblem">
+        <picture>
+          <source srcset="assets/logo-sm.webp" type="image/webp" />
+          <img src="assets/logo-sm.png" alt="Ninja Design Hub" width="68" height="68" decoding="async" />
+        </picture>
+        <div class="loader-emblem-glow"></div>
+      </div>
       <div class="loader-logo">
-        <span class="loader-n">N</span><span class="loader-rest">inja Design Hub</span>
+        <span class="loader-word-accent loader-n">Ninja</span>
+        <span class="loader-word-main loader-rest">Design Hub</span>
       </div>
       <div class="loader-bar">
         <div class="loader-fill"></div>
@@ -182,10 +190,6 @@
               <a href="#work" class="btn btn-primary">
                 <span>Explore Our Work</span>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-              </a>
-              <a href="#contact" class="btn btn-secondary">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-                <span>Contact Now</span>
               </a>
             </div>
 
@@ -369,6 +373,10 @@
               <span>Inquire About Web Development</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </button>
+            <a href="web-development.html" class="service-action-btn" style="margin-top: 0.5rem; background: rgba(255, 75, 31, 0.12); border: 1px solid rgba(255, 75, 31, 0.3); color: #fff;">
+              <span>View Web Development Portfolio (3)</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
           </div>
 
           <!-- Pillar 2: Brand & Graphic Design -->
@@ -540,299 +548,180 @@
           <p class="section-desc">Explore verified case studies, interactive web apps, brand transformations, and video campaigns that drove tangible business growth.</p>
         </div>
 
-        <!-- Filter Tabs (Carousel Trailing Style with Arrows & Morph Transition) -->
+        <!-- Category Quick-Links Bar (Carousel Trailing Style with Arrows & Direct Category Redirection) -->
         <div class="portfolio-filter-carousel-wrapper" id="portfolio-filter-wrapper">
           <button class="filter-carousel-arrow arrow-left" id="filter-scroll-left" aria-label="Scroll filters left" disabled>
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
           </button>
-          <div class="portfolio-filter-tabs" id="portfolio-tabs" role="tablist" aria-label="Portfolio Categories">
-            <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All Projects <span class="count-badge">8</span></button>
-            <button class="filter-btn" data-filter="web" role="tab" aria-selected="false">Web Dev <span class="count-badge">3</span></button>
-            <button class="filter-btn" data-filter="brand" role="tab" aria-selected="false">Brand Design <span class="count-badge">2</span></button>
-            <button class="filter-btn" data-filter="video" role="tab" aria-selected="false">Video &amp; Motion <span class="count-badge">2</span></button>
-            <button class="filter-btn" data-filter="growth" role="tab" aria-selected="false">Social Growth <span class="count-badge">1</span></button>
+          <div class="portfolio-filter-tabs" id="portfolio-tabs" role="tablist" aria-label="Portfolio Disciplines">
+            <a href="#work" class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All Disciplines <span class="count-badge">4</span></a>
+            <a href="web-development.html" class="filter-btn" role="tab" aria-selected="false">Web Dev <span class="count-badge">3</span> <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:4px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+            <a href="brand-design.html" class="filter-btn" role="tab" aria-selected="false">Brand Design <span class="count-badge">2</span> <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:4px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+            <a href="video-motion.html" class="filter-btn" role="tab" aria-selected="false">Video &amp; Motion <span class="count-badge">2</span> <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:4px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+            <a href="social-growth.html" class="filter-btn" role="tab" aria-selected="false">Social Growth <span class="count-badge">1</span> <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:4px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
           </div>
           <button class="filter-carousel-arrow arrow-right" id="filter-scroll-right" aria-label="Scroll filters right">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
           </button>
         </div>
 
-        <!-- Portfolio Cards Grid -->
-        <div class="portfolio-grid" id="portfolio-grid">
-          <!-- Project 1: The secretflorist (Bouquet & Floral Experience) -->
-          <div class="portfolio-card fx-reveal" data-category="web" data-external-url="https://thesecretflorist.in">
-            <a href="https://thesecretflorist.in" target="_blank" rel="noopener noreferrer" class="portfolio-card-media" aria-label="Visit The secretflorist live website">
-              <picture>
-                <source srcset="assets/project-florist.webp" type="image/webp" />
-                <img src="assets/project-florist.jpg" alt="The secretflorist" width="800" height="450" loading="lazy" decoding="async" />
-              </picture>
-              <span class="card-category-badge">Bouquet &amp; Floral Experience</span>
-            </a>
-            <div class="portfolio-card-body">
-              <div>
-                <h3 class="portfolio-card-title">
-                  <a href="https://thesecretflorist.in" target="_blank" rel="noopener noreferrer" class="portfolio-title-link">The secretflorist</a>
-                </h3>
-                <p class="portfolio-card-desc">Bespoke luxury bouquet studio website featuring interactive custom floral arrangement curation, visual showcases, and seamless online ordering.</p>
-              </div>
-              <div class="portfolio-card-footer">
-                <button class="btn btn-outline btn-sm open-case-study" data-case="secret-florist">
-                  <span>View Case Study</span>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
-                <div class="portfolio-links">
-                  <a href="https://thesecretflorist.in" target="_blank" rel="noopener noreferrer" class="icon-link-btn" title="Visit Live Site" aria-label="Visit The secretflorist live website"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Web Dev 2: SaaS Analytics -->
-          <div class="portfolio-card fx-reveal" data-category="web">
-            <div class="portfolio-card-media">
+        <!-- Category Hub Grid (Clean, Lightweight & Mobile-Friendly) -->
+        <div class="category-hub-grid" id="portfolio-grid">
+          
+          <!-- Hub Card 1: Web Development -->
+          <a href="web-development.html" class="category-hub-card fx-reveal" aria-label="Explore Web Development & SaaS portfolio (3 projects)">
+            <div class="category-hub-media">
               <picture>
                 <source srcset="assets/project-dashboard.webp" type="image/webp" />
-                <img src="assets/project-dashboard.png" alt="SaaS Metrics Dashboard" width="1600" height="1100" loading="lazy" decoding="async" />
+                <img src="assets/project-dashboard.png" alt="Web Development & SaaS Platforms" width="800" height="450" loading="lazy" decoding="async" />
               </picture>
-              <span class="card-category-badge">Web Application</span>
+              <div class="category-hub-overlay">
+                <span class="category-hub-meta-badge">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                  <span>3 Live Projects</span>
+                </span>
+              </div>
             </div>
-            <div class="portfolio-card-body">
+            <div class="category-hub-body">
               <div>
-                <h3 class="portfolio-card-title">OmniMetrics Analytics Platform</h3>
-                <p class="portfolio-card-desc">Real-time enterprise analytics suite with sub-second querying and automated churn prediction models.</p>
-                <div class="preview-tech-chips" style="margin-bottom: 1rem;">
-                  <span class="tech-chip">React</span>
-                  <span class="tech-chip">TypeScript</span>
-                  <span class="tech-chip">Tailwind</span>
-                  <span class="tech-chip">Chart.js</span>
+                <div class="category-hub-title-row">
+                  <h3 class="category-hub-title">Web Development &amp; SaaS</h3>
+                  <div class="category-hub-icon-pill">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                  </div>
+                </div>
+                <p class="category-hub-desc">
+                  Ultra-fast React &amp; Next.js platforms, bespoke floral e-commerce (The secretflorist), luxury storefronts (Aura Commerce), and enterprise SaaS analytics (OmniMetrics).
+                </p>
+                <div class="category-hub-chips">
+                  <span class="tech-chip">The secretflorist</span>
+                  <span class="tech-chip">OmniMetrics SaaS</span>
+                  <span class="tech-chip">Aura Commerce</span>
+                  <span class="tech-chip">Next.js / React</span>
                 </div>
               </div>
-              <div class="portfolio-card-footer">
-                <button class="btn btn-outline btn-sm open-case-study" data-case="omni-metrics">
-                  <span>View Case Study</span>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
-                <div class="portfolio-links">
-                  <a href="#contact" class="icon-link-btn" title="Live Demo" aria-label="Demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="icon-link-btn" title="Source Code" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
-                </div>
+              <div class="category-hub-action">
+                <span>Explore Web Development (3 Projects)</span>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
               </div>
             </div>
-          </div>
+          </a>
 
-          <!-- Web Dev 3: Luxury E-Commerce -->
-          <div class="portfolio-card fx-reveal" data-category="web">
-            <div class="portfolio-card-media">
-              <picture>
-                <source srcset="assets/project-commerce.webp" type="image/webp" />
-                <img src="assets/project-commerce.png" alt="Aura Luxury E-Commerce" width="1200" height="1400" loading="lazy" decoding="async" />
-              </picture>
-              <span class="card-category-badge">E-Commerce</span>
-            </div>
-            <div class="portfolio-card-body">
-              <div>
-                <h3 class="portfolio-card-title">Aura Modern Commerce</h3>
-                <p class="portfolio-card-desc">Headless e-commerce storefront with instant instant search, 3D product previews, and 1-click checkout.</p>
-                <div class="preview-tech-chips" style="margin-bottom: 1rem;">
-                  <span class="tech-chip">Next.js</span>
-                  <span class="tech-chip">Shopify Storefront</span>
-                  <span class="tech-chip">Stripe</span>
-                </div>
-              </div>
-              <div class="portfolio-card-footer">
-                <button class="btn btn-outline btn-sm open-case-study" data-case="aura-commerce">
-                  <span>View Case Study</span>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
-                <div class="portfolio-links">
-                  <a href="#contact" class="icon-link-btn" title="Live Store" aria-label="Store"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Brand Project 1 -->
-          <div class="portfolio-card fx-reveal" data-category="brand">
-            <div class="portfolio-card-media">
+          <!-- Hub Card 2: Brand & Graphic Design -->
+          <a href="brand-design.html" class="category-hub-card fx-reveal" aria-label="Explore Brand & Identity Design portfolio (2 systems)">
+            <div class="category-hub-media">
               <picture>
                 <source srcset="assets/project-brand.webp" type="image/webp" />
-                <img src="assets/project-brand.png" alt="Aether AI Brand Identity" width="1200" height="1200" loading="lazy" decoding="async" />
+                <img src="assets/project-brand.png" alt="Brand & Identity Systems" width="800" height="450" loading="lazy" decoding="async" />
               </picture>
-              <span class="card-category-badge">Brand Identity System</span>
+              <div class="category-hub-overlay">
+                <span class="category-hub-meta-badge">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                  <span>2 Design Systems</span>
+                </span>
+              </div>
             </div>
-            <div class="portfolio-card-body">
+            <div class="category-hub-body">
               <div>
-                <h3 class="portfolio-card-title">Aether AI Identity &amp; Guidelines</h3>
-                <p class="portfolio-card-desc">Complete visual design system, custom typography rules, 40+ vector iconography assets, and pitch deck templates.</p>
-                <div class="palette-preview">
-                  <div class="palette-swatch" style="background: #080808;" title="#080808"></div>
-                  <div class="palette-swatch" style="background: #FF4B1F;" title="#FF4B1F"></div>
-                  <div class="palette-swatch" style="background: #FF9068;" title="#FF9068"></div>
-                  <div class="palette-swatch" style="background: #F4F4F6;" title="#F4F4F6"></div>
+                <div class="category-hub-title-row">
+                  <h3 class="category-hub-title">Brand &amp; Identity Design</h3>
+                  <div class="category-hub-icon-pill">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                  </div>
+                </div>
+                <p class="category-hub-desc">
+                  Iconic identity systems, custom design tokens, Figma UI component kits, and investor pitch decks for innovative startups (Aether AI, Zenith Neo-Banking).
+                </p>
+                <div class="category-hub-chips">
+                  <span class="tech-chip">Aether AI Guidelines</span>
+                  <span class="tech-chip">Zenith UI Kit</span>
+                  <span class="tech-chip">Design Tokens</span>
+                  <span class="tech-chip">Figma</span>
                 </div>
               </div>
-              <div class="portfolio-card-footer">
-                <button class="btn btn-outline btn-sm open-case-study" data-case="aether-brand">
-                  <span>View Brand Guide</span>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
-                <span class="tech-chip">18 Deliverables</span>
+              <div class="category-hub-action">
+                <span>Explore Brand Design (2 Systems)</span>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
               </div>
             </div>
-          </div>
+          </a>
 
-          <!-- Brand Project 2: Mobile App Branding -->
-          <div class="portfolio-card fx-reveal" data-category="brand">
-            <div class="portfolio-card-media">
-              <picture>
-                <source srcset="assets/project-mobile.webp" type="image/webp" />
-                <img src="assets/project-mobile.png" alt="Zenith Fintech Mobile App" width="1200" height="1700" loading="lazy" decoding="async" />
-              </picture>
-              <span class="card-category-badge">UI/UX &amp; App Design</span>
-            </div>
-            <div class="portfolio-card-body">
-              <div>
-                <h3 class="portfolio-card-title">Zenith Neo-Banking App UI</h3>
-                <p class="portfolio-card-desc">Next-generation mobile banking experience with biometric verification, instant peer payments, and investment tracking.</p>
-                <div class="palette-preview">
-                  <div class="palette-swatch" style="background: #0B0E14;" title="#0B0E14"></div>
-                  <div class="palette-swatch" style="background: #3B82F6;" title="#3B82F6"></div>
-                  <div class="palette-swatch" style="background: #10B981;" title="#10B981"></div>
-                  <div class="palette-swatch" style="background: #FFFFFF;" title="#FFFFFF"></div>
-                </div>
-              </div>
-              <div class="portfolio-card-footer">
-                <button class="btn btn-outline btn-sm open-case-study" data-case="zenith-app">
-                  <span>View Case Study</span>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
-                <span class="tech-chip">Figma UI Kit</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Video Project 1: Short-Form Viral Reel -->
-          <div class="portfolio-card fx-reveal" data-category="video">
-            <div class="portfolio-card-media">
+          <!-- Hub Card 3: High-Retention Video & Motion -->
+          <a href="video-motion.html" class="category-hub-card fx-reveal" aria-label="Explore High-Retention Video & Motion portfolio (2 films)">
+            <div class="category-hub-media">
               <picture>
                 <source srcset="assets/NDH.webp" type="image/webp" />
-                <img src="assets/NDH.jpeg" alt="Viral Hook Reel Video" width="1200" height="1200" loading="lazy" decoding="async" />
+                <img src="assets/NDH.jpeg" alt="Video & Motion Graphics" width="800" height="450" loading="lazy" decoding="async" />
               </picture>
-              <div class="video-play-overlay open-video-modal" data-video-title="Viral Tech Launch Reel (4.8M Views)" data-video-url="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" data-views="4.8M Views" data-duration="0:45">
-                <div class="play-circle">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                </div>
+              <div class="category-hub-overlay">
+                <span class="category-hub-meta-badge">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+                  <span>6.0M+ Organic Views</span>
+                </span>
               </div>
-              <span class="card-category-badge">Short-Form / Reels</span>
-              <span class="duration-chip">0:45 • 4.8M Views</span>
             </div>
-            <div class="portfolio-card-body">
+            <div class="category-hub-body">
               <div>
-                <h3 class="portfolio-card-title">SaaS Product Launch Reel</h3>
-                <p class="portfolio-card-desc">High-tempo kinetic typography and sound-designed short-form campaign that drove 18,000+ app downloads in 7 days.</p>
-                <div class="preview-tech-chips" style="margin-bottom: 1rem;">
-                  <span class="tech-chip">Premiere Pro</span>
+                <div class="category-hub-title-row">
+                  <h3 class="category-hub-title">Video &amp; Motion Graphics</h3>
+                  <div class="category-hub-icon-pill">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                  </div>
+                </div>
+                <p class="category-hub-desc">
+                  Viral short-form hook reels and cinematic commercial films engineered for peak retention, high watch duration, and +240% average conversion lift.
+                </p>
+                <div class="category-hub-chips">
+                  <span class="tech-chip">SaaS Launch Reel</span>
+                  <span class="tech-chip">Commercial Anthem</span>
                   <span class="tech-chip">After Effects</span>
                   <span class="tech-chip">Sound Design</span>
                 </div>
               </div>
-              <div class="portfolio-card-footer">
-                <button class="btn btn-primary btn-sm open-video-modal" data-video-title="Viral Tech Launch Reel (4.8M Views)" data-video-url="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" data-views="4.8M Views" data-duration="0:45">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                  <span>Play Video</span>
-                </button>
-                <span class="mono" style="font-size: 0.8rem; color: #34d399; font-weight:700;">+240% Conv</span>
+              <div class="category-hub-action">
+                <span>Explore Video &amp; Motion (2 Films)</span>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
               </div>
             </div>
-          </div>
+          </a>
 
-          <!-- Video Project 2: Commercial Brand Film -->
-          <div class="portfolio-card fx-reveal" data-category="video">
-            <div class="portfolio-card-media">
+          <!-- Hub Card 4: Viral Social Growth -->
+          <a href="social-growth.html" class="category-hub-card fx-reveal" aria-label="Explore Viral Social Growth case study">
+            <div class="category-hub-media" style="background: #121018;">
               <picture>
-                <source srcset="assets/project-brand.webp" type="image/webp" />
-                <img src="assets/project-brand.png" alt="Commercial Brand Film" width="1200" height="1200" loading="lazy" decoding="async" />
+                <source srcset="assets/NDH.webp" type="image/webp" />
+                <img src="assets/NDH.jpeg" alt="Viral Social Media Growth" width="800" height="450" loading="lazy" decoding="async" />
               </picture>
-              <div class="video-play-overlay open-video-modal" data-video-title="NextGen AI Brand Anthem Commercial" data-video-url="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" data-views="1.2M Views" data-duration="1:30">
-                <div class="play-circle">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                </div>
+              <div class="category-hub-overlay">
+                <span class="category-hub-meta-badge" style="border-color: rgba(52, 211, 153, 0.4); color: #34d399;">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                  <span>+840% Audience Growth</span>
+                </span>
               </div>
-              <span class="card-category-badge">Commercial Film</span>
-              <span class="duration-chip">1:30 • 1.2M Views</span>
             </div>
-            <div class="portfolio-card-body">
+            <div class="category-hub-body">
               <div>
-                <h3 class="portfolio-card-title">NextGen AI Brand Anthem</h3>
-                <p class="portfolio-card-desc">Cinematic commercial film featuring 3D product renders, custom voiceover narration, and original orchestral score.</p>
-                <div class="preview-tech-chips" style="margin-bottom: 1rem;">
-                  <span class="tech-chip">Cinema 4D</span>
-                  <span class="tech-chip">DaVinci Color</span>
-                  <span class="tech-chip">Soundtrack</span>
-                </div>
-              </div>
-              <div class="portfolio-card-footer">
-                <button class="btn btn-primary btn-sm open-video-modal" data-video-title="NextGen AI Brand Anthem Commercial" data-video-url="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" data-views="1.2M Views" data-duration="1:30">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                  <span>Play Video</span>
-                </button>
-                <span class="mono" style="font-size: 0.8rem; color: #34d399; font-weight:700;">Award Winner</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Social Growth Case Study -->
-          <div class="portfolio-card social-case-card fx-reveal" data-category="growth">
-            <div>
-              <div class="service-card-top" style="margin-bottom: 0.5rem;">
-                <span class="card-category-badge" style="position:static;">Social Growth Scale</span>
-                <span class="mono" style="color: #34d399; font-weight: 700; font-size: 0.85rem;">+840% Growth</span>
-              </div>
-              <h3 class="portfolio-card-title">Creator brand scale from 12k to 145k</h3>
-              <p class="portfolio-card-desc">Scaled a B2B tech founder's personal brand across X and LinkedIn using high-signal carousel templates and algorithmic hook testing.</p>
-              
-              <!-- Before vs After Metrics Comparison -->
-              <div class="metrics-comparison">
-                <div>
-                  <div class="metric-col-title metric-before-title">Before (Day 0)</div>
-                  <div class="metric-stat-item">
-                    <div class="metric-stat-label">Followers</div>
-                    <div class="metric-stat-val">12,400</div>
-                  </div>
-                  <div class="metric-stat-item">
-                    <div class="metric-stat-label">Monthly Views</div>
-                    <div class="metric-stat-val">85,000</div>
-                  </div>
-                  <div class="metric-stat-item">
-                    <div class="metric-stat-label">Engage Rate</div>
-                    <div class="metric-stat-val">1.2%</div>
+                <div class="category-hub-title-row">
+                  <h3 class="category-hub-title">Viral Social Growth</h3>
+                  <div class="category-hub-icon-pill">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
                   </div>
                 </div>
-                <div>
-                  <div class="metric-col-title metric-after-title">After (90 Days)</div>
-                  <div class="metric-stat-item">
-                    <div class="metric-stat-label">Followers</div>
-                    <div class="metric-stat-val after">145,800</div>
-                  </div>
-                  <div class="metric-stat-item">
-                    <div class="metric-stat-label">Monthly Views</div>
-                    <div class="metric-stat-val after">4,200,000</div>
-                  </div>
-                  <div class="metric-stat-item">
-                    <div class="metric-stat-label">Engage Rate</div>
-                    <div class="metric-stat-val after">5.8%</div>
-                  </div>
+                <p class="category-hub-desc">
+                  Data-backed audience acquisition scaling founder personal brands from 12k to 145k followers with high-signal carousel templates and algorithmic hook testing.
+                </p>
+                <div class="category-hub-chips">
+                  <span class="tech-chip">12k → 145k Followers</span>
+                  <span class="tech-chip">4.2M Monthly Views</span>
+                  <span class="tech-chip">5.8% Inbound Rate</span>
                 </div>
               </div>
+              <div class="category-hub-action">
+                <span>Explore Social Growth (Case Study)</span>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </div>
             </div>
-
-            <div class="portfolio-card-footer">
-              <button class="btn btn-primary btn-sm select-service-inquiry" data-service="social-growth" style="width: 100%;">
-                <span>Get Similar Growth Results</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-              </button>
-            </div>
-          </div>
+          </a>
         </div>
       </div>
     </section>
@@ -1029,23 +918,7 @@
             <span>Everything Answered</span>
           </div>
           <h2 class="section-title">Frequently Asked Questions</h2>
-          <p class="section-desc">Search or filter through common questions regarding our process, terms, and technical execution.</p>
-        </div>
-
-        <!-- Search Bar -->
-        <div class="faq-search-wrapper">
-          <svg class="faq-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          <input type="text" id="faq-search-input" class="faq-search-input" placeholder="Search questions (e.g., turnaround, tech stack, revisions)..." />
-        </div>
-
-        <!-- Category Filter Pills -->
-        <div class="faq-categories" id="faq-categories">
-          <button class="faq-cat-btn active" data-cat="all">All Questions</button>
-          <button class="faq-cat-btn" data-cat="turnaround">Turnaround</button>
-          <button class="faq-cat-btn" data-cat="revisions">Revisions</button>
-          <button class="faq-cat-btn" data-cat="tech">Tech Stack</button>
-          <button class="faq-cat-btn" data-cat="payment">Payment Terms</button>
-          <button class="faq-cat-btn" data-cat="communication">Communication</button>
+          <p class="section-desc">Clear answers to common questions regarding our process, terms, and technical execution.</p>
         </div>
 
         <!-- FAQ Items -->
@@ -1105,11 +978,6 @@
             </div>
           </div>
         </div>
-
-        <!-- Shown by script.js when search/category filtering returns no matches -->
-        <p class="faq-empty" id="faq-empty" hidden>
-          No questions match your search or filter. Try a different keyword.
-        </p>
       </div>
     </section>
 
@@ -1270,7 +1138,7 @@
             <li><a href="#proof" class="footer-link">Verified Results</a></li>
             <li><a href="#process" class="footer-link">How We Work</a></li>
             <li><a href="#faq" class="footer-link">FAQ</a></li>
-            <li><a href="#contact" class="footer-link">Contact</a></li>
+           
           </ul>
         </div>
 
@@ -1354,6 +1222,13 @@
     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
     <span id="toast-message">Notification</span>
   </div>
+
+  <!-- Floating Scroll to Top Button (Append exact implementation) -->
+  <a href="#" id="scroll-top" class="scroll-top" aria-label="Scroll to top">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </a>
 
   <!-- JavaScript -->
   <script src="script.js" defer></script>

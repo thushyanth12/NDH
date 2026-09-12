@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta name="description" content="Explore Ninja Design Hub's viral social media growth case studies, scaling founder personal brands from 12k to 145k followers." />
+  <meta name="keywords" content="social media growth, content strategy, viral hooks, b2b founder branding, linkedin growth, x growth" />
+  <meta name="author" content="Ninja Design Hub" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://ninjadesignhub.netlify.app/social-growth.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ninjadesignhub.netlify.app/social-growth.html" />
+  <meta property="og:title" content="Social Growth Portfolio | Ninja Design Hub" />
+  <meta property="og:description" content="Data-backed organic growth systems across X, LinkedIn, and YouTube." />
+  <meta property="og:image" content="assets/NDH.jpeg" />
+
+  <title>Organic Social Growth Portfolio | Ninja Design Hub</title>
+
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <meta name="theme-color" content="#07070a" />
+</head>
+<body class="page-ready">
+
+  <!-- Brand Preloader (Ninja Design Hub Loader Logo) -->
+  <div class="loader" id="preloader" aria-hidden="true">
+    <div class="loader-inner">
+      <div class="loader-emblem">
+        <picture>
+          <source srcset="assets/logo-sm.webp" type="image/webp" />
+          <img src="assets/logo-sm.png" alt="Ninja Design Hub" width="68" height="68" decoding="async" />
+        </picture>
+        <div class="loader-emblem-glow"></div>
+      </div>
+      <div class="loader-logo">
+        <span class="loader-word-accent loader-n">Ninja</span>
+        <span class="loader-word-main loader-rest">Design Hub</span>
+      </div>
+      <div class="loader-bar">
+        <div class="loader-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Progress Indicator -->
+  <div id="scroll-progress-wrap" aria-hidden="true">
+    <div id="scroll-progress"></div>
+  </div>
+
+  <a href="#main-content" class="sr-only">Skip to main content</a>
+
+  <!-- Floating Header -->
+  <header class="site-header" id="site-header">
+    <div class="navbar-inner">
+      <a href="index.html" class="brand-logo" aria-label="Ninja Design Hub Home">
+        <picture>
+          <source srcset="assets/logo-sm.webp" type="image/webp" />
+          <img src="assets/logo-sm.png" alt="Ninja Design Hub" width="32" height="32" decoding="async" onerror="this.style.display='none';" />
+        </picture>
+        <div class="brand-logo-fallback" style="display:none;">N</div>
+        <span>Ninja Design Hub</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="index.html#home" class="nav-link">Home</a>
+        <a href="index.html#services" class="nav-link">Services</a>
+        <a href="index.html#work" class="nav-link active">Work</a>
+        <a href="index.html#proof" class="nav-link">Results</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="index.html#contact" class="btn btn-primary btn-sm">
+          <span>Contact Now</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        <button class="menu-toggle-btn" id="menu-toggle-btn" aria-label="Toggle Navigation Menu">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer-backdrop" id="mobile-backdrop"></div>
+  <div class="mobile-drawer" id="mobile-drawer" aria-label="Mobile Menu">
+    <div>
+      <div class="mobile-drawer-header">
+        <div class="brand-logo">
+          <picture>
+            <source srcset="assets/logo-sm.webp" type="image/webp" />
+            <img src="assets/logo-sm.png" alt="Ninja Design Hub" width="32" height="32" decoding="async" onerror="this.style.display='none';" />
+          </picture>
+          <span>Ninja Design Hub</span>
+        </div>
+        <button class="modal-close-btn" id="mobile-close-btn" aria-label="Close menu">✕</button>
+      </div>
+      <div class="mobile-nav-links">
+        <a href="index.html#home" class="mobile-nav-link"><span>01. Home</span> <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+        <a href="index.html#services" class="mobile-nav-link"><span>02. Services</span> <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+        <a href="index.html#work" class="mobile-nav-link active"><span>03. Portfolio Work</span> <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+        <a href="index.html#proof" class="mobile-nav-link"><span>04. Proven Results</span> <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+        <a href="index.html#process" class="mobile-nav-link"><span>05. How We Work</span> <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+        <a href="index.html#faq" class="mobile-nav-link"><span>06. FAQ</span> <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+        <a href="index.html#contact" class="mobile-nav-link"><span>07. Contact Us</span> <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+      </div>
+    </div>
+  </div>
+
+  <main id="main-content">
+    <section class="subpage-hero">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="subpage-topbar">
+          <nav class="breadcrumb-nav" aria-label="Breadcrumbs">
+            <a href="index.html">Home</a>
+            <span class="separator">/</span>
+            <a href="index.html#work">Portfolio</a>
+            <span class="separator">/</span>
+            <span class="current">Social Growth</span>
+          </nav>
+
+          <a href="index.html#work" class="btn-back" aria-label="Return to portfolio categories on home page">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span>Back to All Categories</span>
+          </a>
+        </div>
+
+        <div class="section-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+          <span>Pillar 04 • Viral Social Growth</span>
+        </div>
+
+        <h1 class="subpage-hero-title">
+          Data-Backed <span class="text-gradient-hero">Social Growth</span> &amp; Audience Monopolies.
+        </h1>
+
+        <p class="subpage-hero-desc">
+          We turn founders and executive brands into industry-defining thought leaders using algorithmic copywriting, high-signal carousel design, and data-backed posting cadence.
+        </p>
+
+        <div class="subpage-metrics-strip">
+          <div class="subpage-metric-badge">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>+840% Audience Scale</span>
+          </div>
+          <div class="subpage-metric-badge">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            <span>4.2M Monthly Impressions</span>
+          </div>
+          <div class="subpage-metric-badge">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+            <span>5.8% Inbound Engagement</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Study Cards Grid -->
+    <section style="padding: 1rem 0 4rem 0;">
+      <div class="container" style="max-width: 900px;">
+        
+        <!-- Social Growth Case Study Card -->
+        <div class="portfolio-card social-case-card fx-reveal" data-category="growth">
+          <div>
+            <div class="service-card-top" style="margin-bottom: 0.75rem;">
+              <span class="card-category-badge" style="position:static;">B2B Founder Social Scale</span>
+              <span class="mono" style="color: #34d399; font-weight: 700; font-size: 0.85rem;">+840% Follower Growth</span>
+            </div>
+            <h2 class="portfolio-card-title" style="font-size: 1.6rem; margin-bottom: 0.75rem;">Creator brand scale from 12k to 145k</h2>
+            <p class="portfolio-card-desc" style="font-size: 1rem;">Scaled a B2B tech founder's personal brand across X and LinkedIn in 90 days using high-signal carousel templates, hook-testing sprints, and conversion-optimized DM funnels.</p>
+            
+            <!-- Before vs After Metrics Comparison -->
+            <div class="metrics-comparison">
+              <div>
+                <div class="metric-col-title metric-before-title">Before (Day 0)</div>
+                <div class="metric-stat-item">
+                  <div class="metric-stat-label">Followers</div>
+                  <div class="metric-stat-val">12,400</div>
+                </div>
+                <div class="metric-stat-item">
+                  <div class="metric-stat-label">Monthly Views</div>
+                  <div class="metric-stat-val">85,000</div>
+                </div>
+                <div class="metric-stat-item">
+                  <div class="metric-stat-label">Engage Rate</div>
+                  <div class="metric-stat-val">1.2%</div>
+                </div>
+              </div>
+              <div>
+                <div class="metric-col-title metric-after-title">After (90 Days)</div>
+                <div class="metric-stat-item">
+                  <div class="metric-stat-label">Followers</div>
+                  <div class="metric-stat-val after">145,800</div>
+                </div>
+                <div class="metric-stat-item">
+                  <div class="metric-stat-label">Monthly Views</div>
+                  <div class="metric-stat-val after">4,200,000</div>
+                </div>
+                <div class="metric-stat-item">
+                  <div class="metric-stat-label">Engage Rate</div>
+                  <div class="metric-stat-val after">5.8%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="portfolio-card-footer" style="padding-top: 1.5rem;">
+            <a href="index.html#contact" class="btn btn-primary" style="width: 100%; justify-content: center;">
+              <span>Get Similar Social Growth Results</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Conversion CTA Banner -->
+        <div class="subpage-cta-card">
+          <div class="section-tag" style="margin-bottom: 0.75rem;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+            <span>Monopolize Your Niche</span>
+          </div>
+          <h3>Ready to Build a High-Signal Inbound Pipeline?</h3>
+          <p>We write, design, and manage organic content that establishes market leadership and converts followers into high-ticket pipeline clients.</p>
+          <div class="subpage-cta-actions">
+            <a href="index.html#contact" class="btn btn-primary">
+              <span>Start Growth Sprints</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <a href="web-development.html" class="btn btn-secondary">
+              <span>View Web Development</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand-col">
+          <a href="index.html" class="brand-logo">
+            <picture>
+              <source srcset="assets/logo-sm.webp" type="image/webp" />
+              <img src="assets/logo-sm.png" alt="Ninja Design Hub" width="36" height="36" decoding="async" onerror="this.style.display='none';" />
+            </picture>
+            <span>Ninja Design Hub</span>
+          </a>
+          <p class="footer-desc">
+            Multidisciplinary digital agency engineering high-converting web applications, iconic brand systems, and organic viral growth for modern innovators.
+          </p>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Portfolio Categories</h4>
+          <ul class="footer-links-list">
+            <li><a href="web-development.html" class="footer-link">Web Development</a></li>
+            <li><a href="brand-design.html" class="footer-link">Brand Design</a></li>
+            <li><a href="video-motion.html" class="footer-link">Video &amp; Motion</a></li>
+            <li><a href="social-growth.html" class="footer-link" style="color: var(--accent-primary); font-weight: 600;">Social Growth</a></li>
+            <li><a href="index.html#contact" class="footer-link">Start a Project</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Connect</h4>
+          <div class="social-links-row">
+            <a href="https://wa.me/918124125555" target="_blank" rel="noopener noreferrer" class="social-link-btn" title="WhatsApp" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></a>
+            <a href="https://www.linkedin.com/in/thushyanth-a-053632328/" target="_blank" rel="noopener noreferrer" class="social-link-btn" title="LinkedIn" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+            <a href="https://www.instagram.com/ninjadesignhub/" target="_blank" rel="noopener noreferrer" class="social-link-btn" title="Instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© <span id="current-year">2026</span> Ninja Design Hub. All rights reserved.</div>
+        <button class="back-to-top-btn" id="back-to-top-btn" type="button"><span>Back to top</span></button>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" id="scroll-top" class="scroll-top" aria-label="Scroll to top">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </a>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

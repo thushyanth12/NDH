@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta name="description" content="Explore Ninja Design Hub's high-retention video editing and motion graphics portfolio, featuring viral reels and brand commercials." />
+  <meta name="keywords" content="video editing, motion graphics, viral reels, shorts, premiere pro, after effects" />
+  <meta name="author" content="Ninja Design Hub" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://ninjadesignhub.netlify.app/video-motion.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ninjadesignhub.netlify.app/video-motion.html" />
+  <meta property="og:title" content="Video &amp; Motion Portfolio | Ninja Design Hub" />
+  <meta property="og:description" content="High-retention short-form video editing and commercial motion graphics designed for peak watch-time." />
+  <meta property="og:image" content="assets/NDH.jpeg" />
+
+  <title>High-Retention Video &amp; Motion Portfolio | Ninja Design Hub</title>
+
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <meta name="theme-color" content="#07070a" />
+</head>
+<body class="page-ready">
+
+  <!-- Brand Preloader (Ninja Design Hub Loader Logo) -->
+  <div class="loader" id="preloader" aria-hidden="true">
+    <div class="loader-inner">
+      <div class="loader-emblem">
+        <picture>
+          <source srcset="assets/logo-sm.webp" type="image/webp" />
+          <img src="assets/logo-sm.png" alt="Ninja Design Hub" width="68" height="68" decoding="async" />
+        </picture>
+        <div class="loader-emblem-glow"></div>
+      </div>
+      <div class="loader-logo">
+        <span class="loader-word-accent loader-n">Ninja</span>
+        <span class="loader-word-main loader-rest">Design Hub</span>
+      </div>
+      <div class="loader-bar">
+        <div class="loader-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Progress Indicator -->
+  <div id="scroll-progress-wrap" aria-hidden="true">
+    <div id="scroll-progress"></div>
+  </div>
+
+  <a href="#main-content" class="sr-only">Skip to main content</a>
+
+  <!-- Floating Header -->
+  <header class="site-header" id="site-header">
+    <div class="navbar-inner">
+      <a href="index.html" class="brand-logo" aria-label="Ninja Design Hub Home">
+        <picture>
+          <source srcset="assets/logo-sm.webp" type="image/webp" />
+          <img src="assets/logo-sm.png" alt="Ninja Design Hub" width="32" height="32" decoding="async" onerror="this.style.display='none';" />
+        </picture>
+        <div class="brand-logo-fallback" style="display:none;">N</div>
+        <span>Ninja Design Hub</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="index.html#home" class="nav-link">Home</a>
+        <a href="index.html#services" class="nav-link">Services</a>
+        <a href="index.html#work" class="nav-link active">Work</a>
+        <a href="index.html#proof" class="nav-link">Results</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="index.html#contact" class="btn btn-primary btn-sm">
+          <span>Contact Now</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        <button class="menu-toggle-btn" id="menu-toggle-btn" aria-label="Toggle Navigation Menu">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer-backdrop" id="mobile-backdrop"></div>
+  <div class="mobile-drawer" id="mobile-drawer" aria-label="Mobile Menu">
+    <div>
+      <div class="mobile-drawer-header">
+        <div class="brand-logo">
+          <picture>
+            <source srcset="assets/logo-sm.webp" type="image/webp" />
+            <img src="assets/logo-sm.png" alt="Ninja Design Hub" width="32" height="32" decoding="async" onerror="this.style.display='none';" />
+          </picture>
+          <span>Ninja Design Hub</span>
+        </div>
+        <button class="modal-close-btn" id="mobile-close-btn" aria-label="Close menu">✕</button>
+      </div>
+      <div class="mobile-nav-links">
+        <a href="index.html#home" class="mobile-nav-link"><span>01. Home</span> <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+        <a href="index.html#services" class="mobile-nav-link"><span>02. Services</span> <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+        <a href="index.html#work" class="mobile-nav-link active"><span>03. Portfolio Work</span> <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+        <a href="index.html#proof" class="mobile-nav-link"><span>04. Proven Results</span> <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+        <a href="index.html#process" class="mobile-nav-link"><span>05. How We Work</span> <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+        <a href="index.html#faq" class="mobile-nav-link"><span>06. FAQ</span> <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+        <a href="index.html#contact" class="mobile-nav-link"><span>07. Contact Us</span> <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+      </div>
+    </div>
+  </div>
+
+  <main id="main-content">
+    <section class="subpage-hero">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="subpage-topbar">
+          <nav class="breadcrumb-nav" aria-label="Breadcrumbs">
+            <a href="index.html">Home</a>
+            <span class="separator">/</span>
+            <a href="index.html#work">Portfolio</a>
+            <span class="separator">/</span>
+            <span class="current">Video &amp; Motion</span>
+          </nav>
+
+          <a href="index.html#work" class="btn-back" aria-label="Return to portfolio categories on home page">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span>Back to All Categories</span>
+          </a>
+        </div>
+
+        <div class="section-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+          <span>Pillar 03 • Video &amp; Motion Graphics</span>
+        </div>
+
+        <h1 class="subpage-hero-title">
+          High-Retention <span class="text-gradient-hero">Video Campaigns</span> &amp; Commercial Reels.
+        </h1>
+
+        <p class="subpage-hero-desc">
+          Addictive pacing, motion graphics, surgical sound design, and color grading tailored for maximum average view duration on Shorts, Reels, and high-impact commercial campaigns.
+        </p>
+
+        <div class="subpage-metrics-strip">
+          <div class="subpage-metric-badge">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>6.0M+ Organic Views</span>
+          </div>
+          <div class="subpage-metric-badge">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            <span>+240% Average Conversion Lift</span>
+          </div>
+          <div class="subpage-metric-badge">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+            <span>Sound Design &amp; DaVinci Color</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Cards Grid -->
+    <section style="padding: 1rem 0 4rem 0;">
+      <div class="container">
+        <div class="portfolio-grid" id="portfolio-grid">
+          
+          <!-- Video Project 1: Short-Form Viral Reel -->
+          <div class="portfolio-card fx-reveal" data-category="video">
+            <div class="portfolio-card-media">
+              <picture>
+                <source srcset="assets/NDH.webp" type="image/webp" />
+                <img src="assets/NDH.jpeg" alt="Viral Hook Reel Video" width="1200" height="1200" loading="lazy" decoding="async" />
+              </picture>
+              <div class="video-play-overlay open-video-modal" data-video-title="Viral Tech Launch Reel (4.8M Views)" data-video-url="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" data-views="4.8M Views" data-duration="0:45">
+                <div class="play-circle">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </div>
+              </div>
+              <span class="card-category-badge">Short-Form / Reels</span>
+              <span class="duration-chip">0:45 • 4.8M Views</span>
+            </div>
+            <div class="portfolio-card-body">
+              <div>
+                <h3 class="portfolio-card-title">SaaS Product Launch Reel</h3>
+                <p class="portfolio-card-desc">High-tempo kinetic typography and sound-designed short-form campaign that drove 18,000+ app downloads in 7 days.</p>
+                <div class="preview-tech-chips" style="margin-bottom: 1rem;">
+                  <span class="tech-chip">Premiere Pro</span>
+                  <span class="tech-chip">After Effects</span>
+                  <span class="tech-chip">Sound Design</span>
+                </div>
+              </div>
+              <div class="portfolio-card-footer">
+                <button class="btn btn-primary btn-sm open-video-modal" data-video-title="Viral Tech Launch Reel (4.8M Views)" data-video-url="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" data-views="4.8M Views" data-duration="0:45">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                  <span>Play Video</span>
+                </button>
+                <span class="mono" style="font-size: 0.8rem; color: #34d399; font-weight:700;">+240% Conv</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video Project 2: Commercial Brand Film -->
+          <div class="portfolio-card fx-reveal" data-category="video">
+            <div class="portfolio-card-media">
+              <picture>
+                <source srcset="assets/project-brand.webp" type="image/webp" />
+                <img src="assets/project-brand.png" alt="Commercial Brand Film" width="1200" height="1200" loading="lazy" decoding="async" />
+              </picture>
+              <div class="video-play-overlay open-video-modal" data-video-title="NextGen AI Brand Anthem Commercial" data-video-url="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" data-views="1.2M Views" data-duration="1:30">
+                <div class="play-circle">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </div>
+              </div>
+              <span class="card-category-badge">Commercial Film</span>
+              <span class="duration-chip">1:30 • 1.2M Views</span>
+            </div>
+            <div class="portfolio-card-body">
+              <div>
+                <h3 class="portfolio-card-title">NextGen AI Brand Anthem</h3>
+                <p class="portfolio-card-desc">Cinematic commercial film featuring 3D product renders, custom voiceover narration, and original orchestral score.</p>
+                <div class="preview-tech-chips" style="margin-bottom: 1rem;">
+                  <span class="tech-chip">Cinema 4D</span>
+                  <span class="tech-chip">DaVinci Color</span>
+                  <span class="tech-chip">Soundtrack</span>
+                </div>
+              </div>
+              <div class="portfolio-card-footer">
+                <button class="btn btn-primary btn-sm open-video-modal" data-video-title="NextGen AI Brand Anthem Commercial" data-video-url="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" data-views="1.2M Views" data-duration="1:30">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                  <span>Play Video</span>
+                </button>
+                <span class="mono" style="font-size: 0.8rem; color: #34d399; font-weight:700;">Award Winner</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Conversion CTA Banner -->
+        <div class="subpage-cta-card">
+          <div class="section-tag" style="margin-bottom: 0.75rem;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            <span>Scale Your Watch Time</span>
+          </div>
+          <h3>Ready to Turn Viewers Into Paying Customers?</h3>
+          <p>We edit short-form and long-form video content that retains viewer attention through calculated pacing and sound effects.</p>
+          <div class="subpage-cta-actions">
+            <a href="index.html#contact" class="btn btn-primary">
+              <span>Start Video Project</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <a href="web-development.html" class="btn btn-secondary">
+              <span>View Web Development</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand-col">
+          <a href="index.html" class="brand-logo">
+            <picture>
+              <source srcset="assets/logo-sm.webp" type="image/webp" />
+              <img src="assets/logo-sm.png" alt="Ninja Design Hub" width="36" height="36" decoding="async" onerror="this.style.display='none';" />
+            </picture>
+            <span>Ninja Design Hub</span>
+          </a>
+          <p class="footer-desc">
+            Multidisciplinary digital agency engineering high-converting web applications, iconic brand systems, and organic viral growth for modern innovators.
+          </p>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Portfolio Categories</h4>
+          <ul class="footer-links-list">
+            <li><a href="web-development.html" class="footer-link">Web Development</a></li>
+            <li><a href="brand-design.html" class="footer-link">Brand Design</a></li>
+            <li><a href="video-motion.html" class="footer-link" style="color: var(--accent-primary); font-weight: 600;">Video &amp; Motion</a></li>
+            <li><a href="social-growth.html" class="footer-link">Social Growth</a></li>
+            <li><a href="index.html#contact" class="footer-link">Start a Project</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Connect</h4>
+          <div class="social-links-row">
+            <a href="https://wa.me/918124125555" target="_blank" rel="noopener noreferrer" class="social-link-btn" title="WhatsApp" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></a>
+            <a href="https://www.linkedin.com/in/thushyanth-a-053632328/" target="_blank" rel="noopener noreferrer" class="social-link-btn" title="LinkedIn" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+            <a href="https://www.instagram.com/ninjadesignhub/" target="_blank" rel="noopener noreferrer" class="social-link-btn" title="Instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© <span id="current-year">2026</span> Ninja Design Hub. All rights reserved.</div>
+        <button class="back-to-top-btn" id="back-to-top-btn" type="button"><span>Back to top</span></button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Video Showcase Lightbox Modal -->
+  <div class="modal-backdrop" id="video-lightbox-modal" aria-hidden="true" role="dialog">
+    <div class="modal-card" style="max-width: 850px; background: #000; padding: 0;">
+      <div class="modal-header" style="background: rgba(15,15,20,0.9);">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span class="card-category-badge" id="lightbox-video-badge">Video Showcase</span>
+          <span id="lightbox-video-title" style="font-weight: 700; color: #fff; font-size: 0.95rem;"></span>
+        </div>
+        <button class="modal-close-btn close-modal-btn" aria-label="Close video">✕</button>
+      </div>
+      <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;">
+        <iframe id="video-iframe" src="" style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div style="padding: 1.25rem 1.75rem; display: flex; align-items: center; justify-content: space-between; background: #0c0c10;">
+        <div style="font-size: 0.85rem; color: var(--text-secondary);" id="lightbox-video-meta">4.8M Organic Views • High Retention Edit</div>
+        <a href="index.html#contact" class="btn btn-primary btn-sm">
+          <span>Inquire About Video Production</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <a href="#" id="scroll-top" class="scroll-top" aria-label="Scroll to top">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </a>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
