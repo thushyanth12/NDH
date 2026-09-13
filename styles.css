@@ -3791,6 +3791,369 @@ body.page-ready .hero-stats-grid.hero-entrance {
   }
 }
 
+
+/* ==========================================================================
+   FOUNDER SECTION
+   ========================================================================== */
+.founder-section {
+  padding: clamp(3rem, 7vw, 5rem) 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.founder-inner {
+  display: flex;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4rem);
+  flex-wrap: wrap;
+}
+
+.founder-avatar-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.founder-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: var(--grad-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fff;
+  font-family: var(--font-brand);
+  box-shadow: 0 0 0 4px var(--surface), 0 0 0 6px rgba(255, 69, 0, 0.35);
+}
+
+.founder-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.65rem;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: var(--radius-full);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #34d399;
+  white-space: nowrap;
+}
+
+.founder-story {
+  flex: 1;
+  min-width: 280px;
+}
+
+.founder-quote {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  line-height: 1.75;
+  color: var(--text-primary);
+  font-style: italic;
+  border-left: 3px solid var(--accent-primary);
+  padding-left: 1.25rem;
+  margin: 1rem 0 1.25rem;
+}
+
+.founder-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.founder-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.founder-role {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.founder-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.founder-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all var(--transition-normal);
+}
+
+.founder-link-btn:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-secondary);
+  background: rgba(255, 75, 31, 0.06);
+  transform: translateY(-1px);
+}
+
+.founder-link-btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   TESTIMONIALS SECTION
+   ========================================================================== */
+.testimonials-section {
+  padding: clamp(3.5rem, 8vw, 6rem) 0;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .testimonials-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.testimonial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: all var(--transition-normal);
+}
+
+.testimonial-card:hover {
+  border-color: var(--border-medium);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.testimonial-quote-mark {
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--accent-primary);
+  font-family: Georgia, serif;
+  opacity: 0.7;
+}
+
+.testimonial-body {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.testimonial-result-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.75rem;
+  background: rgba(255, 75, 31, 0.1);
+  border: 1px solid rgba(255, 75, 31, 0.25);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-secondary);
+  align-self: flex-start;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.testimonial-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--grad-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.testimonial-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+.testimonial-company {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   HONEST SECTION - What We Are NOT Good At
+   ========================================================================== */
+.honest-section {
+  padding: clamp(3rem, 7vw, 5rem) 0;
+  background: var(--bg-card-subtle);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.honest-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .honest-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.honest-card {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  transition: border-color var(--transition-normal);
+}
+
+.honest-card:hover {
+  border-color: rgba(255, 69, 0, 0.3);
+}
+
+.honest-icon {
+  font-size: 1.5rem;
+  color: var(--accent-primary);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  line-height: 1;
+}
+
+.honest-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.honest-desc {
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   CONTACT - Response Promise & Primary Channel
+   ========================================================================== */
+.direct-channel-primary {
+  border-color: rgba(255, 75, 31, 0.35) !important;
+  background: rgba(255, 75, 31, 0.06) !important;
+}
+
+.response-promise {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.875rem 1rem;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.response-promise svg {
+  flex-shrink: 0;
+  color: var(--accent-secondary);
+  margin-top: 1px;
+}
+
+/* ==========================================================================
+   MOBILE-FIRST TYPOGRAPHY + TOUCH TARGET FIXES
+   ========================================================================== */
+
+/* Enforce 16px on form inputs to prevent iOS auto-zoom */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea,
+select {
+  font-size: 16px !important;
+}
+
+/* Hero stats: adapt to 3-column for new 3-stat layout */
+@media (max-width: 639px) {
+  .hero-stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+
+  .stat-number {
+    font-size: 1.15rem;
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
+  }
+}
+
+/* Section body text line-height on mobile */
+@media (max-width: 768px) {
+  .section-desc,
+  .step-content-desc,
+  .service-desc,
+  .result-desc,
+  .category-hub-desc {
+    line-height: 1.75;
+    font-size: 1rem;
+  }
+
+  /* Founder section: stack vertically on mobile */
+  .founder-inner {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .founder-quote {
+    border-left: none;
+    border-top: 3px solid var(--accent-primary);
+    padding-left: 0;
+    padding-top: 1rem;
+    text-align: left;
+  }
+
+  .founder-links {
+    justify-content: center;
+  }
+
+  .founder-meta {
+    justify-content: center;
+  }
+}
+
 /* ==========================================================================
    SCROLL TO TOP BUTTON (Append Exact Implementation)
    ========================================================================== */

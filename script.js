@@ -959,13 +959,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const formSuccessMessage = document.getElementById('form-success-message');
   const resetFormBtn = document.getElementById('reset-form-btn');
 
-  const submitDefaultLabel = submitBtnText?.textContent.trim() || 'SEND MESSAGE →';
-  const submitBusyLabel = 'Transmitting Project Brief...';
+  const submitDefaultLabel = submitBtnText?.textContent.trim() || 'Send Message →';
+  const submitBusyLabel = 'Sending...';
 
-  smartContactForm?.addEventListener('submit', (e) => {
+  smartContactForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Safety net — native HTML5 validation should already have caught these.
     if (!smartContactForm.checkValidity()) {
       smartContactForm.reportValidity();
       return;
@@ -976,22 +975,48 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtnText.textContent = submitBusyLabel;
     }
 
-    window.setTimeout(() => {
-      if (smartContactForm) smartContactForm.style.display = 'none';
-      if (formSuccessMessage) formSuccessMessage.style.display = 'block';
-      showToast('Project Brief received! We will reply within 4 hours.');
+    const formData = new FormData(smartContactForm);
 
+    try {
+      const response = await fetch(smartContactForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        // Success state
+        if (smartContactForm) smartContactForm.style.display = 'none';
+        if (formSuccessMessage) formSuccessMessage.style.display = 'block';
+        showToast('Message sent! We\'ll reply within 4 hours.');
+      } else {
+        // Non-200 response
+        throw new Error('Server error');
+      }
+    } catch (err) {
+      // Network / server error — show inline error, never alert()
+      const errorEl = document.getElementById('form-inline-error');
+      if (!errorEl) {
+        const errDiv = document.createElement('p');
+        errDiv.id = 'form-inline-error';
+        errDiv.style.cssText = 'color: #f87171; font-size: 0.875rem; margin-top: 0.75rem; text-align: center;';
+        errDiv.textContent = 'Something went wrong. Please email us directly at Ninjadesignhub@gmail.com';
+        smartContactForm?.appendChild(errDiv);
+      }
+    } finally {
       if (formSubmitBtn && submitBtnText) {
         formSubmitBtn.disabled = false;
         submitBtnText.textContent = submitDefaultLabel;
       }
-    }, 900);
+    }
   });
 
   resetFormBtn?.addEventListener('click', () => {
     if (smartContactForm) {
       smartContactForm.reset();
       smartContactForm.style.display = 'block';
+      const errEl = document.getElementById('form-inline-error');
+      errEl?.remove();
     }
     if (formSuccessMessage) formSuccessMessage.style.display = 'none';
     if (formSubmitBtn && submitBtnText) {
