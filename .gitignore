@@ -1,5 +1,4 @@
 # ── Antigravity / AI Agents ──────────────────────────────────
-.agents/
 .gemini/
 .playwright-mcp/
 
@@ -32,17 +31,12 @@ yarn-error.log*
 pnpm-debug.log*
 .pnpm-store/
 
-# ── Build Outputs ─────────────────────────────────────────────
+# ── Build & Cache Outputs ─────────────────────────────────────
 dist/
 build/
 out/
-.next/
-.nuxt/
-.output/
 .cache/
-.parcel-cache/
 .vite/
-.turbo/
 
 # ── Environment & Secrets ─────────────────────────────────────
 .env
@@ -64,6 +58,3 @@ temp/
 *.bak
 *.orig
 
-# ── Coverage & Testing ────────────────────────────────────────
-coverage/
-.nyc_output/

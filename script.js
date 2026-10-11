@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Generic reveal-on-scroll: elements animate once when they enter the viewport.
   // Once revealed, the helper classes are removed so hover transforms keep working.
   const fxRevealEls = document.querySelectorAll('.fx-reveal');
-  const FX_GROUPS = ['.services-grid', '.portfolio-grid', '.results-grid', '.process-timeline', '.faq-accordion'];
+  const FX_GROUPS = ['.services-grid', '.portfolio-grid', '.results-grid', '.process-timeline', '.faq-accordion', '.testimonials-grid', '.pre-footer-cta-inner'];
 
   function assignRevealDelays() {
     FX_GROUPS.forEach(selector => {
@@ -1076,4 +1076,91 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('page-ready');
   }
 
+  // =========================================================================
+  // 14. ANIMATED NUMBER COUNTERS (Results Section)
+  // =========================================================================
+  if (!REDUCED_MOTION && 'IntersectionObserver' in window) {
+    const resultCards = document.querySelectorAll('.result-card');
+
+    // Map of partial text → final numeric target + suffix/prefix
+    const counterMap = [
+      { selector: '.result-card:nth-child(1) .result-number', start: 0, end: 125,  prefix: '₹', suffix: ' Cr+', duration: 2200 },
+      { selector: '.result-card:nth-child(2) .result-number', start: 0, end: 125,  prefix: '',  suffix: 'M+',   duration: 2200 },
+      { selector: '.result-card:nth-child(3) .result-number', start: 0.3, end: 0.8, prefix: '< ', suffix: 's',  duration: 1800, decimals: 1 },
+    ];
+
+    function animateCounter(el, start, end, duration, prefix, suffix, decimals) {
+      const startTime = performance.now();
+      const easeOut = t => 1 - Math.pow(1 - t, 3);
+      function step(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const current = start + (end - start) * easeOut(progress);
+        const formatted = decimals
+          ? current.toFixed(decimals)
+          : Math.round(current).toLocaleString('en-IN');
+        el.textContent = `${prefix}${formatted}${suffix}`;
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    const resultsSection = document.querySelector('.results-section');
+    if (resultsSection) {
+      const counterObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          observer.disconnect();
+          counterMap.forEach(({ selector, start, end, prefix, suffix, duration, decimals }) => {
+            const el = document.querySelector(selector);
+            if (el) animateCounter(el, start, end, duration, prefix, suffix, decimals || 0);
+          });
+        });
+      }, { threshold: 0.25 });
+      counterObserver.observe(resultsSection);
+    }
+  }
+
+  // =========================================================================
+  // 15. STAR RATING ANIMATION (Testimonials Section)
+  // =========================================================================
+  if (!REDUCED_MOTION && 'IntersectionObserver' in window) {
+    const testimonialsGrid = document.querySelector('.testimonials-grid');
+    if (testimonialsGrid) {
+      const starObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          observer.disconnect();
+          // Give the section 200ms to start rendering, then pop stars
+          setTimeout(() => {
+            testimonialsGrid.classList.add('stars-animated');
+          }, 200);
+        });
+      }, { threshold: 0.2 });
+      starObserver.observe(testimonialsGrid);
+    }
+  } else {
+    // Reduced motion: just show stars immediately without animation
+    const testimonialsGrid = document.querySelector('.testimonials-grid');
+    if (testimonialsGrid) {
+      testimonialsGrid.querySelectorAll('.star').forEach(star => {
+        star.style.opacity = '1';
+        star.style.transform = 'scale(1)';
+        star.style.color = 'var(--rustic-gold)';
+      });
+    }
+  }
+
+  // =========================================================================
+  // 16. TESTIMONIALS STAGGER DELAY ASSIGNMENT
+  // =========================================================================
+  (function assignTestimonialStagger() {
+    const tGrid = document.querySelector('.testimonials-grid');
+    if (!tGrid) return;
+    tGrid.querySelectorAll('.testimonial-card.fx-reveal').forEach((card, i) => {
+      card.style.setProperty('--fx-delay', `${i * 150}ms`);
+    });
+  })();
+
 });
+

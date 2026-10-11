@@ -3773,21 +3773,44 @@ body.page-ready .hero-stats-grid.hero-entrance {
   }
 
   .navbar-inner {
-    padding: 0.4rem 0.5rem;
+    padding: 0.35rem 0.5rem;
+    gap: 0.35rem;
+  }
+
+  .brand-logo {
+    gap: 0.35rem;
+  }
+
+  .brand-logo img,
+  .brand-logo-fallback {
+    width: 24px;
+    height: 24px;
   }
 
   .brand-logo span {
-    font-size: 0.78rem;
+    font-size: 0.75rem;
+  }
+
+  .nav-actions {
+    gap: 0.3rem;
   }
 
   .nav-actions .btn-sm {
-    padding: 0.35rem 0.55rem;
+    padding: 0.35rem 0.5rem;
     font-size: 0.7rem;
+    min-height: 34px;
   }
 
   .menu-toggle-btn {
-    min-width: 44px;
-    min-height: 44px;
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    min-height: 34px;
+  }
+
+  .menu-toggle-btn svg {
+    width: 18px;
+    height: 18px;
   }
 }
 
@@ -4254,3 +4277,343 @@ select {
     animation: none !important;
   }
 }
+
+/* ==========================================================================
+   NDH REDESIGN ADDITIONS — September 2026
+   All new rules use existing CSS variables — palette unchanged
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   NAV ICON BUTTONS (WhatsApp / Email quick-links)
+   -------------------------------------------------------------------------- */
+.nav-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card-subtle);
+  color: var(--text-muted);
+  transition: border-color var(--transition-normal),
+              color var(--transition-normal),
+              background var(--transition-normal),
+              transform var(--transition-spring);
+  flex-shrink: 0;
+}
+.nav-icon-btn:hover {
+  color: var(--accent-primary);
+  border-color: var(--gold-border);
+  background: var(--gold-glow);
+  transform: translateY(-2px);
+}
+.nav-icon-btn svg { display: block; }
+
+/* --------------------------------------------------------------------------
+   FEATURED CLIENTS SECTION
+   -------------------------------------------------------------------------- */
+.clients-section {
+  padding: 2.5rem 0 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.clients-heading {
+  text-align: center;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  margin-bottom: 1.5rem;
+}
+
+.clients-marquee-wrap {
+  position: relative;
+  overflow: hidden;
+  /* fade edges */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+}
+
+.clients-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: max-content;
+  padding: 0.75rem 0;
+  animation: clientsScroll 28s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clients-marquee-track { animation: none; }
+}
+
+@keyframes clientsScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.client-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card-subtle);
+  font-family: var(--font-brand);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  white-space: nowrap;
+  transition: border-color var(--transition-normal), color var(--transition-normal);
+  cursor: default;
+}
+.client-pill:hover {
+  border-color: var(--gold-border);
+  color: var(--text-primary);
+}
+.client-pill svg {
+  color: var(--accent-primary);
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   STAR RATINGS on Testimonials
+   -------------------------------------------------------------------------- */
+.star-rating {
+  display: flex;
+  gap: 0.2rem;
+  margin-bottom: 0.75rem;
+}
+
+.star {
+  display: inline-block;
+  font-size: 1rem;
+  color: var(--border-subtle);
+  /* Initial hidden state — JS adds .star-lit class */
+  opacity: 0;
+  transform: scale(0);
+  transition: none; /* controlled by animation */
+}
+
+/* When section is in view, JS adds .stars-animated to parent testimonials-grid */
+.stars-animated .star {
+  animation: starFill 0.4s var(--ease-spring) forwards;
+  animation-delay: calc(0.3s + (var(--si) * 0.08s));
+}
+
+@keyframes starFill {
+  from {
+    opacity: 0;
+    transform: scale(0) rotate(-20deg);
+    color: var(--border-subtle);
+  }
+  60% {
+    transform: scale(1.3) rotate(5deg);
+    color: var(--rustic-gold);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    color: var(--rustic-gold);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   PRE-FOOTER CTA BAND
+   -------------------------------------------------------------------------- */
+.pre-footer-cta {
+  padding: 5rem 0;
+  background: var(--bg-dark-elevated);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle background glow */
+.pre-footer-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(255, 69, 0, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.pre-footer-cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.5rem;
+  position: relative;
+}
+
+.pre-footer-cta-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.pre-footer-cta-sub {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  max-width: 42ch;
+}
+
+.pre-footer-cta-btns {
+  display: flex;
+  gap: 1rem;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .pre-footer-cta-inner {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+  .pre-footer-cta-sub {
+    max-width: none;
+  }
+  .pre-footer-cta-btns {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .pre-footer-cta-btns {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+  .pre-footer-cta-btns .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .scroll-top {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-full);
+    right: max(14px, env(safe-area-inset-right, 14px));
+    bottom: max(14px, env(safe-area-inset-bottom, 14px));
+  }
+}
+
+/* --------------------------------------------------------------------------
+   FOOTER — additional Services column support
+   (footer-top-grid already uses auto columns; this ensures 4-col layout)
+   -------------------------------------------------------------------------- */
+@media (min-width: 1025px) {
+  .footer-top-grid {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   STAT COUNTER ANIMATION SUPPORT
+   (counters driven by JS — CSS provides the fade-in base)
+   -------------------------------------------------------------------------- */
+.result-number[data-counter] {
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------------------------
+   ENHANCED SERVICE CARD HOVER ICON ANIMATION
+   -------------------------------------------------------------------------- */
+.service-card:hover .service-icon-box svg {
+  transform: rotate(12deg) scale(1.12);
+  transition: transform 0.4s var(--ease-spring);
+}
+.service-icon-box svg {
+  transition: transform 0.3s var(--ease);
+}
+
+/* --------------------------------------------------------------------------
+   ALTERNATING TESTIMONIAL REVEAL DIRECTIONS
+   (odd cards come from left, even from right)
+   -------------------------------------------------------------------------- */
+.testimonials-grid .testimonial-card:nth-child(odd).fx-reveal {
+  transform: translateX(-40px) translateY(20px);
+}
+.testimonials-grid .testimonial-card:nth-child(even).fx-reveal {
+  transform: translateX(40px) translateY(20px);
+}
+.testimonials-grid .testimonial-card.fx-reveal {
+  opacity: 0;
+}
+.testimonials-grid .testimonial-card.in-view,
+.testimonials-grid .testimonial-card[data-fx-done="true"] {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
+}
+
+/* --------------------------------------------------------------------------
+   BADGE POP-IN ANIMATION
+   Used on step numbers, stat badges
+   -------------------------------------------------------------------------- */
+@keyframes badgePopIn {
+  from { transform: scale(0); opacity: 0; }
+  65%  { transform: scale(1.15); opacity: 1; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.badge-pop-in {
+  animation: badgePopIn 0.55s var(--ease-spring) forwards;
+}
+
+/* --------------------------------------------------------------------------
+   PROCESS STEP COUNTER STAGGER (visual enhancement)
+   -------------------------------------------------------------------------- */
+.process-step-card:nth-child(1) { --fx-delay: 0ms; }
+.process-step-card:nth-child(2) { --fx-delay: 100ms; }
+.process-step-card:nth-child(3) { --fx-delay: 200ms; }
+.process-step-card:nth-child(4) { --fx-delay: 300ms; }
+.process-step-card:nth-child(5) { --fx-delay: 400ms; }
+
+/* --------------------------------------------------------------------------
+   TESTIMONIAL CARD STAGGER DELAYS
+   -------------------------------------------------------------------------- */
+.testimonials-grid .testimonial-card:nth-child(1) { --fx-delay: 0ms; }
+.testimonials-grid .testimonial-card:nth-child(2) { --fx-delay: 150ms; }
+.testimonials-grid .testimonial-card:nth-child(3) { --fx-delay: 300ms; }
+
+/* --------------------------------------------------------------------------
+   CLIENT PILL ENTRANCE (on first load, pills fade in)
+   -------------------------------------------------------------------------- */
+.clients-section .fx-reveal-stagger .client-pill {
+  opacity: 0;
+  animation: fadeInUp 0.5s var(--ease-out) forwards;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --------------------------------------------------------------------------
+   SUBTLE GRADIENT HERO ORB PULSE (enhances existing hero-glow)
+   -------------------------------------------------------------------------- */
+@keyframes subtleGradientShift {
+  0%  { opacity: 0.35; transform: translateY(0px) scale(1); }
+  50% { opacity: 0.55; transform: translateY(-12px) scale(1.04); }
+  100%{ opacity: 0.35; transform: translateY(0px) scale(1); }
+}
+.hero-glow {
+  /* Override existing static rule with the animated version */
+  animation: subtleGradientShift 7s ease-in-out infinite !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-glow { animation: none !important; }
+}
