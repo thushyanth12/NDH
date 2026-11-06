@@ -17,18 +17,20 @@
   <meta property="og:url" content="https://ninjadesignhub.com/" />
   <meta property="og:title" content="Ninja Design Hub | Websites, Brand & Content That Converts" />
   <meta property="og:description" content="We help ambitious brands build fast websites, clear identities, and content that earns attention. Most clients see their first results within 60 days of launch." />
-  <meta property="og:image" content="assets/NDH.jpeg" />
+  <meta property="og:image" content="assets/NDH.webp" />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:title" content="Ninja Design Hub | Real Results, Not Agency Jargon" />
   <meta property="twitter:description" content="Fast websites, clear brand identities, and content that gets shared. 250+ projects, 3 years, zero fluff." />
-  <meta property="twitter:image" content="assets/NDH.jpeg" />
+  <meta property="twitter:image" content="assets/NDH.webp" />
 
-  <!-- Preconnect & Google Fonts (Streamlined weights + swap for speed) -->
+  <!-- Preconnect & Google Fonts — non-blocking load pattern for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Space+Grotesk:wght@500;600;700&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" /></noscript>
 
   <!-- Progressive enhancement flag: gates entrance/reveal styles on JS availability -->
   <script>document.documentElement.classList.add('js');</script>
@@ -1087,77 +1089,77 @@
         <div class="faq-accordion" id="faq-accordion">
           <!-- Item 1 -->
           <div class="faq-item" data-category="turnaround" data-keywords="turnaround time speed delivery timeline launch">
-            <button class="faq-question-btn" type="button">
+            <button class="faq-question-btn" type="button" aria-expanded="false" aria-controls="faq-answer-1" id="faq-btn-1">
               <span>What is the typical turnaround time for a complete project?</span>
               <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
-            <div class="faq-answer">
+            <div class="faq-answer" id="faq-answer-1" role="region" aria-labelledby="faq-btn-1">
               A standard high-converting landing page is delivered within 7–10 business days. Full-stack web applications and complete brand systems typically take 2–3 weeks. We work with strict milestone sprint deliveries so you're never left wondering about status.
             </div>
           </div>
 
           <!-- Item 2 -->
           <div class="faq-item" data-category="revisions" data-keywords="revisions changes feedback guarantee satisfaction">
-            <button class="faq-question-btn" type="button">
+            <button class="faq-question-btn" type="button" aria-expanded="false" aria-controls="faq-answer-2" id="faq-btn-2">
               <span>How do revisions work? What if I need adjustments?</span>
               <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
-            <div class="faq-answer">
+            <div class="faq-answer" id="faq-answer-2" role="region" aria-labelledby="faq-btn-2">
               We provide iterative checkpoints at every phase (Wireframes → Design → Interactive Build). Minor tweaks and copy refinements are unlimited during the build phase. Our goal is 100% client satisfaction before any public launch.
             </div>
           </div>
 
           <!-- Item 3 -->
           <div class="faq-item" data-category="tech" data-keywords="tech stack react vite tailwind wordpress node framework backend code">
-            <button class="faq-question-btn" type="button">
+            <button class="faq-question-btn" type="button" aria-expanded="false" aria-controls="faq-answer-3" id="faq-btn-3">
               <span>What technology stack do you use for web development?</span>
               <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
-            <div class="faq-answer">
+            <div class="faq-answer" id="faq-answer-3" role="region" aria-labelledby="faq-btn-3">
               We specialize in lightweight, ultra-fast modern web technologies: React 19, TypeScript, Vite, Tailwind CSS, clean semantic HTML5, and Headless APIs (Shopify, Stripe, Supabase). We strictly avoid heavy bloated CMS themes that slow down your conversion rates.
             </div>
           </div>
 
           <!-- Item 4 -->
           <div class="faq-item" data-category="payment" data-keywords="payment terms milestones invoicing deposit stripe wire inr upi">
-            <button class="faq-question-btn" type="button">
+            <button class="faq-question-btn" type="button" aria-expanded="false" aria-controls="faq-answer-4" id="faq-btn-4">
               <span>What are your payment terms and billing structure?</span>
               <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
-            <div class="faq-answer">
+            <div class="faq-answer" id="faq-answer-4" role="region" aria-labelledby="faq-btn-4">
               Standard fixed-scope projects operate on a 50% upfront deposit and 50% upon final sign-off and deployment. We accept direct Bank Transfer (NEFT/IMPS/UPI), Stripe, Razorpay, or credit cards with GST invoicing.
             </div>
           </div>
 
           <!-- Item 5 -->
           <div class="faq-item" data-category="communication" data-keywords="communication slack updates async calls timezone video whatsapp">
-            <button class="faq-question-btn" type="button">
+            <button class="faq-question-btn" type="button" aria-expanded="false" aria-controls="faq-answer-5" id="faq-btn-5">
               <span>How do you handle day-to-day project communication?</span>
               <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
-            <div class="faq-answer">
+            <div class="faq-answer" id="faq-answer-5" role="region" aria-labelledby="faq-btn-5">
               We prioritize high-efficiency asynchronous communication via dedicated WhatsApp/Slack channels, Loom video walkthroughs, and weekly scheduled milestone check-ins. You receive a live project board to track progress in real-time.
             </div>
           </div>
 
           <!-- Item 6 -->
           <div class="faq-item" data-category="fit" data-keywords="enterprise large team agency size scope">
-            <button class="faq-question-btn" type="button">
+            <button class="faq-question-btn" type="button" aria-expanded="false" aria-controls="faq-answer-6" id="faq-btn-6">
               <span>Do you work with large enterprise teams?</span>
               <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
-            <div class="faq-answer">
+            <div class="faq-answer" id="faq-answer-6" role="region" aria-labelledby="faq-btn-6">
               We're a lean studio, not a 50-person agency. We work best with founders, solo operators, and small teams who want direct access to the person doing the work. If you need an enterprise vendor with account managers and SLA contracts, we're probably not the right fit.
             </div>
           </div>
 
           <!-- Item 7 -->
           <div class="faq-item" data-category="fit" data-keywords="brief vague unclear requirements scope project requirements">
-            <button class="faq-question-btn" type="button">
+            <button class="faq-question-btn" type="button" aria-expanded="false" aria-controls="faq-answer-7" id="faq-btn-7">
               <span>Do you take on vague briefs or undefined projects?</span>
               <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
-            <div class="faq-answer">
+            <div class="faq-answer" id="faq-answer-7" role="region" aria-labelledby="faq-btn-7">
               No. We've tried vague briefs — they never end well for either side. We need to know your target audience, the business goal you're working toward, and roughly what you're willing to spend before we can give you an honest answer about fit. It takes 10 minutes and saves weeks.
             </div>
           </div>
@@ -1180,7 +1182,7 @@
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
               <span>Email Us</span>
             </a>
-            <a href="https://wa.me/918124125555" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <a href="https://wa.me/918124125555?text=Hi%20Ninja%20Design%20Hub!%20I%20saw%20your%20work%20and%20would%20love%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
               <span>WhatsApp Us</span>
             </a>
@@ -1218,7 +1220,7 @@
                 </a>
 
                 <!-- Secondary: WhatsApp -->
-                <a href="https://wa.me/918124125555" target="_blank" rel="noopener noreferrer" class="direct-channel-card" title="WhatsApp">
+                <a href="https://wa.me/918124125555?text=Hi%20Ninja%20Design%20Hub!%20I%20saw%20your%20work%20and%20would%20love%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" class="direct-channel-card" title="WhatsApp">
                   <div class="channel-icon-box">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
                   </div>
@@ -1238,24 +1240,42 @@
 
           <!-- Right Smart Form Card -->
           <div class="contact-form-card">
-            <!-- REAL FORM: Replace YOUR_FORMSPREE_ID below with your Formspree endpoint -->
-            <form id="smart-contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+            <!-- Netlify Forms: form submissions handled automatically on Netlify hosting.
+                 For local dev, submissions POST to Formspree as a fallback (replace YOUR_FORMSPREE_ID). -->
+            <form
+              id="smart-contact-form"
+              name="ndh-contact"
+              method="POST"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
+              action="https://formspree.io/f/YOUR_FORMSPREE_ID"
+              novalidate
+            >
+              <!-- Netlify hidden field (required for Netlify Forms) -->
+              <input type="hidden" name="form-name" value="ndh-contact" />
+              <!-- Honeypot anti-spam field (hidden from real users) -->
+              <p class="sr-only" aria-hidden="true">
+                <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" /></label>
+              </p>
+
               <!-- Name & Email Row -->
               <div class="form-row-2col">
                 <div class="form-group">
                   <label class="form-label" for="contact-name">Your Name</label>
-                  <input type="text" id="contact-name" name="name" class="form-input" placeholder="e.g. Arjun Sharma" required autocomplete="name" />
+                  <input type="text" id="contact-name" name="name" class="form-input" placeholder="e.g. Arjun Sharma" autocomplete="name" aria-required="true" aria-describedby="error-name" />
+                  <span class="form-field-error" id="error-name" role="alert" aria-live="polite"></span>
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="contact-email">Email Address</label>
-                  <input type="email" id="contact-email" name="email" class="form-input" placeholder="you@example.com" required autocomplete="email" />
+                  <input type="email" id="contact-email" name="email" class="form-input" placeholder="you@example.com" autocomplete="email" aria-required="true" aria-describedby="error-email" />
+                  <span class="form-field-error" id="error-email" role="alert" aria-live="polite"></span>
                 </div>
               </div>
 
               <!-- Service Type -->
               <div class="form-group">
                 <label class="form-label" for="contact-service">What do you need?</label>
-                <select id="contact-service" name="service" class="form-input form-select" required>
+                <select id="contact-service" name="service" class="form-input form-select" aria-required="true" aria-describedby="error-service">
                   <option value="" disabled selected>Pick the closest match</option>
                   <option value="web-dev">A website or web app</option>
                   <option value="brand-design">Brand identity / logo / design system</option>
@@ -1264,12 +1284,14 @@
                   <option value="content-creation">Content creation</option>
                   <option value="full-stack">All of the above / not sure</option>
                 </select>
+                <span class="form-field-error" id="error-service" role="alert" aria-live="polite"></span>
               </div>
 
               <!-- Message -->
               <div class="form-group">
                 <label class="form-label" for="contact-message">Tell us about your project</label>
-                <textarea id="contact-message" name="message" class="form-textarea" placeholder="What are you building, who's it for, and when do you need it? The more detail the better." required></textarea>
+                <textarea id="contact-message" name="message" class="form-textarea" placeholder="What are you building, who's it for, and when do you need it? The more detail the better." aria-required="true" aria-describedby="error-message"></textarea>
+                <span class="form-field-error" id="error-message" role="alert" aria-live="polite"></span>
               </div>
 
               <!-- Submit Button -->
@@ -1279,13 +1301,13 @@
             </form>
 
             <!-- Success Box (shown after form submit) -->
-            <div id="form-success-message" class="form-success-box" style="display: none;">
+            <div id="form-success-message" class="form-success-box" style="display: none;" role="status" aria-live="polite">
               <div class="success-icon-wrap">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
               </div>
               <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; color: #fff;">Message received!</h3>
               <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.7;">
-                Thanks for reaching out. Thushyanth will read this personally and reply within 4 hours on weekdays. Talk soon!
+                Thanks for reaching out. Thushyanth will read this personally and <strong>reply within 4 hours</strong> on weekdays. Talk soon!
               </p>
               <button type="button" class="btn btn-secondary btn-sm" id="reset-form-btn">
                 <span>Send Another Message</span>
@@ -1350,7 +1372,7 @@
             Follow our daily design breakdowns and full-stack engineering teardowns.
           </p>
           <div class="social-links-row">
-            <a href="https://wa.me/918124125555" target="_blank" rel="noopener noreferrer" class="social-link-btn" title="WhatsApp: 81241 25555" aria-label="WhatsApp (+91 81241 25555)">
+            <a href="https://wa.me/918124125555?text=Hi%20Ninja%20Design%20Hub!%20I%20saw%20your%20work%20and%20would%20love%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" class="social-link-btn" title="WhatsApp: 81241 25555" aria-label="WhatsApp (+91 81241 25555)">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
             </a>
             <a href="https://www.linkedin.com/in/thushyanth-a-053632328/" target="_blank" rel="noopener noreferrer" class="social-link-btn" title="LinkedIn" aria-label="LinkedIn">

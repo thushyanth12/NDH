@@ -880,17 +880,28 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // =========================================================================
-  // 10. FAQ ACCORDION
+  // 10. FAQ ACCORDION — Semantic aria-expanded + single-open accordion
   // =========================================================================
   const faqItems = document.querySelectorAll('#faq-accordion .faq-item');
 
   faqItems.forEach(item => {
     const btn = item.querySelector('.faq-question-btn');
-    btn?.addEventListener('click', () => {
+    if (!btn) return;
+
+    btn.addEventListener('click', () => {
       const isActive = item.classList.contains('active');
-      faqItems.forEach(i => i.classList.remove('active'));
+
+      // Collapse all items (single-open accordion)
+      faqItems.forEach(i => {
+        i.classList.remove('active');
+        const ib = i.querySelector('.faq-question-btn');
+        if (ib) ib.setAttribute('aria-expanded', 'false');
+      });
+
+      // Expand clicked item if it was not already active
       if (!isActive) {
         item.classList.add('active');
+        btn.setAttribute('aria-expanded', 'true');
       }
     });
   });
@@ -952,7 +963,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Contact Form Submission
+  // Contact Form Submission — custom inline validation + Netlify Forms / Formspree
   const smartContactForm = document.getElementById('smart-contact-form');
   const formSubmitBtn = document.getElementById('form-submit-btn');
   const submitBtnText = document.getElementById('submit-btn-text');
@@ -962,13 +973,89 @@ document.addEventListener('DOMContentLoaded', () => {
   const submitDefaultLabel = submitBtnText?.textContent.trim() || 'Send Message →';
   const submitBusyLabel = 'Sending...';
 
+  /** Show or clear an inline field error */
+  function setFieldError(fieldId, errorId, message) {
+    const field = document.getElementById(fieldId);
+    const errorEl = document.getElementById(errorId);
+    if (!field || !errorEl) return;
+    if (message) {
+      field.classList.add('input-error');
+      errorEl.textContent = message;
+      errorEl.style.display = 'block';
+    } else {
+      field.classList.remove('input-error');
+      errorEl.textContent = '';
+      errorEl.style.display = 'none';
+    }
+  }
+
+  /** Clear all field errors */
+  function clearAllErrors() {
+    ['contact-name', 'contact-email', 'contact-service', 'contact-message'].forEach(id => {
+      const field = document.getElementById(id);
+      field?.classList.remove('input-error');
+    });
+    ['error-name', 'error-email', 'error-service', 'error-message'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) { el.textContent = ''; el.style.display = 'none'; }
+    });
+    document.getElementById('form-inline-error')?.remove();
+  }
+
+  /** Validate form fields; returns true if valid */
+  function validateForm() {
+    let valid = true;
+    const name = document.getElementById('contact-name');
+    const email = document.getElementById('contact-email');
+    const service = document.getElementById('contact-service');
+    const message = document.getElementById('contact-message');
+
+    clearAllErrors();
+
+    if (!name?.value.trim()) {
+      setFieldError('contact-name', 'error-name', 'Please enter your name.');
+      valid = false;
+    }
+
+    if (!email?.value.trim()) {
+      setFieldError('contact-email', 'error-email', 'Please enter your email address.');
+      valid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+      setFieldError('contact-email', 'error-email', 'Please enter a valid email address.');
+      valid = false;
+    }
+
+    if (!service?.value) {
+      setFieldError('contact-service', 'error-service', 'Please select a service.');
+      valid = false;
+    }
+
+    if (!message?.value.trim() || message.value.trim().length < 10) {
+      setFieldError('contact-message', 'error-message', 'Please describe your project (at least 10 characters).');
+      valid = false;
+    }
+
+    // Focus first errored field for accessibility
+    if (!valid) {
+      const firstError = smartContactForm?.querySelector('.input-error');
+      firstError?.focus({ preventScroll: false });
+    }
+
+    return valid;
+  }
+
+  // Clear error on individual field interaction
+  ['contact-name', 'contact-email', 'contact-service', 'contact-message'].forEach(id => {
+    document.getElementById(id)?.addEventListener('input', () => {
+      const errorId = `error-${id.replace('contact-', '')}`;
+      setFieldError(id, errorId, '');
+    });
+  });
+
   smartContactForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    if (!smartContactForm.checkValidity()) {
-      smartContactForm.reportValidity();
-      return;
-    }
+    if (!validateForm()) return;
 
     if (formSubmitBtn && submitBtnText) {
       formSubmitBtn.disabled = true;
@@ -990,19 +1077,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (formSuccessMessage) formSuccessMessage.style.display = 'block';
         showToast('Message sent! We\'ll reply within 4 hours.');
       } else {
-        // Non-200 response
         throw new Error('Server error');
       }
     } catch (err) {
       // Network / server error — show inline error, never alert()
-      const errorEl = document.getElementById('form-inline-error');
+      let errorEl = document.getElementById('form-inline-error');
       if (!errorEl) {
-        const errDiv = document.createElement('p');
-        errDiv.id = 'form-inline-error';
-        errDiv.style.cssText = 'color: #f87171; font-size: 0.875rem; margin-top: 0.75rem; text-align: center;';
-        errDiv.textContent = 'Something went wrong. Please email us directly at Ninjadesignhub@gmail.com';
-        smartContactForm?.appendChild(errDiv);
+        errorEl = document.createElement('p');
+        errorEl.id = 'form-inline-error';
+        errorEl.style.cssText = 'color: #f87171; font-size: 0.875rem; margin-top: 0.75rem; text-align: center;';
+        smartContactForm?.appendChild(errorEl);
       }
+      errorEl.textContent = 'Something went wrong. Please email us directly at Ninjadesignhub@gmail.com';
     } finally {
       if (formSubmitBtn && submitBtnText) {
         formSubmitBtn.disabled = false;
@@ -1015,8 +1101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (smartContactForm) {
       smartContactForm.reset();
       smartContactForm.style.display = 'block';
-      const errEl = document.getElementById('form-inline-error');
-      errEl?.remove();
+      clearAllErrors();
     }
     if (formSuccessMessage) formSuccessMessage.style.display = 'none';
     if (formSubmitBtn && submitBtnText) {
